@@ -737,7 +737,7 @@ DEPENDENCIES:
   - XCoordinator/RxSwift (~> 2.0.3)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Differentiator
     - EmptyDataSet-Swift
     - Firebase
@@ -793,6 +793,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   XCoordinator: 9ee654fedef1ffede33d5c11677708a555c00542
 
-PODFILE CHECKSUM: b45dfe73d77da0288895753877add64a875dc1b3
+PODFILE CHECKSUM: 8353735ed3a757d0b429d2dcdbf178730b45b3d4
 
 COCOAPODS: 1.10.1

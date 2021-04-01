@@ -1,0 +1,708 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
+		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
+		9AB4C7EE2615E74C00CDCE38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7ED2615E74C00CDCE38 /* SceneDelegate.swift */; };
+		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
+		9AB4C7F52615E74D00CDCE38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */; };
+		9AB4C7F82615E74D00CDCE38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */; };
+		9AB4C8032615E74D00CDCE38 /* SocialLiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */; };
+		9AB4C80E2615E74D00CDCE38 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */; };
+		A9FE8551ADE9CA8D0B0CF799 /* Pods_SocialLiteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010B5D7B77185FC573EFA89 /* Pods_SocialLiteTests.framework */; };
+		EE59EC4A875D35622E3B8F3A /* Pods_SocialLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9AB4C7FF2615E74D00CDCE38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AB4C7E02615E74C00CDCE38 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AB4C7E72615E74C00CDCE38;
+			remoteInfo = SocialLite;
+		};
+		9AB4C80A2615E74D00CDCE38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AB4C7E02615E74C00CDCE38 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9AB4C7E72615E74C00CDCE38;
+			remoteInfo = SocialLite;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
+		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
+		7010B5D7B77185FC573EFA89 /* Pods_SocialLiteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLiteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		875B6EB9EF29D84E3C947704 /* Pods-SocialLiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.debug.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9AB4C7E82615E74C00CDCE38 /* SocialLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9AB4C7ED2615E74C00CDCE38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9AB4C7F22615E74C00CDCE38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9AB4C7F72615E74D00CDCE38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9AB4C7F92615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AB4C7FE2615E74D00CDCE38 /* SocialLiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialLiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLiteTests.swift; sourceTree = "<group>"; };
+		9AB4C8042615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AB4C8092615E74D00CDCE38 /* SocialLiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialLiteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
+		9AB4C80F2615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite_SocialLiteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7DE6ED1137B5A2FF88D0A66 /* Pods-SocialLite-SocialLiteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.debug.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD3098E9C803B9197B32A31D /* Pods-SocialLite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.debug.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9AB4C7E52615E74C00CDCE38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE59EC4A875D35622E3B8F3A /* Pods_SocialLite.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C7FB2615E74D00CDCE38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9FE8551ADE9CA8D0B0CF799 /* Pods_SocialLiteTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C8062615E74D00CDCE38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD3098E9C803B9197B32A31D /* Pods-SocialLite.debug.xcconfig */,
+				4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */,
+				B7DE6ED1137B5A2FF88D0A66 /* Pods-SocialLite-SocialLiteUITests.debug.xcconfig */,
+				3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */,
+				875B6EB9EF29D84E3C947704 /* Pods-SocialLiteTests.debug.xcconfig */,
+				1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8196F42D75F8C488D63EDF63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */,
+				B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */,
+				7010B5D7B77185FC573EFA89 /* Pods_SocialLiteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AB4C7DF2615E74C00CDCE38 = {
+			isa = PBXGroup;
+			children = (
+				9AB4C7EA2615E74C00CDCE38 /* SocialLite */,
+				9AB4C8012615E74D00CDCE38 /* SocialLiteTests */,
+				9AB4C80C2615E74D00CDCE38 /* SocialLiteUITests */,
+				9AB4C7E92615E74C00CDCE38 /* Products */,
+				24E60DD7F92E6DF2FDC9B858 /* Pods */,
+				8196F42D75F8C488D63EDF63 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9AB4C7E92615E74C00CDCE38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AB4C7E82615E74C00CDCE38 /* SocialLite.app */,
+				9AB4C7FE2615E74D00CDCE38 /* SocialLiteTests.xctest */,
+				9AB4C8092615E74D00CDCE38 /* SocialLiteUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AB4C7EA2615E74C00CDCE38 /* SocialLite */ = {
+			isa = PBXGroup;
+			children = (
+				9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */,
+				9AB4C7ED2615E74C00CDCE38 /* SceneDelegate.swift */,
+				9AB4C7F12615E74C00CDCE38 /* Main.storyboard */,
+				9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */,
+				9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */,
+				9AB4C7F92615E74D00CDCE38 /* Info.plist */,
+			);
+			path = SocialLite;
+			sourceTree = "<group>";
+		};
+		9AB4C8012615E74D00CDCE38 /* SocialLiteTests */ = {
+			isa = PBXGroup;
+			children = (
+				9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */,
+				9AB4C8042615E74D00CDCE38 /* Info.plist */,
+			);
+			path = SocialLiteTests;
+			sourceTree = "<group>";
+		};
+		9AB4C80C2615E74D00CDCE38 /* SocialLiteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */,
+				9AB4C80F2615E74D00CDCE38 /* Info.plist */,
+			);
+			path = SocialLiteUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9AB4C7E72615E74C00CDCE38 /* SocialLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AB4C8122615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLite" */;
+			buildPhases = (
+				F57F4893842F696BF0744F20 /* [CP] Check Pods Manifest.lock */,
+				9AB4C7E42615E74C00CDCE38 /* Sources */,
+				9AB4C7E52615E74C00CDCE38 /* Frameworks */,
+				9AB4C7E62615E74C00CDCE38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SocialLite;
+			productName = SocialLite;
+			productReference = 9AB4C7E82615E74C00CDCE38 /* SocialLite.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9AB4C7FD2615E74D00CDCE38 /* SocialLiteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AB4C8152615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLiteTests" */;
+			buildPhases = (
+				E674864259DC1CFAFBE1A57F /* [CP] Check Pods Manifest.lock */,
+				9AB4C7FA2615E74D00CDCE38 /* Sources */,
+				9AB4C7FB2615E74D00CDCE38 /* Frameworks */,
+				9AB4C7FC2615E74D00CDCE38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9AB4C8002615E74D00CDCE38 /* PBXTargetDependency */,
+			);
+			name = SocialLiteTests;
+			productName = SocialLiteTests;
+			productReference = 9AB4C7FE2615E74D00CDCE38 /* SocialLiteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9AB4C8082615E74D00CDCE38 /* SocialLiteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AB4C8182615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLiteUITests" */;
+			buildPhases = (
+				65FE617623974AE07B846634 /* [CP] Check Pods Manifest.lock */,
+				9AB4C8052615E74D00CDCE38 /* Sources */,
+				9AB4C8062615E74D00CDCE38 /* Frameworks */,
+				9AB4C8072615E74D00CDCE38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9AB4C80B2615E74D00CDCE38 /* PBXTargetDependency */,
+			);
+			name = SocialLiteUITests;
+			productName = SocialLiteUITests;
+			productReference = 9AB4C8092615E74D00CDCE38 /* SocialLiteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9AB4C7E02615E74C00CDCE38 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					9AB4C7E72615E74C00CDCE38 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					9AB4C7FD2615E74D00CDCE38 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 9AB4C7E72615E74C00CDCE38;
+					};
+					9AB4C8082615E74D00CDCE38 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 9AB4C7E72615E74C00CDCE38;
+					};
+				};
+			};
+			buildConfigurationList = 9AB4C7E32615E74C00CDCE38 /* Build configuration list for PBXProject "SocialLite" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9AB4C7DF2615E74C00CDCE38;
+			productRefGroup = 9AB4C7E92615E74C00CDCE38 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AB4C7E72615E74C00CDCE38 /* SocialLite */,
+				9AB4C7FD2615E74D00CDCE38 /* SocialLiteTests */,
+				9AB4C8082615E74D00CDCE38 /* SocialLiteUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AB4C7E62615E74C00CDCE38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB4C7F82615E74D00CDCE38 /* LaunchScreen.storyboard in Resources */,
+				9AB4C7F52615E74D00CDCE38 /* Assets.xcassets in Resources */,
+				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C7FC2615E74D00CDCE38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C8072615E74D00CDCE38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		65FE617623974AE07B846634 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SocialLite-SocialLiteUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E674864259DC1CFAFBE1A57F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SocialLiteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F57F4893842F696BF0744F20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SocialLite-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9AB4C7E42615E74C00CDCE38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
+				9AB4C7EE2615E74C00CDCE38 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C7FA2615E74D00CDCE38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB4C8032615E74D00CDCE38 /* SocialLiteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AB4C8052615E74D00CDCE38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AB4C80E2615E74D00CDCE38 /* SocialLiteUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9AB4C8002615E74D00CDCE38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AB4C7E72615E74C00CDCE38 /* SocialLite */;
+			targetProxy = 9AB4C7FF2615E74D00CDCE38 /* PBXContainerItemProxy */;
+		};
+		9AB4C80B2615E74D00CDCE38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9AB4C7E72615E74C00CDCE38 /* SocialLite */;
+			targetProxy = 9AB4C80A2615E74D00CDCE38 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9AB4C7F12615E74C00CDCE38 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AB4C7F22615E74C00CDCE38 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AB4C7F72615E74D00CDCE38 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9AB4C8102615E74D00CDCE38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9AB4C8112615E74D00CDCE38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9AB4C8132615E74D00CDCE38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD3098E9C803B9197B32A31D /* Pods-SocialLite.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLite/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLite;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9AB4C8142615E74D00CDCE38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLite/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLite;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9AB4C8162615E74D00CDCE38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 875B6EB9EF29D84E3C947704 /* Pods-SocialLiteTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLiteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SocialLite.app/SocialLite";
+			};
+			name = Debug;
+		};
+		9AB4C8172615E74D00CDCE38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLiteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SocialLite.app/SocialLite";
+			};
+			name = Release;
+		};
+		9AB4C8192615E74D00CDCE38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7DE6ED1137B5A2FF88D0A66 /* Pods-SocialLite-SocialLiteUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLiteUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SocialLite;
+			};
+			name = Debug;
+		};
+		9AB4C81A2615E74D00CDCE38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SocialLiteUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SocialLite;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9AB4C7E32615E74C00CDCE38 /* Build configuration list for PBXProject "SocialLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AB4C8102615E74D00CDCE38 /* Debug */,
+				9AB4C8112615E74D00CDCE38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AB4C8122615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AB4C8132615E74D00CDCE38 /* Debug */,
+				9AB4C8142615E74D00CDCE38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AB4C8152615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLiteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AB4C8162615E74D00CDCE38 /* Debug */,
+				9AB4C8172615E74D00CDCE38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AB4C8182615E74D00CDCE38 /* Build configuration list for PBXNativeTarget "SocialLiteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AB4C8192615E74D00CDCE38 /* Debug */,
+				9AB4C81A2615E74D00CDCE38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9AB4C7E02615E74C00CDCE38 /* Project object */;
+}

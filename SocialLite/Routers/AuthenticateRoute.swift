@@ -11,4 +11,5 @@ import XCoordinator
 public enum AuthenticateRoute: Route {
     case login
     case register
+    case close
 }

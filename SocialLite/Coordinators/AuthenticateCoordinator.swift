@@ -19,6 +19,8 @@ final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
             let viewModel = RegisterViewModel(with: weakRouter)
             let controller = RegisterViewController.newInstance(with: viewModel)
             return .push(controller)
+        case .close:
+            return .dismissToRoot()
         }
     }
 }

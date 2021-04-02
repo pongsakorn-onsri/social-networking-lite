@@ -31,7 +31,7 @@ final class LoginViewController: BaseViewController<LoginViewModel> {
     func configureBinding() {
         registerButton.rx.tap
             .subscribe(onNext: { [weak self]_ in
-                self?.viewModel?.routeToRegister()
+                self?.viewModel?.router.trigger(.register)
             })
             .disposed(by: disposeBag)
         

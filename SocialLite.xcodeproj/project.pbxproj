@@ -25,6 +25,7 @@
 		11338B7126164F8B000D8823 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* Register.storyboard */; };
 		11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* RegisterViewController.swift */; };
 		11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* RegisterViewModel.swift */; };
+		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -73,6 +74,7 @@
 		11338B7526164F93000D8823 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		11338B7A26164FA1000D8823 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 		9AB4C8F2261632F600CDCE38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				11B53A0526174E0B0056B822 /* GoogleService-Info.plist */,
 				9AB4C7F12615E74C00CDCE38 /* Main.storyboard */,
 				9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */,
 				9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */,
@@ -380,6 +383,7 @@
 				9AB4C7E52615E74C00CDCE38 /* Frameworks */,
 				9AB4C7E62615E74C00CDCE38 /* Resources */,
 				6E602CB44D3464AF483019CF /* [CP] Embed Pods Frameworks */,
+				90D1CE5FF2A0D4C67323C14B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -419,6 +423,7 @@
 				9AB4C8062615E74D00CDCE38 /* Frameworks */,
 				9AB4C8072615E74D00CDCE38 /* Resources */,
 				58D056067AC283DFD85CD6FB /* [CP] Embed Pods Frameworks */,
+				BBE682260ADF0B99DF83A27C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -483,6 +488,7 @@
 				11338B6526164E6E000D8823 /* Login.storyboard in Resources */,
 				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
 				11338B7126164F8B000D8823 /* Register.storyboard in Resources */,
+				11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +580,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SocialLite/Pods-SocialLite-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90D1CE5FF2A0D4C67323C14B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialLite/Pods-SocialLite-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialLite/Pods-SocialLite-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SocialLite/Pods-SocialLite-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBE682260ADF0B99DF83A27C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E674864259DC1CFAFBE1A57F /* [CP] Check Pods Manifest.lock */ = {

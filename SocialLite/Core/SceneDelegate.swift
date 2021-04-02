@@ -7,6 +7,7 @@
 
 import UIKit
 import XCoordinator
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let router = AppCoordinator().strongRouter
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        FirebaseApp.configure()
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let newWindow = UIWindow(windowScene: windowScene)
         self.window = newWindow

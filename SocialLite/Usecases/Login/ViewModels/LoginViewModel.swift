@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 import XCoordinator
+import GoogleSignIn
+import FirebaseAuth
 
 final class LoginViewModel: NSObject, ViewModelProtocol {
     typealias RouteType = AuthenticateRoute
@@ -20,5 +22,9 @@ final class LoginViewModel: NSObject, ViewModelProtocol {
     
     func routeToRegister() {
         router.trigger(.register)
+    }
+    
+    func signIn(with credential: AuthCredential) {
+        
     }
 }

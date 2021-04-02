@@ -8,6 +8,7 @@ target 'SocialLite' do
   # UI
   pod 'MaterialComponents'
   pod 'EmptyDataSet-Swift', '~> 5.0.0'
+  pod 'GoogleSignIn'
   
   # Linter
   pod 'SwiftLint'
@@ -16,11 +17,12 @@ target 'SocialLite' do
   pod 'ObjectMapper'
   
   # Base
-  pod 'Firebase'
+  pod 'Firebase', :subspecs => ['Auth', 'RemoteConfig', "Firestore", 'Storage', 'Performance', 'Analytics', 'Crashlytics']
   pod 'XCoordinator/RxSwift', '~> 2.0.3'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
-  pod 'RxDataSources', '~> 5.0'
+  pod 'RxDataSources'
+  pod 'RxGesture'
 
   target 'SocialLiteTests' do
     inherit! :search_paths

@@ -9,9 +9,9 @@ import Foundation
 import XCoordinator
 
 public enum AppRoute: Route {
-    case launch
     case feed
     case timeline
     case post
     case authenticate
+    case signout
 }

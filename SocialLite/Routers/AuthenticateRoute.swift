@@ -9,7 +9,7 @@ import Foundation
 import XCoordinator
 
 public enum AuthenticateRoute: Route {
-    case login
+    case signin
     case register
     case close
 }

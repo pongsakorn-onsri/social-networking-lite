@@ -19,9 +19,9 @@
 		11338B3826164103000D8823 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B3726164103000D8823 /* BaseViewModel.swift */; };
 		11338B47261641C4000D8823 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B46261641C4000D8823 /* BaseProtocols.swift */; };
 		11338B5326164CF4000D8823 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5226164CF4000D8823 /* UserManager.swift */; };
-		11338B5B26164E59000D8823 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5A26164E59000D8823 /* LoginViewController.swift */; };
-		11338B6026164E67000D8823 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5F26164E67000D8823 /* LoginViewModel.swift */; };
-		11338B6526164E6E000D8823 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B6426164E6E000D8823 /* Login.storyboard */; };
+		11338B5B26164E59000D8823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5A26164E59000D8823 /* SignInViewController.swift */; };
+		11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5F26164E67000D8823 /* SignInViewModel.swift */; };
+		11338B6526164E6E000D8823 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B6426164E6E000D8823 /* SignIn.storyboard */; };
 		11338B7126164F8B000D8823 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* Register.storyboard */; };
 		11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* RegisterViewController.swift */; };
 		11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* RegisterViewModel.swift */; };
@@ -67,9 +67,9 @@
 		11338B3726164103000D8823 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		11338B46261641C4000D8823 /* BaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
 		11338B5226164CF4000D8823 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
-		11338B5A26164E59000D8823 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		11338B5F26164E67000D8823 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		11338B6426164E6E000D8823 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		11338B5A26164E59000D8823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		11338B5F26164E67000D8823 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		11338B6426164E6E000D8823 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		11338B7026164F8B000D8823 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
 		11338B7526164F93000D8823 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		11338B7A26164FA1000D8823 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				11338B1D26163FEC000D8823 /* Feed */,
-				11338B6926164E72000D8823 /* Login */,
+				11338B6926164E72000D8823 /* SignIn */,
 				11338B7F26164FA4000D8823 /* Register */,
 			);
 			path = Usecases;
@@ -215,14 +215,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		11338B6926164E72000D8823 /* Login */ = {
+		11338B6926164E72000D8823 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
 				11338B972616507F000D8823 /* ViewControllers */,
 				11338B932616507A000D8823 /* ViewModels */,
 				11338B8F2616506E000D8823 /* Views */,
 			);
-			path = Login;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		11338B7F26164FA4000D8823 /* Register */ = {
@@ -262,7 +262,7 @@
 		11338B8F2616506E000D8823 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				11338B6426164E6E000D8823 /* Login.storyboard */,
+				11338B6426164E6E000D8823 /* SignIn.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,7 +270,7 @@
 		11338B932616507A000D8823 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11338B5F26164E67000D8823 /* LoginViewModel.swift */,
+				11338B5F26164E67000D8823 /* SignInViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 		11338B972616507F000D8823 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				11338B5A26164E59000D8823 /* LoginViewController.swift */,
+				11338B5A26164E59000D8823 /* SignInViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -485,7 +485,7 @@
 				9AB4C7F82615E74D00CDCE38 /* LaunchScreen.storyboard in Resources */,
 				9AB4C7F52615E74D00CDCE38 /* Assets.xcassets in Resources */,
 				11338B2E2616401E000D8823 /* Feed.storyboard in Resources */,
-				11338B6526164E6E000D8823 /* Login.storyboard in Resources */,
+				11338B6526164E6E000D8823 /* SignIn.storyboard in Resources */,
 				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
 				11338B7126164F8B000D8823 /* Register.storyboard in Resources */,
 				11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */,
@@ -675,13 +675,13 @@
 				11338B0F26163E5F000D8823 /* AuthenticateCoordinator.swift in Sources */,
 				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
 				11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */,
-				11338B6026164E67000D8823 /* LoginViewModel.swift in Sources */,
+				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,
 				11338B33261640FC000D8823 /* BaseViewController.swift in Sources */,
 				11338A9C261639CB000D8823 /* SceneDelegate.swift in Sources */,
 				11338B1926163FCF000D8823 /* FeedViewModel.swift in Sources */,
 				11338B1426163FBD000D8823 /* FeedViewController.swift in Sources */,
-				11338B5B26164E59000D8823 /* LoginViewController.swift in Sources */,
+				11338B5B26164E59000D8823 /* SignInViewController.swift in Sources */,
 				11338B47261641C4000D8823 /* BaseProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

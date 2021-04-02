@@ -11,9 +11,9 @@ import XCoordinator
 final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
     override func prepareTransition(for route: RouteType) -> TransitionType {
         switch route {
-        case .login:
-            let viewModel = LoginViewModel(with: weakRouter)
-            let controller = LoginViewController.newInstance(with: viewModel)
+        case .signin:
+            let viewModel = SignInViewModel(with: weakRouter)
+            let controller = SignInViewController.newInstance(with: viewModel)
             return .push(controller)
         case .register:
             let viewModel = RegisterViewModel(with: weakRouter)

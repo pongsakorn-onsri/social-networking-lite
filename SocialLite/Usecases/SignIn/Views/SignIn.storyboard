@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="M6B-Dh-P5U">
+            <objects>
+                <viewController storyboardIdentifier="SignInViewController" id="2bt-df-THM" customClass="SignInViewController" customModule="SocialLite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JVZ-FE-HPg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RO3-6l-Nvh">
+                                <rect key="frame" x="91" y="388" width="232.5" height="120"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOg-jR-VpA">
+                                <rect key="frame" x="178.5" y="559" width="57" height="30"/>
+                                <state key="normal" title="Register"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ElM-RM-1B2" customClass="GIDSignInButton">
+                                <rect key="frame" x="24" y="609" width="366" height="45"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="kGi-MP-bY2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7cD-db-TuH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ElM-RM-1B2" firstAttribute="centerX" secondItem="RO3-6l-Nvh" secondAttribute="centerX" id="1oD-x3-jss"/>
+                            <constraint firstItem="dOg-jR-VpA" firstAttribute="centerX" secondItem="RO3-6l-Nvh" secondAttribute="centerX" id="Dzq-Xd-Wdg"/>
+                            <constraint firstItem="7cD-db-TuH" firstAttribute="trailing" secondItem="ElM-RM-1B2" secondAttribute="trailing" constant="24" id="GBf-6Z-6JC"/>
+                            <constraint firstItem="RO3-6l-Nvh" firstAttribute="centerY" secondItem="JVZ-FE-HPg" secondAttribute="centerY" id="JZh-S8-uwq"/>
+                            <constraint firstItem="RO3-6l-Nvh" firstAttribute="centerX" secondItem="JVZ-FE-HPg" secondAttribute="centerX" id="NOB-GL-LQY"/>
+                            <constraint firstItem="ElM-RM-1B2" firstAttribute="top" secondItem="dOg-jR-VpA" secondAttribute="bottom" constant="20" id="UmS-ZR-XOo"/>
+                            <constraint firstItem="dOg-jR-VpA" firstAttribute="top" secondItem="RO3-6l-Nvh" secondAttribute="bottom" constant="51" id="iK8-Rb-Yfb"/>
+                            <constraint firstItem="ElM-RM-1B2" firstAttribute="leading" secondItem="7cD-db-TuH" secondAttribute="leading" constant="24" id="yUS-OS-I4w"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="registerButton" destination="dOg-jR-VpA" id="xgi-Fo-gLT"/>
+                        <outlet property="signInWithGoogle" destination="ElM-RM-1B2" id="Spn-Do-G5f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P8G-Gc-bEl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34.782608695652179" y="33.482142857142854"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

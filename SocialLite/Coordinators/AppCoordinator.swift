@@ -13,9 +13,12 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
         super.init(initialRoute: .launch)
     }
     
+    private var authenCoordinator: AuthenticateCoordinator?
+    
     fileprivate func authTransition(_ route: AuthenticateRoute = .login) -> NavigationTransition {
         let coor = AuthenticateCoordinator(initialRoute: route)
         coor.rootViewController.modalPresentationStyle = .fullScreen
+        authenCoordinator = coor
         return .present(coor)
     }
     

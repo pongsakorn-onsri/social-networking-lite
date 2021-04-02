@@ -23,14 +23,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edd-lo-6yP">
+                                <rect key="frame" x="317" y="808" width="77" height="34"/>
+                                <state key="normal" title="New post">
+                                    <color key="titleColor" systemColor="systemIndigoColor"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o6j-a8-X0K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="o6j-a8-X0K" firstAttribute="bottom" secondItem="edd-lo-6yP" secondAttribute="bottom" constant="20" id="FOM-x3-bGA"/>
                             <constraint firstItem="Ct1-p9-2Jg" firstAttribute="centerY" secondItem="hNW-Tx-Rr8" secondAttribute="centerY" id="KKj-zR-ahZ"/>
+                            <constraint firstItem="o6j-a8-X0K" firstAttribute="trailing" secondItem="edd-lo-6yP" secondAttribute="trailing" constant="20" id="fpU-7Q-qcx"/>
                             <constraint firstItem="Ct1-p9-2Jg" firstAttribute="centerX" secondItem="hNW-Tx-Rr8" secondAttribute="centerX" id="tJu-bv-osU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="newPostButton" destination="edd-lo-6yP" id="dCN-xI-4bk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGx-es-Qev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,6 +51,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -8,9 +8,12 @@
 import Foundation
 import Firebase
 import RxSwift
+import RxRelay
+
+typealias User = Firebase.User
 
 protocol AuthenProtocol {
-    var currentUser: Firebase.User? { get }
+    var currentUser: User? { get set }
     
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?)
     func signOut()
@@ -19,20 +22,23 @@ protocol AuthenProtocol {
 class Authen: NSObject, AuthenProtocol {
     
     private var auth: Auth
-    
-    var currentUser: Firebase.User? { auth.currentUser }
+    var currentUser: User?
     
     init(auth: Auth) {
         self.auth = auth
     }
     
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?) {
-        auth.signIn(with: credential, completion: completion)
+        auth.signIn(with: credential) { [weak self](authResult, error) in
+            completion?(authResult, error)
+            self?.currentUser = authResult?.user
+        }
     }
     
     func signOut() {
         do {
             try auth.signOut()
+            currentUser = nil
         } catch {
             print("Sign out action error: \(error.localizedDescription)")
         }
@@ -43,14 +49,27 @@ final class UserManager: NSObject {
     static var shared = UserManager()
     
     private var auth: AuthenProtocol
-    
-    private override init() {
-        auth = Authen(auth: Auth.auth())
+    var userObservable: BehaviorRelay<User?>
+    var isSignIn: Bool { currentUser != nil }
+    var currentUser: User? {
+        didSet {
+            userObservable.accept(currentUser)
+        }
     }
     
-    var user: Firebase.User? { auth.currentUser }
-    var isSignIn: Bool { user != nil }
-    
+    private override init() {
+        let shared = Auth.auth()
+        auth = Authen(auth: shared)
+        userObservable = BehaviorRelay(value: shared.currentUser)
+        currentUser = shared.currentUser
+        super.init()
+        shared.addStateDidChangeListener { (_, user) in
+            self.currentUser = user
+        }
+    }
+}
+
+extension UserManager {
     func signIn(with credential: AuthCredential) -> Single<User> {
         return Single.create { (observer) -> Disposable in
             self.auth.signIn(with: credential) { (authResult, error) in
@@ -61,7 +80,6 @@ final class UserManager: NSObject {
                 } else {
                     observer(.error(SignInError.unknown))
                 }
-                
             }
             return Disposables.create()
         }

@@ -28,7 +28,7 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             return authTransition(.login)
         case .launch:
             var routes = [AppRoute.feed]
-            if UserManager.shared.user == nil {
+            if !UserManager.shared.isSignIn {
                 routes.append(.authenticate)
             }
             return .multiple(routes.map { prepareTransition(for: $0) })

@@ -23,6 +23,7 @@ class FeedViewModel: BaseViewModel {
     
     func transform(input: Input) -> Output {
         input.userChanged
+            .distinctUntilChanged()
             .subscribe(onNext: { [weak self]user in
                 if user == nil {
                     self?.router.trigger(.authenticate)

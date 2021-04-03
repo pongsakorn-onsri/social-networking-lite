@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import RxSwift
+import MaterialComponents
 
 open class BaseViewController<T: ViewModelProtocol>: UIViewController, UseViewModel {
     public typealias Model = T
@@ -17,5 +18,14 @@ open class BaseViewController<T: ViewModelProtocol>: UIViewController, UseViewMo
     
     public func bind(to model: T) {
         self.viewModel = model
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        applyTheme(with: containerScheme)
+    }
+    
+    func applyTheme(with containerScheme: MDCContainerScheming) {
+        
     }
 }

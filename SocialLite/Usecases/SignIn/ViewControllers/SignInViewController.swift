@@ -35,10 +35,10 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.addSubview(appBarViewController.view)
         appBarViewController.didMove(toParent: self)
+        super.viewDidLoad()
         configureUI()
         configureSignInProviders()
         configureBinding()
@@ -86,6 +86,14 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         // Google
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
+    
+    override func applyTheme(with containerScheme: MDCContainerScheming) {
+        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
+        emailTextField.applyTheme(withScheme: containerScheme)
+        passwordTextField.applyTheme(withScheme: containerScheme)
+        signInButton.applyOutlinedTheme(withScheme: containerScheme)
+        signUpButton.applyOutlinedTheme(withScheme: containerScheme)
+    }
 }
 
 extension SignInViewController: GIDSignInDelegate {
@@ -94,15 +102,5 @@ extension SignInViewController: GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         viewModel?.signIn(with: credential)
-    }
-}
-
-extension SignInViewController {
-    func applyTheme(with containerScheme: MDCContainerScheming) {
-        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
-        emailTextField.applyTheme(withScheme: containerScheme)
-        passwordTextField.applyTheme(withScheme: containerScheme)
-        signInButton.applyOutlinedTheme(withScheme: containerScheme)
-        signUpButton.applyOutlinedTheme(withScheme: containerScheme)
     }
 }

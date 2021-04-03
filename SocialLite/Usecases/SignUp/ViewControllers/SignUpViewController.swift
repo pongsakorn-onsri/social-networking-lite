@@ -8,11 +8,11 @@
 import UIKit
 import MaterialComponents
 
-extension RegisterViewController: UseStoryboard {
-    static var storyboardName: String { "Register" }
+extension SignUpViewController: UseStoryboard {
+    static var storyboardName: String { "SignUp" }
 }
 
-class RegisterViewController: BaseViewController<RegisterViewModel> {
+class SignUpViewController: BaseViewController<SignUpViewModel> {
 
     let appBarViewController = MDCAppBarViewController()
     

@@ -10,6 +10,6 @@ import XCoordinator
 
 public enum AuthenticateRoute: Route {
     case signin
-    case register
+    case signup
     case close
 }

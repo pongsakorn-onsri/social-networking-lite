@@ -1,5 +1,5 @@
 //
-//  RegisterViewModel.swift
+//  SignUpViewModel.swift
 //  SocialLite
 //
 //  Created by Pongsakorn Onsri on 2/4/2564 BE.
@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import XCoordinator
 
-class RegisterViewModel: NSObject, ViewModelProtocol {
+class SignUpViewModel: NSObject, ViewModelProtocol {
     typealias RouteType = AuthenticateRoute
     var router: WeakRouter<RouteType>
     var disposeBag: DisposeBag = DisposeBag()

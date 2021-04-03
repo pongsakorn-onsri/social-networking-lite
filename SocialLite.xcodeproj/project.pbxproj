@@ -22,9 +22,9 @@
 		11338B5B26164E59000D8823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5A26164E59000D8823 /* SignInViewController.swift */; };
 		11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5F26164E67000D8823 /* SignInViewModel.swift */; };
 		11338B6526164E6E000D8823 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B6426164E6E000D8823 /* SignIn.storyboard */; };
-		11338B7126164F8B000D8823 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* Register.storyboard */; };
-		11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* RegisterViewController.swift */; };
-		11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* RegisterViewModel.swift */; };
+		11338B7126164F8B000D8823 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* SignUp.storyboard */; };
+		11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* SignUpViewController.swift */; };
+		11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* SignUpViewModel.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -97,9 +97,9 @@
 		11338B5A26164E59000D8823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		11338B5F26164E67000D8823 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		11338B6426164E6E000D8823 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
-		11338B7026164F8B000D8823 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
-		11338B7526164F93000D8823 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		11338B7A26164FA1000D8823 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		11338B7026164F8B000D8823 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		11338B7526164F93000D8823 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		11338B7A26164FA1000D8823 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 				11B53AC32617ECB70056B822 /* CreatePost */,
 				11338B1D26163FEC000D8823 /* Feed */,
 				11338B6926164E72000D8823 /* SignIn */,
-				11338B7F26164FA4000D8823 /* Register */,
+				11338B7F26164FA4000D8823 /* SignUp */,
 			);
 			path = Usecases;
 			sourceTree = "<group>";
@@ -283,20 +283,20 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
-		11338B7F26164FA4000D8823 /* Register */ = {
+		11338B7F26164FA4000D8823 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				11338B842616505E000D8823 /* ViewControllers */,
 				11338B8826165064000D8823 /* ViewModels */,
 				11338B8326165057000D8823 /* Views */,
 			);
-			path = Register;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		11338B8326165057000D8823 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				11338B7026164F8B000D8823 /* Register.storyboard */,
+				11338B7026164F8B000D8823 /* SignUp.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 		11338B842616505E000D8823 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				11338B7526164F93000D8823 /* RegisterViewController.swift */,
+				11338B7526164F93000D8823 /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -312,7 +312,7 @@
 		11338B8826165064000D8823 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11338B7A26164FA1000D8823 /* RegisterViewModel.swift */,
+				11338B7A26164FA1000D8823 /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -652,7 +652,7 @@
 				11B53B182618093A0056B822 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 				11B53B172618093A0056B822 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
-				11338B7126164F8B000D8823 /* Register.storyboard in Resources */,
+				11338B7126164F8B000D8823 /* SignUp.storyboard in Resources */,
 				11B53B0B2618093A0056B822 /* Montserrat-ExtraLight.ttf in Resources */,
 				11B53B112618093A0056B822 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				11B53B0E2618093A0056B822 /* Montserrat-MediumItalic.ttf in Resources */,
@@ -843,14 +843,14 @@
 				11338B0A26163DB2000D8823 /* AuthenticateRoute.swift in Sources */,
 				11338B3826164103000D8823 /* BaseViewModel.swift in Sources */,
 				11338B0526163D02000D8823 /* AppRouter.swift in Sources */,
-				11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */,
+				11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */,
 				11B53B26261814000056B822 /* UIColor+Extensions.swift in Sources */,
 				11338AFD26163C69000D8823 /* AppCoordinator.swift in Sources */,
 				11338B0F26163E5F000D8823 /* AuthenticateCoordinator.swift in Sources */,
 				11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */,
 				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
 				11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */,
-				11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */,
+				11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */,
 				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,
 				11338B33261640FC000D8823 /* BaseViewController.swift in Sources */,

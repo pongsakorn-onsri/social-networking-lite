@@ -68,7 +68,7 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
     func configureBinding() {
         signUpButton.rx.tap
             .subscribe(onNext: { [weak self]_ in
-                self?.viewModel?.router.trigger(.register)
+                self?.viewModel?.router.trigger(.signup)
             })
             .disposed(by: disposeBag)
         

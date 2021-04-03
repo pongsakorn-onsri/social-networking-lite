@@ -26,6 +26,9 @@
 		11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* RegisterViewController.swift */; };
 		11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* RegisterViewModel.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
+		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
+		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
+		11B53AD52617ED170056B822 /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B53AD42617ED170056B822 /* CreatePost.storyboard */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -75,6 +78,9 @@
 		11338B7A26164FA1000D8823 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
+		11B53AD42617ED170056B822 /* CreatePost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreatePost.storyboard; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 		11338AFB26163C36000D8823 /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
+				11B53AC32617ECB70056B822 /* CreatePost */,
 				11338B1D26163FEC000D8823 /* Feed */,
 				11338B6926164E72000D8823 /* SignIn */,
 				11338B7F26164FA4000D8823 /* Register */,
@@ -281,6 +288,40 @@
 				11338B5A26164E59000D8823 /* SignInViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		11B53AC32617ECB70056B822 /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				11B53AC52617ECDA0056B822 /* ViewControllers */,
+				11B53AC62617ECE10056B822 /* ViewModels */,
+				11B53AC42617ECD50056B822 /* Views */,
+			);
+			path = CreatePost;
+			sourceTree = "<group>";
+		};
+		11B53AC42617ECD50056B822 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				11B53AD42617ED170056B822 /* CreatePost.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		11B53AC52617ECDA0056B822 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				11B53AC72617ECF60056B822 /* CreatePostViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		11B53AC62617ECE10056B822 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
@@ -488,6 +529,7 @@
 				11338B6526164E6E000D8823 /* SignIn.storyboard in Resources */,
 				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
 				11338B7126164F8B000D8823 /* Register.storyboard in Resources */,
+				11B53AD52617ED170056B822 /* CreatePost.storyboard in Resources */,
 				11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,7 +715,9 @@
 				11338B7B26164FA1000D8823 /* RegisterViewModel.swift in Sources */,
 				11338AFD26163C69000D8823 /* AppCoordinator.swift in Sources */,
 				11338B0F26163E5F000D8823 /* AuthenticateCoordinator.swift in Sources */,
+				11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */,
 				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
+				11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */,
 				11338B7626164F93000D8823 /* RegisterViewController.swift in Sources */,
 				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,

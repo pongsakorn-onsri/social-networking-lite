@@ -33,7 +33,9 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
         case .timeline:
             return .none()
         case .post:
-            return .none()
+            let viewModel = CreatePostViewModel(with: weakRouter)
+            let controller = CreatePostViewController.newInstance(with: viewModel)
+            return .present(controller)
         case .signout:
             let alertController = UIAlertController(title: "Are you sure to sign out ?", message: nil, preferredStyle: .actionSheet)
             let actionConfirm = UIAlertAction(title: "Sign out", style: .destructive) { _ in
@@ -45,6 +47,9 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             alertController.addAction(actionConfirm)
             alertController.addAction(actionCancel)
             return .present(alertController)
+        case .dismiss:
+            return .dismiss()
         }
+        
     }
 }

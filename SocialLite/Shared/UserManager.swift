@@ -15,6 +15,7 @@ typealias User = Firebase.User
 protocol AuthenProtocol {
     var currentUser: User? { get set }
     
+    func signUp(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?)
     func signIn(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
     func signOut()
@@ -27,6 +28,13 @@ class Authen: NSObject, AuthenProtocol {
     
     init(auth: Auth) {
         self.auth = auth
+    }
+    
+    func signUp(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
+        auth.createUser(withEmail: email, password: password) { [weak self](authResult, error) in
+            completion?(authResult, error)
+            self?.currentUser = authResult?.user
+        }
     }
     
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?) {
@@ -78,6 +86,21 @@ final class UserManager: NSObject {
 }
 
 extension UserManager {
+    func signUp(with email: String, password: String) -> Single<User> {
+        return Single.create { (observer) -> Disposable in
+            self.auth.signUp(with: email, password: password) { (authResult, error) in
+                if let user = authResult?.user {
+                    observer(.success(user))
+                } else if let error = error {
+                    observer(.error(error))
+                } else {
+                    observer(.error(SignInError.unknown))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     func signIn(with credential: AuthCredential) -> Single<User> {
         return Single.create { (observer) -> Disposable in
             self.auth.signIn(with: credential) { (authResult, error) in

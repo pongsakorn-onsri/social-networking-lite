@@ -33,6 +33,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         appBarViewController.didMove(toParent: self)
         super.viewDidLoad()
         configureUI()
+        configureBinding()
     }
     
     func configureUI() {
@@ -40,20 +41,60 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         
         emailTextField.label.text = "Email account"
         emailTextField.placeholder = "john.doe@email.com"
+        emailTextField.textContentType = .emailAddress
+        emailTextField.keyboardType = .emailAddress
         emailTextField.sizeToFit()
         
         passwordTextField.isSecureTextEntry = true
         passwordTextField.label.text = "Password"
         passwordTextField.placeholder = "*********"
+        passwordTextField.textContentType = .newPassword
+        passwordTextField.passwordRules = UITextInputPasswordRules(descriptor: "minlength: 8;")
         passwordTextField.sizeToFit()
         
         confirmPasswordTextField.isSecureTextEntry = true
         confirmPasswordTextField.label.text = "Confirm Password"
         confirmPasswordTextField.placeholder = "*********"
+        confirmPasswordTextField.textContentType = .newPassword
         confirmPasswordTextField.sizeToFit()
         
         confirmButton.setTitle("Confirm", for: .normal)
         confirmButton.accessibilityLabel = "Confirm"
+    }
+    
+    func configureBinding() {
+        guard let viewModel = viewModel else { return }
+        let input = SignUpViewModel.Input(
+            email: emailTextField.rx.text.orEmpty.asObservable(),
+            password: passwordTextField.rx.text.orEmpty.asObservable(),
+            confirmPassword: confirmPasswordTextField.rx.text.orEmpty.asObservable(),
+            submitTapped: confirmButton.rx.tap.asObservable())
+        
+        let output = viewModel.transform(input: input)
+        output.emailError
+            .map { (self.emailTextField, $0) }
+            .drive(onNext: handleTextFieldOnError)
+            .disposed(by: disposeBag)
+        
+        output.passwordError
+            .map { (self.passwordTextField, $0) }
+            .drive(onNext: handleTextFieldOnError)
+            .disposed(by: disposeBag)
+        
+        output.confirmPasswordError
+            .map { (self.confirmPasswordTextField, $0) }
+            .drive(onNext: handleTextFieldOnError)
+            .disposed(by: disposeBag)
+    }
+    
+    private func handleTextFieldOnError(_ textField: MDCOutlinedTextField?, _ error: Error?) {
+        if let error = error {
+            textField?.leadingAssistiveLabel.text = error.localizedDescription
+            textField?.applyErrorTheme(withScheme: containerScheme)
+        } else {
+            textField?.leadingAssistiveLabel.text = nil
+            textField?.applyTheme(withScheme: containerScheme)
+        }
     }
     
     override func applyTheme(with containerScheme: MDCContainerScheming) {

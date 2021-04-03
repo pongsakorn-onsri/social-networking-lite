@@ -6,10 +6,11 @@
 //
 
 import Foundation
-import RxSwift
 import XCoordinator
+import RxSwift
+import RxCocoa
 import GoogleSignIn
-import FirebaseAuth
+import Firebase
 
 final class SignInViewModel: NSObject, ViewModelProtocol {
     typealias RouteType = AuthenticateRoute
@@ -21,13 +22,101 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
         self.router = router
     }
     
-    func signIn(with credential: AuthCredential) {
-        UserManager.shared.signIn(with: credential)
-            .subscribe(onSuccess: { [weak self]_ in
-                self?.router.trigger(.close)
-            }, onError: { [weak self]error in
-                self?.errorSubject.onNext(error)
+    struct Input {
+        let email: Observable<String>
+        let password: Observable<String>
+        let signInTapped: Observable<Void>
+        let signUpTapped: Observable<Void>
+        let signInGoogleTapped: Observable<Void>
+    }
+    
+    struct Output {
+        let emailError: Driver<Error?>
+        let passwordError: Driver<Error?>
+    }
+    
+    let inputEmail: BehaviorRelay<String> = BehaviorRelay(value: "")
+    let inputPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
+    let outputEmailError: PublishSubject<Error?> = PublishSubject()
+    let outputPasswordError: PublishSubject<Error?> = PublishSubject()
+    
+    func transform(input: Input) -> Output {
+        input.email
+            .bind(to: inputEmail)
+            .disposed(by: disposeBag)
+        input.password
+            .bind(to: inputPassword)
+            .disposed(by: disposeBag)
+        
+        input.signInTapped
+            .map { _ in (self.inputEmail.value, self.inputPassword.value) }
+            .filter(validate)
+            .subscribe(onNext: { [weak self](email, password) in
+                self?.signIn(with: email, password: password)
             })
             .disposed(by: disposeBag)
+        
+        input.signUpTapped
+            .subscribe(onNext: { [weak self]_ in
+                self?.router.trigger(.signup)
+            })
+            .disposed(by: disposeBag)
+        
+        input.signInGoogleTapped
+            .subscribe(onNext: {
+                GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+                GIDSignIn.sharedInstance()?.delegate = self
+                GIDSignIn.sharedInstance()?.signIn()
+            })
+            .disposed(by: disposeBag)
+        
+        return Output(
+            emailError: outputEmailError.asDriver(onErrorJustReturn: nil),
+            passwordError: outputPasswordError.asDriver(onErrorJustReturn: nil)
+        )
+    }
+    
+    private func signIn(with credential: AuthCredential) {
+        UserManager.shared.signIn(with: credential)
+            .subscribe(onSuccess: { [weak self]_ in
+                self?.outputEmailError.onNext(nil)
+                self?.outputPasswordError.onNext(nil)
+                self?.router.trigger(.close)
+            }, onError: { [weak self]error in
+                self?.outputEmailError.onNext(error)
+                self?.outputPasswordError.onNext(error)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func signIn(with email: String, password: String) {
+        UserManager.shared.signIn(with: email, password: password)
+            .subscribe(onSuccess: { [weak self]_ in
+                self?.outputEmailError.onNext(nil)
+                self?.outputPasswordError.onNext(nil)
+                self?.router.trigger(.close)
+            }, onError: { [weak self]error in
+                self?.outputEmailError.onNext(error)
+                self?.outputPasswordError.onNext(error)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func validate(_ email: String, _ password: String) -> Bool {
+        let emailValid = !email.trimmingCharacters(in: .whitespaces).isEmpty
+        outputEmailError.onNext(emailValid ? nil : SignInError.message("Please input email account."))
+        
+        let passwordValid = !password.trimmingCharacters(in: .whitespaces).isEmpty
+        outputPasswordError.onNext(passwordValid ? nil : SignInError.message("Please input your password."))
+        return emailValid && passwordValid
+    }
+}
+
+extension SignInViewModel: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser, withError error: Error) {
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        self.signIn(with: credential)
     }
 }

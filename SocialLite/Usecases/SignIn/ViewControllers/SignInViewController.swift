@@ -66,18 +66,41 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
     }
     
     func configureBinding() {
-        signUpButton.rx.tap
-            .subscribe(onNext: { [weak self]_ in
-                self?.viewModel?.router.trigger(.signup)
+        guard let viewModel = viewModel else { return }
+        
+        let input = SignInViewModel.Input(
+            email: emailTextField.rx.text.orEmpty.asObservable(),
+            password: passwordTextField.rx.text.orEmpty.asObservable(),
+            signInTapped: signInButton.rx.tap.asObservable(),
+            signUpTapped: signUpButton.rx.tap.asObservable(),
+            signInGoogleTapped: signInWithGoogle.rx.tapGesture()
+                .when(.recognized)
+                .map { _ in Void() }
+                .asObservable()
+        )
+        
+        let output = viewModel.transform(input: input)
+        output.emailError
+            .drive(onNext: { [weak self]error in
+                if let error = error {
+                    self?.emailTextField.leadingAssistiveLabel.text = error.localizedDescription
+                    self?.emailTextField.applyErrorTheme(withScheme: containerScheme)
+                } else {
+                    self?.emailTextField.leadingAssistiveLabel.text = nil
+                    self?.emailTextField.applyTheme(withScheme: containerScheme)
+                }
             })
             .disposed(by: disposeBag)
         
-        signInWithGoogle.rx.tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self]_ in
-                GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
-                GIDSignIn.sharedInstance()?.delegate = self
-                GIDSignIn.sharedInstance()?.signIn()
+        output.passwordError
+            .drive(onNext: { [weak self]error in
+                if let error = error {
+                    self?.passwordTextField.leadingAssistiveLabel.text = error.localizedDescription
+                    self?.passwordTextField.applyErrorTheme(withScheme: containerScheme)
+                } else {
+                    self?.passwordTextField.leadingAssistiveLabel.text = nil
+                    self?.passwordTextField.applyTheme(withScheme: containerScheme)
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -93,14 +116,5 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         passwordTextField.applyTheme(withScheme: containerScheme)
         signInButton.applyOutlinedTheme(withScheme: containerScheme)
         signUpButton.applyOutlinedTheme(withScheme: containerScheme)
-    }
-}
-
-extension SignInViewController: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser, withError error: Error) {
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
-        viewModel?.signIn(with: credential)
     }
 }

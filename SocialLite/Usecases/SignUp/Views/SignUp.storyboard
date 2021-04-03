@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john.doe@email.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVc-gL-y3f" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="45" y="184" width="324" height="44"/>
+                                <rect key="frame" x="45" y="164" width="324" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="WxZ-94-1QN"/>
                                 </constraints>
@@ -26,7 +26,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="*********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iTG-dy-Ghu" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="45" y="252" width="324" height="44"/>
+                                <rect key="frame" x="45" y="248" width="324" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="lId-SO-9xM"/>
                                 </constraints>
@@ -34,7 +34,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="*********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-2d-5KQ" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="45" y="320" width="324" height="44"/>
+                                <rect key="frame" x="45" y="332" width="324" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="WiQ-hx-w59"/>
                                 </constraints>
@@ -42,7 +42,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXH-Ib-zgW" customClass="MDCButton">
-                                <rect key="frame" x="45" y="394" width="324" height="33"/>
+                                <rect key="frame" x="45" y="416" width="324" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Confirm"/>
                             </button>
@@ -51,15 +51,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bhL-2d-5KQ" firstAttribute="leading" secondItem="cVc-gL-y3f" secondAttribute="leading" id="0Zu-kA-LPj"/>
-                            <constraint firstItem="cVc-gL-y3f" firstAttribute="top" secondItem="ZsT-xF-MUy" secondAttribute="top" constant="140" id="1pg-6u-xDP"/>
+                            <constraint firstItem="cVc-gL-y3f" firstAttribute="top" secondItem="ZsT-xF-MUy" secondAttribute="top" constant="120" id="1pg-6u-xDP"/>
                             <constraint firstItem="ZsT-xF-MUy" firstAttribute="trailing" secondItem="cVc-gL-y3f" secondAttribute="trailing" constant="45" id="95N-tP-Yyv"/>
-                            <constraint firstItem="bhL-2d-5KQ" firstAttribute="top" secondItem="iTG-dy-Ghu" secondAttribute="bottom" constant="24" id="XyL-B7-pp4"/>
+                            <constraint firstItem="bhL-2d-5KQ" firstAttribute="top" secondItem="iTG-dy-Ghu" secondAttribute="bottom" constant="40" id="XyL-B7-pp4"/>
                             <constraint firstItem="jXH-Ib-zgW" firstAttribute="leading" secondItem="cVc-gL-y3f" secondAttribute="leading" id="ZYh-Qg-NkJ"/>
                             <constraint firstItem="bhL-2d-5KQ" firstAttribute="trailing" secondItem="cVc-gL-y3f" secondAttribute="trailing" id="mnV-7M-G9I"/>
                             <constraint firstItem="iTG-dy-Ghu" firstAttribute="leading" secondItem="cVc-gL-y3f" secondAttribute="leading" id="qAN-Z9-XWt"/>
                             <constraint firstItem="iTG-dy-Ghu" firstAttribute="trailing" secondItem="cVc-gL-y3f" secondAttribute="trailing" id="usc-DS-gBq"/>
-                            <constraint firstItem="jXH-Ib-zgW" firstAttribute="top" secondItem="bhL-2d-5KQ" secondAttribute="bottom" constant="30" id="vSs-DT-yAu"/>
-                            <constraint firstItem="iTG-dy-Ghu" firstAttribute="top" secondItem="cVc-gL-y3f" secondAttribute="bottom" constant="24" id="wyg-BP-Aae"/>
+                            <constraint firstItem="jXH-Ib-zgW" firstAttribute="top" secondItem="bhL-2d-5KQ" secondAttribute="bottom" constant="40" id="vSs-DT-yAu"/>
+                            <constraint firstItem="iTG-dy-Ghu" firstAttribute="top" secondItem="cVc-gL-y3f" secondAttribute="bottom" constant="40" id="wyg-BP-Aae"/>
                             <constraint firstItem="jXH-Ib-zgW" firstAttribute="trailing" secondItem="cVc-gL-y3f" secondAttribute="trailing" id="xut-Aq-Qr9"/>
                             <constraint firstItem="cVc-gL-y3f" firstAttribute="leading" secondItem="ZsT-xF-MUy" secondAttribute="leading" constant="45" id="zM0-CL-vh7"/>
                         </constraints>

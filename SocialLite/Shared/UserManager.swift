@@ -16,6 +16,7 @@ protocol AuthenProtocol {
     var currentUser: User? { get set }
     
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?)
+    func signIn(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
     func signOut()
 }
 
@@ -30,6 +31,13 @@ class Authen: NSObject, AuthenProtocol {
     
     func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?) {
         auth.signIn(with: credential) { [weak self](authResult, error) in
+            completion?(authResult, error)
+            self?.currentUser = authResult?.user
+        }
+    }
+    
+    func signIn(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
+        auth.signIn(withEmail: email, password: password) { [weak self](authResult, error) in
             completion?(authResult, error)
             self?.currentUser = authResult?.user
         }
@@ -85,17 +93,34 @@ extension UserManager {
         }
     }
     
+    func signIn(with email: String, password: String) -> Single<User> {
+        return Single.create { (observer) -> Disposable in
+            self.auth.signIn(with: email, password: password) { (authResult, error) in
+                if let user = authResult?.user {
+                    observer(.success(user))
+                } else if let error = error {
+                    observer(.error(error))
+                } else {
+                    observer(.error(SignInError.unknown))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     func signOut() {
         auth.signOut()
     }
 }
 
-enum SignInError: Error, CustomStringConvertible {
+enum SignInError: LocalizedError {
     case unknown
+    case message(String)
     
-    var description: String {
+    var errorDescription: String? {
         switch self {
         case .unknown: return "Something wrong ❌"
+        case let .message(text): return text
         }
     }
 }

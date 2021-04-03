@@ -12,6 +12,7 @@ import RxGesture
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import MaterialComponents
 
 extension SignInViewController: UseStoryboard {
     static var storyboardName: String { "SignIn" }
@@ -19,17 +20,53 @@ extension SignInViewController: UseStoryboard {
 
 final class SignInViewController: BaseViewController<SignInViewModel> {
     
-    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var emailTextField: MDCOutlinedTextField!
+    @IBOutlet weak var passwordTextField: MDCOutlinedTextField!
+    
+    @IBOutlet weak var signInButton: MDCButton!
+    @IBOutlet weak var signUpButton: MDCButton!
     @IBOutlet weak var signInWithGoogle: GIDSignInButton!
+    
+    let appBarViewController = MDCAppBarViewController()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addChild(appBarViewController)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.addSubview(appBarViewController.view)
+        appBarViewController.didMove(toParent: self)
+        configureUI()
         configureSignInProviders()
         configureBinding()
     }
     
+    func configureUI() {
+        appBarViewController.navigationBar.title = "Sign In"
+        
+        emailTextField.label.text = "Email account"
+        emailTextField.placeholder = "john.doe@email.com"
+        emailTextField.sizeToFit()
+        
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.label.text = "Password"
+        passwordTextField.placeholder = "*********"
+        passwordTextField.sizeToFit()
+        
+        signInButton.setTitle("Sign In", for: .normal)
+        signInButton.accessibilityLabel = "Sign in"
+        
+        signUpButton.setTitle("Sign Up", for: .normal)
+        signUpButton.accessibilityLabel = "Sign Up"
+        
+        applyTheme(with: containerScheme)
+    }
+    
     func configureBinding() {
-        registerButton.rx.tap
+        signUpButton.rx.tap
             .subscribe(onNext: { [weak self]_ in
                 self?.viewModel?.router.trigger(.register)
             })
@@ -57,5 +94,15 @@ extension SignInViewController: GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         viewModel?.signIn(with: credential)
+    }
+}
+
+extension SignInViewController {
+    func applyTheme(with containerScheme: MDCContainerScheming) {
+        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
+        emailTextField.applyTheme(withScheme: containerScheme)
+        passwordTextField.applyTheme(withScheme: containerScheme)
+        signInButton.applyOutlinedTheme(withScheme: containerScheme)
+        signUpButton.applyOutlinedTheme(withScheme: containerScheme)
     }
 }

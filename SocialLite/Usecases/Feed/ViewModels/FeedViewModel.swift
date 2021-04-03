@@ -13,7 +13,7 @@ import RxCocoa
 class FeedViewModel: BaseViewModel {
     
     struct Input {
-        let newPostSelected: Observable<Void>
+        let createPostTapped: Observable<Void>
         let userChanged: Observable<User?>
     }
     
@@ -23,7 +23,6 @@ class FeedViewModel: BaseViewModel {
     
     func transform(input: Input) -> Output {
         input.userChanged
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self]user in
                 if user == nil {
                     self?.router.trigger(.authenticate)
@@ -31,7 +30,7 @@ class FeedViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.newPostSelected
+        input.createPostTapped
             .subscribe(onNext: { [weak self]_ in
                 self?.router.trigger(.post)
             })

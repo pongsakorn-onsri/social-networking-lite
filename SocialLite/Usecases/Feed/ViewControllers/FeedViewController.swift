@@ -10,16 +10,20 @@ import UIKit
 
 final class FeedViewController: BaseViewController<FeedViewModel> {
     
-    @IBOutlet weak var newPostButton: UIButton!
+    @IBOutlet weak var createPostButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSignOutButton()
+        configureViewModel()
+    }
+    
+    func configureSignOutButton() {
         let logoutItem = UIBarButtonItem(title: "Sign out",
                                          style: .plain,
                                          target: self,
                                          action: #selector(signOut))
         navigationItem.setRightBarButton(logoutItem, animated: true)
-        configureViewModel()
     }
     
     @objc func signOut() {
@@ -29,7 +33,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     func configureViewModel() {
         guard let viewModel = viewModel else { return }
         let input = FeedViewModel.Input(
-            newPostSelected: newPostButton.rx.tap.asObservable(),
+            createPostTapped: createPostButton.rx.tap.asObservable(),
             userChanged: UserManager.shared.userObservable.asObservable()
         )
         let output = viewModel.transform(input: input)

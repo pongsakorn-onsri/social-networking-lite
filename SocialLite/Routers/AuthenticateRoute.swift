@@ -12,4 +12,5 @@ public enum AuthenticateRoute: Route {
     case signin
     case signup
     case close
+    case alert(Error)
 }

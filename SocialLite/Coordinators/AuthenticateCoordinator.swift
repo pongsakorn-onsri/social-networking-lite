@@ -21,6 +21,11 @@ final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
             return .push(controller)
         case .close:
             return .dismissToRoot()
+        case let .alert(error):
+            let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+            let actionConfirm = UIAlertAction(title: "Confirm", style: .default, handler: nil)
+            alertController.addAction(actionConfirm)
+            return .present(alertController)
         }
     }
 }

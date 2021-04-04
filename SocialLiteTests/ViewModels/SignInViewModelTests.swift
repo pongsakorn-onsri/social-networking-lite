@@ -10,6 +10,7 @@ import Quick
 import Nimble
 import RxSwift
 import RxTest
+import RxBlocking
 import XCoordinator
 import GoogleSignIn
 import FirebaseAuth
@@ -40,41 +41,90 @@ class SignInViewModelTests: QuickSpec {
             }
             
             context("input email and password") {
-                it("input empty email > press sign in") {
+                
+                it("press sign in") {
 
                     /// Given
-                    let inputEmail = scheduler.createHotObservable([
-                        .next(0, ""),
-                    ])
-                    
                     let signInTapped = scheduler.createHotObservable([
-                        .next(1, ()),
+                        .next(230, ()),
                     ])
 
-                    let input = ViewModel.Input(email: inputEmail.asObservable(),
-                                                 password: .just(""),
+                    let input = ViewModel.Input(email: .just(""),
+                                                password: .just(""),
                                                  signInTapped: signInTapped.asObservable(),
                                                  signUpTapped: .just(()))
                     let output = viewModel.transform(input: input)
                     
                     /// When
-                    let outputEmailErrors = scheduler.start {
-                        output.emailError
-                            .asObservable()
-                            .map { error in
-                                error?.localizedDescription
-                            }
+                    let outputEmailObserver = scheduler.createObserver(String?.self)
+                    let disposable = output.emailError
+                        .map { $0?.localizedDescription }
+                        .drive(outputEmailObserver)
+                    
+                    let outputPasswordObserver = scheduler.createObserver(String?.self)
+                    let disposable2 = output.passwordError
+                        .map { $0?.localizedDescription }
+                        .drive(outputPasswordObserver)
+                    
+                    scheduler.scheduleAt(1000) {
+                        disposable.dispose()
+                        disposable2.dispose()
                     }
-                    _ = scheduler.start { signInTapped.asObservable() }
+                    
                     scheduler.start()
                     
                     /// Then
-                    let expectedEmailErrors: [Recorded<Event<String?>>] = Recorded.events(
-                        .next(0, nil),
-                        .next(2, "Please input email account.")
-                    )
+                    expect(outputEmailObserver.events).to(equal([ .next(230, "Please input email account.") ]))
+                    expect(outputPasswordObserver.events).to(equal([ .next(230, "Please input your password.") ]))
+                }
+                
+                it("input email & password -> press sign in") {
 
-                    expect(outputEmailErrors.events).to(equal(expectedEmailErrors))
+                    /// Given
+                    let inputEmail = scheduler.createHotObservable([
+                        .next(210, "aaaa"),
+                        .next(240, "pongsakorn@gmail.com"),
+                    ])
+                    
+                    let inputPassword = scheduler.createHotObservable([
+                        .next(220, "bbbb"),
+                        .next(250, "Welcome1"),
+                    ])
+                    
+                    let signInTapped = scheduler.createHotObservable([
+                        .next(230, ()),
+                        .next(260, ()),
+                    ])
+
+                    let input = ViewModel.Input(email: inputEmail.asObservable(),
+                                                password: inputPassword.asObservable(),
+                                                 signInTapped: signInTapped.asObservable(),
+                                                 signUpTapped: .just(()))
+                    let output = viewModel.transform(input: input)
+                    
+                    /// When
+                    let outputEmailObserver = scheduler.createObserver(String?.self)
+                    let disposable = output.emailError
+                        .map { $0?.localizedDescription }
+                        .drive(outputEmailObserver)
+                    
+                    let outputPasswordObserver = scheduler.createObserver(String?.self)
+                    let disposable2 = output.passwordError
+                        .map { $0?.localizedDescription }
+                        .drive(outputPasswordObserver)
+                    
+                    scheduler.scheduleAt(1000) {
+                        disposable.dispose()
+                        disposable2.dispose()
+                    }
+                    
+                    scheduler.start()
+                    
+                    /// Then
+                    expect(outputEmailObserver.events).to(equal([ .next(230, nil),
+                                                                  .next(260, nil) ]))
+                    expect(outputPasswordObserver.events).to(equal([ .next(230, nil),
+                                                                     .next(260, nil) ]))
                 }
             }
             
@@ -109,7 +159,7 @@ class SignInViewModelTests: QuickSpec {
                 context("with email and password") {
                     it("by empty value") {
                         var onError: Error?
-                        viewModel.signIn(with: "", password: "")
+                        
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
                                 .subscribe(onNext: { error in
@@ -120,14 +170,17 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: "", password: "")
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("The password is invalid or the user does not have a password."))
                     }
                     
                     it("by wrong password") {
                         var onError: Error?
-                        viewModel.signIn(with: "pongsakorn.onsri@gmail.com", password: "123456789")
+                        
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
                                 .subscribe(onNext: { error in
@@ -138,14 +191,17 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: "pongsakorn.onsri@gmail.com", password: "123456789")
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("The password is invalid or the user does not have a password."))
                     }
                     
                     it("by email does not registered") {
                         var onError: Error?
-                        viewModel.signIn(with: "aaa.bbb@gmail.com", password: "aaa")
+                        
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
                                 .subscribe(onNext: { error in
@@ -156,14 +212,17 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: "aaa.bbb@gmail.com", password: "aaa")
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("There is no user record corresponding to this identifier. The user may have been deleted."))
                     }
                     
                     it("by only short password") {
                         var onError: Error?
-                        viewModel.signIn(with: "", password: "aaa")
+                        
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
                                 .subscribe(onNext: { error in
@@ -174,7 +233,10 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: "", password: "aaa")
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("The email address is badly formatted."))
                     }
@@ -184,7 +246,6 @@ class SignInViewModelTests: QuickSpec {
                     it("by empty token") {
                         var onError: Error?
                         let credential = GoogleAuthProvider.credential(withIDToken: "", accessToken: "")
-                        viewModel.signIn(with: credential)
                         
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
@@ -196,7 +257,10 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: credential)
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
                     }
@@ -206,7 +270,6 @@ class SignInViewModelTests: QuickSpec {
                     it("by empty token") {
                         var onError: Error?
                         let credential = GitHubAuthProvider.credential(withToken: "")
-                        viewModel.signIn(with: credential)
                         
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
@@ -218,7 +281,10 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: credential)
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
                     }
@@ -228,7 +294,6 @@ class SignInViewModelTests: QuickSpec {
                     it("by empty token") {
                         var onError: Error?
                         let credential = FacebookAuthProvider.credential(withAccessToken: "")
-                        viewModel.signIn(with: credential)
                         
                         waitUntil(timeout: .seconds(10)) { (done) in
                             viewModel.signInErrorSubject
@@ -240,7 +305,10 @@ class SignInViewModelTests: QuickSpec {
                                     done()
                                 })
                                 .disposed(by: self.disposeBag)
+                            
+                            viewModel.signIn(with: credential)
                         }
+                        
                         expect(onError).notTo(beNil())
                         expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
                     }

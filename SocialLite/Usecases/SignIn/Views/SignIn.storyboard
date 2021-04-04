@@ -23,15 +23,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOg-jR-VpA" customClass="MDCButton">
-                                <rect key="frame" x="45" y="445" width="324" height="33"/>
+                                <rect key="frame" x="45" y="460" width="324" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="zO0-Jh-0dz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign up"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ElM-RM-1B2" customClass="GIDSignInButton">
-                                <rect key="frame" x="45" y="498" width="324" height="45"/>
+                                <rect key="frame" x="45" y="528" width="324" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="kGi-MP-bY2"/>
+                                    <constraint firstAttribute="height" constant="48" id="kGi-MP-bY2"/>
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="*********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-NI-PcB" customClass="MDCOutlinedTextField">
@@ -51,12 +54,15 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsp-05-mbu" customClass="MDCButton">
-                                <rect key="frame" x="45" y="372" width="324" height="33"/>
+                                <rect key="frame" x="45" y="372" width="324" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="cFt-en-1eV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign in"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQF-Fd-y7b">
-                                <rect key="frame" x="193.5" y="413" width="27" height="24"/>
+                                <rect key="frame" x="193.5" y="428" width="27" height="24"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

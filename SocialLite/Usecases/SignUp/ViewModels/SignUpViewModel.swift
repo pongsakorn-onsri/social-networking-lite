@@ -41,6 +41,9 @@ class SignUpViewModel: NSObject, ViewModelProtocol {
     var inputEmail: BehaviorRelay<String> = BehaviorRelay(value: "")
     var inputPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
     var inputConfirmPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var outputEmail: PublishSubject<Error?> = PublishSubject()
+    var outputPassword: PublishSubject<Error?> = PublishSubject()
+    var outputConfirmPassword: PublishSubject<Error?> = PublishSubject()
     var signUpErrorSubject: PublishSubject<Error> = PublishSubject()
     
     func transform(input: Input) -> Output {
@@ -57,25 +60,10 @@ class SignUpViewModel: NSObject, ViewModelProtocol {
             .bind(to: inputConfirmPassword)
             .disposed(by: disposeBag)
         
-        let validateEmail = input.email
-            .map { self.validate($0, type: .email) }
-            .asObservable()
-        
-        let validatePassword = input.password
-            .map { self.validate($0, type: .password) }
-            .asObservable()
-        
-        let validateConfirmPassword = input.confirmPassword
-            .map { self.validate($0, type: .confirmPassword) }
-            .asObservable()
-        
         input.submitTapped
-            .flatMap { _ in
-                Observable.zip(validateEmail, validatePassword, validateConfirmPassword)
-                    .filter { errors -> Bool in
-                        errors.0 == nil && errors.1 == nil && errors.2 == nil
-                    }
-            }
+            .map { _ in (self.inputEmail.value, self.inputPassword.value, self.inputConfirmPassword.value) }
+            .flatMap(validateAll)
+            .filter { success in success }
             .map { _ in (self.inputEmail.value, self.inputPassword.value) }
             .subscribe(onNext: { [weak self](email, password) in
                 self?.signUp(with: email, password: password)
@@ -91,9 +79,9 @@ class SignUpViewModel: NSObject, ViewModelProtocol {
             .disposed(by: disposeBag)
         
         return Output(
-            emailError: validateEmail.asDriver(onErrorJustReturn: nil),
-            passwordError: validatePassword.asDriver(onErrorJustReturn: nil),
-            confirmPasswordError: validateConfirmPassword.asDriver(onErrorJustReturn: nil)
+            emailError: outputEmail.asDriver(onErrorJustReturn: nil),
+            passwordError: outputPassword.asDriver(onErrorJustReturn: nil),
+            confirmPasswordError: outputConfirmPassword.asDriver(onErrorJustReturn: nil)
         )
     }
     
@@ -105,6 +93,24 @@ class SignUpViewModel: NSObject, ViewModelProtocol {
                 self?.signUpErrorSubject.onNext(error)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func validateAll(_ email: String, _ password: String, _ confirmPassword: String) -> Single<Bool> {
+        return Single.create { (observer) -> Disposable in
+            
+            let validateEmail = self.validate(email, type: .email)
+            self.outputEmail.onNext(validateEmail)
+            
+            let validatePassword = self.validate(password, type: .password)
+            self.outputPassword.onNext(validatePassword)
+            
+            let validateConfirmPassword = self.validate(confirmPassword, type: .confirmPassword)
+            self.outputConfirmPassword.onNext(validateConfirmPassword)
+            
+            observer(.success(validateEmail == nil && validatePassword == nil && validateConfirmPassword == nil))
+            
+            return Disposables.create()
+        }
     }
     
     private func validate(_ value: String, type: ValidateType) -> Error? {

@@ -49,11 +49,13 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         
         emailTextField.label.text = "Email account"
         emailTextField.placeholder = "john.doe@email.com"
+        emailTextField.keyboardType = .emailAddress
         emailTextField.sizeToFit()
         
         passwordTextField.isSecureTextEntry = true
         passwordTextField.label.text = "Password"
         passwordTextField.placeholder = "*********"
+        passwordTextField.returnKeyType = .done
         passwordTextField.sizeToFit()
         
         signInButton.setTitle("Sign In", for: .normal)

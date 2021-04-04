@@ -49,6 +49,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         passwordTextField.label.text = "Password"
         passwordTextField.placeholder = "*********"
         passwordTextField.textContentType = .newPassword
+        passwordTextField.returnKeyType = .done
         passwordTextField.passwordRules = UITextInputPasswordRules(descriptor: "minlength: 8;")
         passwordTextField.sizeToFit()
         
@@ -56,6 +57,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         confirmPasswordTextField.label.text = "Confirm Password"
         confirmPasswordTextField.placeholder = "*********"
         confirmPasswordTextField.textContentType = .newPassword
+        confirmPasswordTextField.returnKeyType = .done
         confirmPasswordTextField.sizeToFit()
         
         confirmButton.setTitle("Confirm", for: .normal)

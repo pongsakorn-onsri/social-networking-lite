@@ -39,6 +39,7 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
     let inputPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
     let outputEmailError: PublishSubject<Error?> = PublishSubject()
     let outputPasswordError: PublishSubject<Error?> = PublishSubject()
+    let signInErrorSubject: PublishSubject<Error> = PublishSubject()
     
     func transform(input: Input) -> Output {
         input.email
@@ -63,10 +64,16 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
             .disposed(by: disposeBag)
         
         input.signInGoogleTapped
-            .subscribe(onNext: {
+            .subscribe(onNext: { _ in
                 GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
                 GIDSignIn.sharedInstance()?.delegate = self
                 GIDSignIn.sharedInstance()?.signIn()
+            })
+            .disposed(by: disposeBag)
+        
+        signInErrorSubject
+            .subscribe(onNext: { [weak self]error in
+                self?.router.trigger(.alert(error))
             })
             .disposed(by: disposeBag)
         
@@ -96,8 +103,7 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
                 self?.outputPasswordError.onNext(nil)
                 self?.router.trigger(.close)
             }, onError: { [weak self]error in
-                self?.outputEmailError.onNext(error)
-                self?.outputPasswordError.onNext(error)
+                self?.signInErrorSubject.onNext(error)
             })
             .disposed(by: disposeBag)
     }

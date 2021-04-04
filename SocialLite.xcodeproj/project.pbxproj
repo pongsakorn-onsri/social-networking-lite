@@ -56,6 +56,7 @@
 		11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B532619AB650056B822 /* SignInViewModelTests.swift */; };
 		11B53B5F2619AC990056B822 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */; };
 		11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53BA32619C2FC0056B822 /* MockAuthen.swift */; };
+		11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -136,6 +137,7 @@
 		11B53B532619AB650056B822 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
 		11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
 		11B53BA32619C2FC0056B822 /* MockAuthen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthen.swift; sourceTree = "<group>"; };
+		11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				11B53B532619AB650056B822 /* SignInViewModelTests.swift */,
+				11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 			files = (
 				11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */,
 				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
+				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

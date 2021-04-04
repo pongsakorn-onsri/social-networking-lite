@@ -74,12 +74,16 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
             email: emailTextField.rx.text.orEmpty.asObservable(),
             password: passwordTextField.rx.text.orEmpty.asObservable(),
             signInTapped: signInButton.rx.tap.asObservable(),
-            signUpTapped: signUpButton.rx.tap.asObservable(),
-            signInGoogleTapped: signInWithGoogle.rx.tapGesture()
-                .when(.recognized)
-                .map { _ in Void() }
-                .asObservable()
+            signUpTapped: signUpButton.rx.tap.asObservable()
         )
+        
+        signInWithGoogle.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+                GIDSignIn.sharedInstance()?.signIn()
+            })
+            .disposed(by: disposeBag)
         
         let output = viewModel.transform(input: input)
         output.emailError
@@ -110,6 +114,7 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
     func configureSignInProviders() {
         // Google
         GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.delegate = self
     }
     
     override func applyTheme(with containerScheme: MDCContainerScheming) {
@@ -118,5 +123,14 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         passwordTextField.applyTheme(withScheme: containerScheme)
         signInButton.applyOutlinedTheme(withScheme: containerScheme)
         signUpButton.applyOutlinedTheme(withScheme: containerScheme)
+    }
+}
+
+extension SignInViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser, withError error: Error) {
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        viewModel?.signIn(with: credential)
     }
 }

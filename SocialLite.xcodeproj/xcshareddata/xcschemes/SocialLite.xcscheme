@@ -26,7 +26,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9AB4C7E72615E74C00CDCE38"
+            BuildableName = "SocialLite.app"
+            BlueprintName = "SocialLite"
+            ReferencedContainer = "container:SocialLite.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,16 +46,6 @@
                BlueprintIdentifier = "9AB4C7FD2615E74D00CDCE38"
                BuildableName = "SocialLiteTests.xctest"
                BlueprintName = "SocialLiteTests"
-               ReferencedContainer = "container:SocialLite.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9AB4C8082615E74D00CDCE38"
-               BuildableName = "SocialLiteUITests.xctest"
-               BlueprintName = "SocialLiteUITests"
                ReferencedContainer = "container:SocialLite.xcodeproj">
             </BuildableReference>
          </TestableReference>

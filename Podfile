@@ -28,6 +28,7 @@ target 'SocialLite' do
     inherit! :search_paths
     pod 'Quick'
     pod 'Nimble'
+    pod 'RxTest'
   end
 
   target 'SocialLiteUITests' do

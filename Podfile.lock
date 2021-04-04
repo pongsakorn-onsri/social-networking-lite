@@ -1046,6 +1046,8 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.2)
+  - RxTest (5.1.2):
+    - RxSwift (~> 5)
   - SwiftLint (0.43.0)
   - XCoordinator/Core (2.0.7)
   - XCoordinator/RxSwift (2.0.7):
@@ -1070,6 +1072,7 @@ DEPENDENCIES:
   - RxDataSources
   - RxGesture
   - RxSwift (~> 5)
+  - RxTest
   - SwiftLint
   - XCoordinator/RxSwift (~> 2.0.3)
 
@@ -1117,6 +1120,7 @@ SPEC REPOS:
     - RxGesture
     - RxRelay
     - RxSwift
+    - RxTest
     - SwiftLint
     - XCoordinator
 
@@ -1163,9 +1167,10 @@ SPEC CHECKSUMS:
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   XCoordinator: 9ee654fedef1ffede33d5c11677708a555c00542
 
-PODFILE CHECKSUM: 9fa60495b508973afd4ad949779c0fe1b21a5a7a
+PODFILE CHECKSUM: 7626e64930b955a1fd2fad16ecc55bbd02f612b3
 
 COCOAPODS: 1.10.1

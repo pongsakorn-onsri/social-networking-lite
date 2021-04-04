@@ -27,7 +27,6 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
         let password: Observable<String>
         let signInTapped: Observable<Void>
         let signUpTapped: Observable<Void>
-        let signInGoogleTapped: Observable<Void>
     }
     
     struct Output {
@@ -39,7 +38,7 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
     let inputPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
     let outputEmailError: PublishSubject<Error?> = PublishSubject()
     let outputPasswordError: PublishSubject<Error?> = PublishSubject()
-    let signInErrorSubject: PublishSubject<Error> = PublishSubject()
+    let signInErrorSubject: PublishSubject<Error?> = PublishSubject()
     
     func transform(input: Input) -> Output {
         input.email
@@ -63,17 +62,11 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
             })
             .disposed(by: disposeBag)
         
-        input.signInGoogleTapped
-            .subscribe(onNext: { _ in
-                GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
-                GIDSignIn.sharedInstance()?.delegate = self
-                GIDSignIn.sharedInstance()?.signIn()
-            })
-            .disposed(by: disposeBag)
-        
         signInErrorSubject
             .subscribe(onNext: { [weak self]error in
-                self?.router.trigger(.alert(error))
+                if let error = error {
+                    self?.router.trigger(.alert(error))
+                }
             })
             .disposed(by: disposeBag)
         
@@ -83,24 +76,25 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
         )
     }
     
-    private func signIn(with credential: AuthCredential) {
+    func signIn(with credential: AuthCredential) {
         UserManager.shared.signIn(with: credential)
             .subscribe(onSuccess: { [weak self]_ in
                 self?.outputEmailError.onNext(nil)
                 self?.outputPasswordError.onNext(nil)
+                self?.signInErrorSubject.onNext(nil)
                 self?.router.trigger(.close)
             }, onError: { [weak self]error in
-                self?.outputEmailError.onNext(error)
-                self?.outputPasswordError.onNext(error)
+                self?.signInErrorSubject.onNext(error)
             })
             .disposed(by: disposeBag)
     }
     
-    private func signIn(with email: String, password: String) {
+    func signIn(with email: String, password: String) {
         UserManager.shared.signIn(with: email, password: password)
             .subscribe(onSuccess: { [weak self]_ in
                 self?.outputEmailError.onNext(nil)
                 self?.outputPasswordError.onNext(nil)
+                self?.signInErrorSubject.onNext(nil)
                 self?.router.trigger(.close)
             }, onError: { [weak self]error in
                 self?.signInErrorSubject.onNext(error)
@@ -115,14 +109,5 @@ final class SignInViewModel: NSObject, ViewModelProtocol {
         let passwordValid = !password.trimmingCharacters(in: .whitespaces).isEmpty
         outputPasswordError.onNext(passwordValid ? nil : SignInError.message("Please input your password."))
         return emailValid && passwordValid
-    }
-}
-
-extension SignInViewModel: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser, withError error: Error) {
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
-        self.signIn(with: credential)
     }
 }

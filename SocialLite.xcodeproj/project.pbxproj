@@ -53,13 +53,14 @@
 		11B53B182618093A0056B822 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11B53B012618093A0056B822 /* Montserrat-ExtraBoldItalic.ttf */; };
 		11B53B1E261813F60056B822 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B1D261813F60056B822 /* UIFont+Extensions.swift */; };
 		11B53B26261814000056B822 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B25261814000056B822 /* UIColor+Extensions.swift */; };
+		11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B532619AB650056B822 /* SignInViewModelTests.swift */; };
+		11B53B5F2619AC990056B822 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */; };
+		11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53BA32619C2FC0056B822 /* MockAuthen.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
 		9AB4C7F52615E74D00CDCE38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */; };
 		9AB4C7F82615E74D00CDCE38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */; };
-		9AB4C8032615E74D00CDCE38 /* SocialLiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */; };
-		9AB4C80E2615E74D00CDCE38 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */; };
 		A9FE8551ADE9CA8D0B0CF799 /* Pods_SocialLiteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7010B5D7B77185FC573EFA89 /* Pods_SocialLiteTests.framework */; };
 		EE59EC4A875D35622E3B8F3A /* Pods_SocialLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */; };
 /* End PBXBuildFile section */
@@ -132,6 +133,9 @@
 		11B53B1D261813F60056B822 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		11B53B25261814000056B822 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		11B53B3C2618E83C0056B822 /* SocialLite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SocialLite.entitlements; sourceTree = "<group>"; };
+		11B53B532619AB650056B822 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
+		11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
+		11B53BA32619C2FC0056B822 /* MockAuthen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthen.swift; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,10 +148,8 @@
 		9AB4C7F72615E74D00CDCE38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9AB4C7F92615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AB4C7FE2615E74D00CDCE38 /* SocialLiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialLiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLiteTests.swift; sourceTree = "<group>"; };
 		9AB4C8042615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AB4C8092615E74D00CDCE38 /* SocialLiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialLiteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
 		9AB4C80F2615E74D00CDCE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite_SocialLiteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7DE6ED1137B5A2FF88D0A66 /* Pods-SocialLite-SocialLiteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.debug.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -433,6 +435,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		11B53B522619AAF50056B822 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				11B53B532619AB650056B822 /* SignInViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		11B53BA82619C2FF0056B822 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				11B53BA32619C2FC0056B822 /* MockAuthen.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,8 +514,9 @@
 		9AB4C8012615E74D00CDCE38 /* SocialLiteTests */ = {
 			isa = PBXGroup;
 			children = (
-				9AB4C8022615E74D00CDCE38 /* SocialLiteTests.swift */,
+				11B53B522619AAF50056B822 /* ViewModels */,
 				9AB4C8042615E74D00CDCE38 /* Info.plist */,
+				11B53BA82619C2FF0056B822 /* Mocks */,
 			);
 			path = SocialLiteTests;
 			sourceTree = "<group>";
@@ -505,7 +524,7 @@
 		9AB4C80C2615E74D00CDCE38 /* SocialLiteUITests */ = {
 			isa = PBXGroup;
 			children = (
-				9AB4C80D2615E74D00CDCE38 /* SocialLiteUITests.swift */,
+				11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */,
 				9AB4C80F2615E74D00CDCE38 /* Info.plist */,
 			);
 			path = SocialLiteUITests;
@@ -602,10 +621,12 @@
 					};
 					9AB4C7FD2615E74D00CDCE38 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = 9AB4C7E72615E74C00CDCE38;
 					};
 					9AB4C8082615E74D00CDCE38 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = 9AB4C7E72615E74C00CDCE38;
 					};
 				};
@@ -870,7 +891,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB4C8032615E74D00CDCE38 /* SocialLiteTests.swift in Sources */,
+				11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */,
+				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,7 +900,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AB4C80E2615E74D00CDCE38 /* SocialLiteUITests.swift in Sources */,
+				11B53B5F2619AC990056B822 /* SocialLiteUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1102,7 @@
 			baseConfigurationReference = 875B6EB9EF29D84E3C947704 /* Pods-SocialLiteTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SocialLiteTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -1090,6 +1113,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SocialLite.app/SocialLite";
@@ -1101,6 +1125,7 @@
 			baseConfigurationReference = 1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SocialLiteTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -1121,6 +1146,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7DE6ED1137B5A2FF88D0A66 /* Pods-SocialLite-SocialLiteUITests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SocialLiteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1130,6 +1156,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = onsri.pongsakorn.SocialLiteUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SocialLite;
@@ -1140,6 +1167,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SocialLiteUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

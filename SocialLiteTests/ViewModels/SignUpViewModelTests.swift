@@ -83,22 +83,9 @@ class SignUpViewModelTests: QuickSpec {
                 let output = viewModel.transform(input: input)
                 
                 /// When
-                let outputEmailError = scheduler.createObserver(String?.self)
-                let outputPasswordError = scheduler.createObserver(String?.self)
-                let outputConfirmPasswordError = scheduler.createObserver(String?.self)
-                
-                output.emailError
-                    .map { $0?.localizedDescription }
-                    .drive(outputEmailError)
-                    .disposed(by: self.disposeBag)
-                output.passwordError
-                    .map { $0?.localizedDescription }
-                    .drive(outputPasswordError)
-                    .disposed(by: self.disposeBag)
-                output.confirmPasswordError
-                    .map { $0?.localizedDescription }
-                    .drive(outputConfirmPasswordError)
-                    .disposed(by: self.disposeBag)
+                let outputEmail = scheduler.record(output.emailError.map { $0?.localizedDescription })
+                let outputPassword = scheduler.record(output.passwordError.map { $0?.localizedDescription })
+                let outputConfirmPassword = scheduler.record(output.confirmPasswordError.map { $0?.localizedDescription })
                 
                 scheduler.start()
                 
@@ -131,9 +118,9 @@ class SignUpViewModelTests: QuickSpec {
                     .next(310, nil),
                 ])
                 
-                expect(outputEmailError.events).to(equal(expectedEmailErrors))
-                expect(outputPasswordError.events).to(equal(expectedPasswordErrors))
-                expect(outputConfirmPasswordError.events).to(equal(expectedConfirmPasswordErrors))
+                expect(outputEmail.events).to(equal(expectedEmailErrors))
+                expect(outputPassword.events).to(equal(expectedPasswordErrors))
+                expect(outputConfirmPassword.events).to(equal(expectedConfirmPasswordErrors))
             }
             
         }

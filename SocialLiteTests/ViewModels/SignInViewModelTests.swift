@@ -56,26 +56,14 @@ class SignInViewModelTests: QuickSpec {
                     let output = viewModel.transform(input: input)
                     
                     /// When
-                    let outputEmailObserver = scheduler.createObserver(String?.self)
-                    let disposable = output.emailError
-                        .map { $0?.localizedDescription }
-                        .drive(outputEmailObserver)
-                    
-                    let outputPasswordObserver = scheduler.createObserver(String?.self)
-                    let disposable2 = output.passwordError
-                        .map { $0?.localizedDescription }
-                        .drive(outputPasswordObserver)
-                    
-                    scheduler.scheduleAt(1000) {
-                        disposable.dispose()
-                        disposable2.dispose()
-                    }
-                    
+                    let outputEmail = scheduler.record(output.emailError.map { $0?.localizedDescription })
+                    let outputPassword = scheduler.record(output.passwordError.map { $0?.localizedDescription })
+
                     scheduler.start()
                     
                     /// Then
-                    expect(outputEmailObserver.events).to(equal([ .next(230, "Please input email account.") ]))
-                    expect(outputPasswordObserver.events).to(equal([ .next(230, "Please input your password.") ]))
+                    expect(outputEmail.events).to(equal([ .next(230, "Please input email account.") ]))
+                    expect(outputPassword.events).to(equal([ .next(230, "Please input your password.") ]))
                 }
                 
                 it("input email & password -> press sign in") {
@@ -103,27 +91,15 @@ class SignInViewModelTests: QuickSpec {
                     let output = viewModel.transform(input: input)
                     
                     /// When
-                    let outputEmailObserver = scheduler.createObserver(String?.self)
-                    let disposable = output.emailError
-                        .map { $0?.localizedDescription }
-                        .drive(outputEmailObserver)
-                    
-                    let outputPasswordObserver = scheduler.createObserver(String?.self)
-                    let disposable2 = output.passwordError
-                        .map { $0?.localizedDescription }
-                        .drive(outputPasswordObserver)
-                    
-                    scheduler.scheduleAt(1000) {
-                        disposable.dispose()
-                        disposable2.dispose()
-                    }
+                    let outputEmail = scheduler.record(output.emailError.map { $0?.localizedDescription })
+                    let outputPassword = scheduler.record(output.passwordError.map { $0?.localizedDescription })
                     
                     scheduler.start()
                     
                     /// Then
-                    expect(outputEmailObserver.events).to(equal([ .next(230, nil),
+                    expect(outputEmail.events).to(equal([ .next(230, nil),
                                                                   .next(260, nil) ]))
-                    expect(outputPasswordObserver.events).to(equal([ .next(230, nil),
+                    expect(outputPassword.events).to(equal([ .next(230, nil),
                                                                      .next(260, nil) ]))
                 }
             }

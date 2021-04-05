@@ -10,14 +10,12 @@ import Firebase
 import RxSwift
 import RxRelay
 
-typealias User = Firebase.User
-
 protocol AuthenProtocol {
     var currentUser: User? { get set }
     
-    func signUp(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
-    func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?)
-    func signIn(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
+    func signUp(with email: String, password: String, completion: ((User?, Error?) -> Void)?)
+    func signIn(with credential: AuthCredential, completion: ((User?, Error?) -> Void)?)
+    func signIn(with email: String, password: String, completion: ((User?, Error?) -> Void)?)
     func signOut()
 }
 
@@ -30,24 +28,27 @@ class Authen: NSObject, AuthenProtocol {
         self.auth = auth
     }
     
-    func signUp(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
+    func signUp(with email: String, password: String, completion: ((User?, Error?) -> Void)?) {
         auth.createUser(withEmail: email, password: password) { [weak self](authResult, error) in
-            completion?(authResult, error)
-            self?.currentUser = authResult?.user
+            let user = User(firebaseUser: authResult?.user)
+            self?.currentUser = user
+            completion?(user, error)
         }
     }
     
-    func signIn(with credential: AuthCredential, completion: ((AuthDataResult?, Error?) -> Void)?) {
+    func signIn(with credential: AuthCredential, completion: ((User?, Error?) -> Void)?) {
         auth.signIn(with: credential) { [weak self](authResult, error) in
-            completion?(authResult, error)
-            self?.currentUser = authResult?.user
+            let user = User(firebaseUser: authResult?.user)
+            self?.currentUser = user
+            completion?(user, error)
         }
     }
     
-    func signIn(with email: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?) {
+    func signIn(with email: String, password: String, completion: ((User?, Error?) -> Void)?) {
         auth.signIn(withEmail: email, password: password) { [weak self](authResult, error) in
-            completion?(authResult, error)
-            self?.currentUser = authResult?.user
+            let user = User(firebaseUser: authResult?.user)
+            self?.currentUser = user
+            completion?(user, error)
         }
     }
     
@@ -75,21 +76,29 @@ final class UserManager: NSObject {
     
     private override init() {
         let shared = Auth.auth()
-        auth = Authen(auth: shared)
-        userObservable = BehaviorRelay(value: shared.currentUser)
-        currentUser = shared.currentUser
+        self.auth = Authen(auth: shared)
+        let user = User(firebaseUser: shared.currentUser)
+        userObservable = BehaviorRelay(value: user)
+        currentUser = user
         super.init()
         shared.addStateDidChangeListener { (_, user) in
-            self.currentUser = user
+            self.currentUser = User(firebaseUser: user)
         }
+    }
+    
+    init(auth: AuthenProtocol) {
+        self.auth = auth
+        userObservable = BehaviorRelay(value: auth.currentUser)
+        currentUser = auth.currentUser
+        super.init()
     }
 }
 
 extension UserManager {
     func signUp(with email: String, password: String) -> Single<User> {
         return Single.create { (observer) -> Disposable in
-            self.auth.signUp(with: email, password: password) { (authResult, error) in
-                if let user = authResult?.user {
+            self.auth.signUp(with: email, password: password) { (user, error) in
+                if let user = user {
                     observer(.success(user))
                 } else if let error = error {
                     observer(.error(error))
@@ -103,8 +112,8 @@ extension UserManager {
     
     func signIn(with credential: AuthCredential) -> Single<User> {
         return Single.create { (observer) -> Disposable in
-            self.auth.signIn(with: credential) { (authResult, error) in
-                if let user = authResult?.user {
+            self.auth.signIn(with: credential) { (user, error) in
+                if let user = user {
                     observer(.success(user))
                 } else if let error = error {
                     observer(.error(error))
@@ -118,8 +127,8 @@ extension UserManager {
     
     func signIn(with email: String, password: String) -> Single<User> {
         return Single.create { (observer) -> Disposable in
-            self.auth.signIn(with: email, password: password) { (authResult, error) in
-                if let user = authResult?.user {
+            self.auth.signIn(with: email, password: password) { (user, error) in
+                if let user = user {
                     observer(.success(user))
                 } else if let error = error {
                     observer(.error(error))
@@ -133,6 +142,7 @@ extension UserManager {
     
     func signOut() {
         auth.signOut()
+        currentUser = nil
     }
 }
 

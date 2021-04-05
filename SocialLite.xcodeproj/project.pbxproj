@@ -57,6 +57,9 @@
 		11B53B5F2619AC990056B822 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */; };
 		11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53BA32619C2FC0056B822 /* MockAuthen.swift */; };
 		11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */; };
+		11B53C37261B50FE0056B822 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C36261B50FE0056B822 /* User.swift */; };
+		11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C80261B5AA90056B822 /* TestSchedulerExtensions.swift */; };
+		11B53C8A261B5C750056B822 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C89261B5C750056B822 /* UserManagerTests.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -138,6 +141,9 @@
 		11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
 		11B53BA32619C2FC0056B822 /* MockAuthen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthen.swift; sourceTree = "<group>"; };
 		11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
+		11B53C36261B50FE0056B822 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		11B53C80261B5AA90056B822 /* TestSchedulerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSchedulerExtensions.swift; sourceTree = "<group>"; };
+		11B53C89261B5C750056B822 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -454,6 +460,30 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		11B53C35261B50DB0056B822 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11B53C36261B50FE0056B822 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		11B53C7F261B5A9C0056B822 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11B53C80261B5AA90056B822 /* TestSchedulerExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		11B53C88261B5C6A0056B822 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				11B53C89261B5C750056B822 /* UserManagerTests.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,14 +532,15 @@
 		9AB4C7EA2615E74C00CDCE38 /* SocialLite */ = {
 			isa = PBXGroup;
 			children = (
-				11B53B3C2618E83C0056B822 /* SocialLite.entitlements */,
-				11B53B1C261813CD0056B822 /* Extensions */,
-				11338B5126164CE4000D8823 /* Shared */,
 				11338AFA26163B9E000D8823 /* Coordinators */,
 				11338AF826163B94000D8823 /* Core */,
-				11338AF926163B99000D8823 /* Routers */,
-				11338AFB26163C36000D8823 /* Usecases */,
+				11B53B1C261813CD0056B822 /* Extensions */,
+				11B53C35261B50DB0056B822 /* Models */,
 				9AB4C8F2261632F600CDCE38 /* Resources */,
+				11338AF926163B99000D8823 /* Routers */,
+				11338B5126164CE4000D8823 /* Shared */,
+				11B53B3C2618E83C0056B822 /* SocialLite.entitlements */,
+				11338AFB26163C36000D8823 /* Usecases */,
 			);
 			path = SocialLite;
 			sourceTree = "<group>";
@@ -517,6 +548,8 @@
 		9AB4C8012615E74D00CDCE38 /* SocialLiteTests */ = {
 			isa = PBXGroup;
 			children = (
+				11B53C88261B5C6A0056B822 /* Shared */,
+				11B53C7F261B5A9C0056B822 /* Extensions */,
 				11B53B522619AAF50056B822 /* ViewModels */,
 				9AB4C8042615E74D00CDCE38 /* Info.plist */,
 				11B53BA82619C2FF0056B822 /* Mocks */,
@@ -876,6 +909,7 @@
 				11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */,
 				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
 				11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */,
+				11B53C37261B50FE0056B822 /* User.swift in Sources */,
 				11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */,
 				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,
@@ -895,8 +929,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */,
+				11B53C8A261B5C750056B822 /* UserManagerTests.swift in Sources */,
 				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
 				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
+				11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

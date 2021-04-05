@@ -24,7 +24,8 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Create Post" id="J1Y-7s-WmV">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="U0o-gY-40j"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="U0o-gY-40j"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="Jln-jO-UVs"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -39,6 +40,7 @@
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="U0o-gY-40j" id="j74-My-Sr2"/>
+                        <outlet property="createButton" destination="Jln-jO-UVs" id="Lv7-OZ-qaR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMp-h7-vUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -15,6 +15,7 @@ extension CreatePostViewController: UseStoryboard {
 class CreatePostViewController: BaseViewController<CreatePostViewModel> {
 
     @IBOutlet weak var closeButton: UIBarButtonItem!
+    @IBOutlet weak var createButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,10 @@ class CreatePostViewController: BaseViewController<CreatePostViewModel> {
     
     func configureBinding() {
         guard let viewModel = viewModel else { return }
-        let input = CreatePostViewModel.Input(closeTapped: closeButton.rx.tap.asObservable())
+        let input = CreatePostViewModel.Input(
+            closeTapped: closeButton.rx.tap.asObservable(),
+            createTapped: createButton.rx.tap.asObservable()
+        )
         
         _ = viewModel.transform(input: input)
     }

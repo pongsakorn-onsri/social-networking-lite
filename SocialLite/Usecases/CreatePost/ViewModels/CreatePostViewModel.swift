@@ -12,6 +12,7 @@ final class CreatePostViewModel: BaseViewModel {
 
     struct Input {
         let closeTapped: Observable<Void>
+        let createTapped: Observable<Void>
     }
     
     struct Output {

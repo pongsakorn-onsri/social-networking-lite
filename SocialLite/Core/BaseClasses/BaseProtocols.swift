@@ -21,17 +21,6 @@ public protocol UseStoryboard {
 
 public extension UseStoryboard where Self: UIViewController {
     static var storyboardIdentifier: String { return String(describing: Self.self) }
-    
-    static func newInstance() -> Self {
-        let storyboard = UIStoryboard(name: Self.storyboardName, bundle: Bundle.main)
-        let vcIdentifier = Self.storyboardIdentifier
-        let instantiateVC = storyboard.instantiateViewController(withIdentifier: vcIdentifier)
-        if let viewController = instantiateVC as? Self {
-            return viewController
-        } else {
-            return Self()
-        }
-    }
 }
 
 public extension UseViewModel where Self: UIViewController, Self: UseStoryboard {
@@ -41,17 +30,6 @@ public extension UseViewModel where Self: UIViewController, Self: UseStoryboard 
         let instantiateVC = storyboard.instantiateViewController(withIdentifier: vcIdentifier)
         if let viewController = instantiateVC as? Self {
             viewController.bind(to: viewModel)
-            return viewController
-        } else {
-            return Self()
-        }
-    }
-    
-    static func newInstance() -> Self {
-        let storyboard = UIStoryboard(name: Self.storyboardName, bundle: Bundle.main)
-        let vcIdentifier = Self.storyboardIdentifier
-        let instantiateVC = storyboard.instantiateViewController(withIdentifier: vcIdentifier)
-        if let viewController = instantiateVC as? Self {
             return viewController
         } else {
             return Self()

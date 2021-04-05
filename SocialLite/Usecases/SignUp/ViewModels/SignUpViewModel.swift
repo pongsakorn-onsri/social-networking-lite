@@ -60,12 +60,14 @@ class SignUpViewModel: NSObject, ViewModelProtocol {
             .bind(to: inputConfirmPassword)
             .disposed(by: disposeBag)
         
+        let inputForms = Observable.combineLatest(inputEmail, inputPassword, inputConfirmPassword)
+        
         input.submitTapped
-            .map { _ in (self.inputEmail.value, self.inputPassword.value, self.inputConfirmPassword.value) }
+            .withLatestFrom(inputForms)
             .flatMap(validateAll)
             .filter { success in success }
-            .map { _ in (self.inputEmail.value, self.inputPassword.value) }
-            .subscribe(onNext: { [weak self](email, password) in
+            .withLatestFrom(inputForms)
+            .subscribe(onNext: { [weak self](email, password, _) in
                 self?.signUp(with: email, password: password)
             }, onError: { [weak self](error) in
                 self?.signUpErrorSubject.onNext(error)

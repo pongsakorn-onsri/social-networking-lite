@@ -8,6 +8,7 @@
 import Foundation
 import XCoordinator
 import MaterialComponents
+import FirebaseFirestore
 
 final class AppCoordinator: NavigationCoordinator<AppRoute> {
     init() {
@@ -57,6 +58,18 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             alertController.addAction(actionConfirm)
             alertController.applyTheme(withScheme: containerScheme)
             return .present(alertController)
+        case let .delete(post, observer):
+            let alertController = MDCAlertController(title: "Are you sure to delete?",
+                                                     message: nil)
+            let actionConfirm = MDCAlertAction(title: "Confirm", emphasis: .high) { _ in
+                observer.onNext(post)
+            }
+            let actionCancel = MDCAlertAction(title: "Cancel", emphasis: .low, handler: nil)
+            alertController.addAction(actionConfirm)
+            alertController.addAction(actionCancel)
+            alertController.applyTheme(withScheme: containerScheme)
+            return .present(alertController)
+            
         case .dismiss:
             return .dismiss()
         }

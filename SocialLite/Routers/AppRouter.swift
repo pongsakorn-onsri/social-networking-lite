@@ -7,6 +7,8 @@
 
 import Foundation
 import XCoordinator
+import RxSwift
+import RxCocoa
 
 public enum AppRoute: Route {
     case feed
@@ -15,5 +17,6 @@ public enum AppRoute: Route {
     case authenticate
     case signout
     case alert(Error)
+    case delete(Post, PublishSubject<Post>)
     case dismiss
 }

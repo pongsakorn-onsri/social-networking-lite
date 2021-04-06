@@ -62,6 +62,10 @@
 		11B53C8A261B5C750056B822 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C89261B5C750056B822 /* UserManagerTests.swift */; };
 		11B53C92261C4E8A0056B822 /* CreatePostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C91261C4E8A0056B822 /* CreatePostUseCase.swift */; };
 		11B53C97261C4EA40056B822 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C96261C4EA40056B822 /* Post.swift */; };
+		11B53CD8261C9D380056B822 /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CD7261C9D380056B822 /* PostCellViewModel.swift */; };
+		11B53CE2261CA4800056B822 /* FeedUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CE1261CA4800056B822 /* FeedUseCase.swift */; };
+		11B53CEB261CB7BE0056B822 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CE9261CB7BE0056B822 /* PostTableViewCell.swift */; };
+		11B53CEC261CB7BE0056B822 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B53CEA261CB7BE0056B822 /* PostTableViewCell.xib */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -148,6 +152,10 @@
 		11B53C89261B5C750056B822 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
 		11B53C91261C4E8A0056B822 /* CreatePostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCase.swift; sourceTree = "<group>"; };
 		11B53C96261C4EA40056B822 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		11B53CD7261C9D380056B822 /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
+		11B53CE1261CA4800056B822 /* FeedUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUseCase.swift; sourceTree = "<group>"; };
+		11B53CE9261CB7BE0056B822 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		11B53CEA261CB7BE0056B822 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				11338B1826163FCF000D8823 /* FeedViewModel.swift */,
+				11B53CE1261CA4800056B822 /* FeedUseCase.swift */,
+				11B53CD7261C9D380056B822 /* PostCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -265,6 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				11338B2D2616401E000D8823 /* Feed.storyboard */,
+				11B53CE9261CB7BE0056B822 /* PostTableViewCell.swift */,
+				11B53CEA261CB7BE0056B822 /* PostTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -719,6 +731,7 @@
 				9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */,
 				11338B7126164F8B000D8823 /* SignUp.storyboard in Resources */,
 				11B53B0B2618093A0056B822 /* Montserrat-ExtraLight.ttf in Resources */,
+				11B53CEC261CB7BE0056B822 /* PostTableViewCell.xib in Resources */,
 				11B53B112618093A0056B822 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				11B53B0E2618093A0056B822 /* Montserrat-MediumItalic.ttf in Resources */,
 				11B53B072618093A0056B822 /* Montserrat-Medium.ttf in Resources */,
@@ -907,9 +920,12 @@
 			files = (
 				11338B0A26163DB2000D8823 /* AuthenticateRoute.swift in Sources */,
 				11338B3826164103000D8823 /* BaseViewModel.swift in Sources */,
+				11B53CE2261CA4800056B822 /* FeedUseCase.swift in Sources */,
 				11338B0526163D02000D8823 /* AppRouter.swift in Sources */,
+				11B53CD8261C9D380056B822 /* PostCellViewModel.swift in Sources */,
 				11B53C97261C4EA40056B822 /* Post.swift in Sources */,
 				11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */,
+				11B53CEB261CB7BE0056B822 /* PostTableViewCell.swift in Sources */,
 				11B53B26261814000056B822 /* UIColor+Extensions.swift in Sources */,
 				11338AFD26163C69000D8823 /* AppCoordinator.swift in Sources */,
 				11338B0F26163E5F000D8823 /* AuthenticateCoordinator.swift in Sources */,

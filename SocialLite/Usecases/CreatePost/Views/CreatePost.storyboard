@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N94-7A-cg4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -17,35 +17,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFr-Cg-NLI">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-4G-f8a">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="6tG-29-JTY"/>
-                                </constraints>
+                                <color key="barTintColor" red="0.21568627450980393" green="0.58823529411764708" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem title="Create Post" id="J1Y-7s-WmV">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="U0o-gY-40j"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Create" id="Jln-jO-UVs"/>
+                                    <navigationItem title="Create Post" id="vxq-Ne-bFL">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="0hP-bb-P6J">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="vX8-hp-HgU">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="js4-lk-zAA">
+                                <rect key="frame" x="364" y="56" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="js4-lk-zAA" secondAttribute="height" multiplier="1:1" id="jFB-AL-Oyh"/>
+                                </constraints>
+                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypo-HX-DlV" customClass="MDCOutlinedTextArea">
+                                <rect key="frame" x="20" y="108" width="374" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="100" id="wmH-ky-aqf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ywr-j1-MPS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NFr-Cg-NLI" firstAttribute="trailing" secondItem="Ywr-j1-MPS" secondAttribute="trailing" id="GzI-JU-wXw"/>
-                            <constraint firstItem="NFr-Cg-NLI" firstAttribute="leading" secondItem="Ywr-j1-MPS" secondAttribute="leading" id="Ijw-Ub-Itx"/>
-                            <constraint firstItem="NFr-Cg-NLI" firstAttribute="top" secondItem="Ywr-j1-MPS" secondAttribute="top" id="h1f-YU-ZUD"/>
+                            <constraint firstItem="js4-lk-zAA" firstAttribute="trailing" secondItem="aF4-4G-f8a" secondAttribute="trailing" constant="-30" id="3su-H6-b0g"/>
+                            <constraint firstItem="js4-lk-zAA" firstAttribute="centerY" secondItem="aF4-4G-f8a" secondAttribute="centerY" id="9O6-5T-WRQ"/>
+                            <constraint firstItem="Ywr-j1-MPS" firstAttribute="top" secondItem="aF4-4G-f8a" secondAttribute="top" id="9Wr-Vh-U4j"/>
+                            <constraint firstItem="Ywr-j1-MPS" firstAttribute="trailing" secondItem="aF4-4G-f8a" secondAttribute="trailing" id="h6K-vi-ksL"/>
+                            <constraint firstItem="ypo-HX-DlV" firstAttribute="top" secondItem="aF4-4G-f8a" secondAttribute="bottom" constant="20" id="iOf-Yg-aZE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ypo-HX-DlV" secondAttribute="trailing" id="imn-FR-WPv"/>
+                            <constraint firstItem="ypo-HX-DlV" firstAttribute="leading" secondItem="6M8-L2-HaI" secondAttribute="leadingMargin" id="udI-Je-4Ei"/>
+                            <constraint firstItem="aF4-4G-f8a" firstAttribute="leading" secondItem="Ywr-j1-MPS" secondAttribute="leading" id="wsy-Of-8ry"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="U0o-gY-40j" id="j74-My-Sr2"/>
-                        <outlet property="createButton" destination="Jln-jO-UVs" id="Lv7-OZ-qaR"/>
+                        <outlet property="closeButton" destination="0hP-bb-P6J" id="sfQ-r4-mFZ"/>
+                        <outlet property="createButton" destination="vX8-hp-HgU" id="w1h-dJ-F9E"/>
+                        <outlet property="loadingIndicator" destination="js4-lk-zAA" id="iRy-FB-yVb"/>
+                        <outlet property="textArea" destination="ypo-HX-DlV" id="Okv-xE-V23"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMp-h7-vUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="74"/>
+            <point key="canvasLocation" x="50.724637681159422" y="73.660714285714278"/>
         </scene>
     </scenes>
     <resources>

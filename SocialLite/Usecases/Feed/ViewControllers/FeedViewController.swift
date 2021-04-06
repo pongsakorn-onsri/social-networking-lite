@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import EmptyDataSet_Swift
+import RxDataSources
 import MaterialComponents
 
 final class FeedViewController: BaseViewController<FeedViewModel> {
@@ -42,6 +43,11 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
             .drive(onNext: { user in
                 self.title = user.displayName
             })
+            .disposed(by: disposeBag)
+        
+        let itemsDataSource = dataSource()
+        output.tableData
+            .drive(tableView.rx.items(dataSource: itemsDataSource))
             .disposed(by: disposeBag)
     }
     
@@ -88,6 +94,9 @@ extension FeedViewController {
     }
     
     func configureTableView() {
+        let identifier = String(describing: PostTableViewCell.self)
+        let postCellNib = UINib(nibName: identifier, bundle: Bundle.main)
+        tableView.register(postCellNib, forCellReuseIdentifier: identifier)
         tableView.tableFooterView = UIView()
         
         tableView.emptyDataSetView { (customView) in
@@ -100,7 +109,24 @@ extension FeedViewController {
                 .didTapDataButton { [weak self] in
                     self?.viewModel?.refreshAction.onNext(())
                 }
-            
         }
+    }
+    
+    func dataSource() -> RxTableViewSectionedReloadDataSource<FeedViewModel.SectionModel> {
+        return .init(configureCell: { source, tableView, indexPath, _ in
+            switch source[indexPath] {
+            case let .post(viewModel):
+                let identifier = String(describing: PostTableViewCell.self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+                let postCell = cell as? PostTableViewCell
+                postCell?.configure(with: viewModel)
+                postCell?.deleteButton.rx.tap
+                    .subscribe(onNext: { _ in
+                        self.viewModel?.willDeletePostAction.onNext(viewModel.post)
+                    })
+                    .disposed(by: self.disposeBag)
+                return cell
+            }
+        })
     }
 }

@@ -8,6 +8,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lekton-Regular.ttf">
+            <string>Lekton-Regular</string>
+        </array>
+        <array key="Montserrat-SemiBold.ttf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Feed View Controller-->
         <scene sceneID="Dc0-71-AzH">
@@ -20,6 +28,60 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wZp-3N-mRk">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostTableViewCell" id="Sdk-se-YrA" customClass="PostTableViewCell" customModule="SocialLite" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="159.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sdk-se-YrA" id="Dku-Zc-ZSo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="159.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pongsakorn Onsri" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqc-WX-HKW">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06/04/21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gs-Aw-nc7">
+                                                    <rect key="frame" x="20" y="16" width="374" height="10"/>
+                                                    <fontDescription key="fontDescription" name="Lekton-Regular" family="Lekton" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4b8-wo-qoW">
+                                                    <rect key="frame" x="20" y="31" width="374" height="108.5"/>
+                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                    <fontDescription key="fontDescription" name="Lekton-Regular" family="Lekton" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygk-O7-kRD">
+                                                    <rect key="frame" x="376" y="0.0" width="30" height="30"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4b8-wo-qoW" firstAttribute="trailing" secondItem="Eqc-WX-HKW" secondAttribute="trailing" id="5za-1g-NFK"/>
+                                                <constraint firstItem="Eqc-WX-HKW" firstAttribute="leading" secondItem="Dku-Zc-ZSo" secondAttribute="leading" constant="20" symbolic="YES" id="DsL-HK-kta"/>
+                                                <constraint firstAttribute="trailing" secondItem="ygk-O7-kRD" secondAttribute="trailing" constant="8" id="HRb-nn-uN7"/>
+                                                <constraint firstItem="Eqc-WX-HKW" firstAttribute="top" secondItem="Dku-Zc-ZSo" secondAttribute="top" id="IgC-TX-FmR"/>
+                                                <constraint firstItem="8Gs-Aw-nc7" firstAttribute="leading" secondItem="Eqc-WX-HKW" secondAttribute="leading" id="JCv-B0-Fig"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Gs-Aw-nc7" secondAttribute="trailing" constant="20" symbolic="YES" id="Khq-TC-Sdj"/>
+                                                <constraint firstAttribute="trailing" secondItem="Eqc-WX-HKW" secondAttribute="trailing" constant="20" symbolic="YES" id="Rol-hJ-Kb8"/>
+                                                <constraint firstAttribute="bottom" secondItem="4b8-wo-qoW" secondAttribute="bottom" constant="20" symbolic="YES" id="XaM-az-Ju7"/>
+                                                <constraint firstItem="4b8-wo-qoW" firstAttribute="top" secondItem="8Gs-Aw-nc7" secondAttribute="bottom" constant="5" id="YrN-MU-Ncv"/>
+                                                <constraint firstItem="4b8-wo-qoW" firstAttribute="leading" secondItem="Eqc-WX-HKW" secondAttribute="leading" id="Z2E-ur-lVN"/>
+                                                <constraint firstItem="8Gs-Aw-nc7" firstAttribute="top" secondItem="Eqc-WX-HKW" secondAttribute="bottom" id="qeJ-WK-gJ6"/>
+                                                <constraint firstItem="ygk-O7-kRD" firstAttribute="top" secondItem="Dku-Zc-ZSo" secondAttribute="top" id="ugI-yt-Q4Y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="ygk-O7-kRD" id="iuf-Dr-i79"/>
+                                            <outlet property="descriptionLabel" destination="4b8-wo-qoW" id="4pJ-Hg-DG2"/>
+                                            <outlet property="timeLabel" destination="8Gs-Aw-nc7" id="6cY-De-ZGo"/>
+                                            <outlet property="titleLabel" destination="Eqc-WX-HKW" id="lP4-RZ-jMS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o6j-a8-X0K"/>

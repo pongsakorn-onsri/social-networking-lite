@@ -7,15 +7,35 @@
 
 import Foundation
 import UIKit
+import MaterialComponents
 
 final class FeedViewController: BaseViewController<FeedViewModel> {
     
     @IBOutlet weak var createPostButton: UIButton!
-
+    @IBOutlet weak var tableView: UITableView!
+    
+    let appBarViewController = MDCAppBarViewController()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addChild(appBarViewController)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Timeline"
         configureSignOutButton()
+        configureNavigationBar()
         configureViewModel()
+    }
+    
+    func configureNavigationBar() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.addSubview(appBarViewController.view)
+        appBarViewController.didMove(toParent: self)
+        appBarViewController.headerView.minMaxHeightIncludesSafeArea = false
+        appBarViewController.headerView.trackingScrollView = tableView
+        tableView.delegate = appBarViewController
     }
     
     func configureSignOutButton() {
@@ -23,7 +43,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
                                          style: .plain,
                                          target: self,
                                          action: #selector(signOut))
-        navigationItem.setRightBarButton(logoutItem, animated: true)
+        navigationItem.setRightBarButtonItems([logoutItem], animated: true)
     }
     
     @objc func signOut() {
@@ -43,6 +63,10 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
                 self.title = user.displayName
             })
             .disposed(by: disposeBag)
+    }
+    
+    override func applyTheme(with containerScheme: MDCContainerScheming) {
+        appBarViewController.applySurfaceTheme(withScheme: containerScheme)
     }
     
 }

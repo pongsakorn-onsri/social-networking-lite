@@ -17,35 +17,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct1-p9-2Jg">
-                                <rect key="frame" x="172" y="428.5" width="70.5" height="39.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edd-lo-6yP">
                                 <rect key="frame" x="300" y="808" width="94" height="34"/>
                                 <state key="normal" title="Create Post">
                                     <color key="titleColor" systemColor="systemIndigoColor"/>
                                 </state>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wZp-3N-mRk">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o6j-a8-X0K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="wZp-3N-mRk" firstAttribute="trailing" secondItem="o6j-a8-X0K" secondAttribute="trailing" id="77N-tP-ISx"/>
+                            <constraint firstItem="wZp-3N-mRk" firstAttribute="bottom" secondItem="o6j-a8-X0K" secondAttribute="bottom" id="BaS-NM-wff"/>
                             <constraint firstItem="o6j-a8-X0K" firstAttribute="bottom" secondItem="edd-lo-6yP" secondAttribute="bottom" constant="20" id="FOM-x3-bGA"/>
-                            <constraint firstItem="Ct1-p9-2Jg" firstAttribute="centerY" secondItem="hNW-Tx-Rr8" secondAttribute="centerY" id="KKj-zR-ahZ"/>
+                            <constraint firstItem="wZp-3N-mRk" firstAttribute="leading" secondItem="o6j-a8-X0K" secondAttribute="leading" id="Pxz-jq-sFL"/>
                             <constraint firstItem="o6j-a8-X0K" firstAttribute="trailing" secondItem="edd-lo-6yP" secondAttribute="trailing" constant="20" id="fpU-7Q-qcx"/>
-                            <constraint firstItem="Ct1-p9-2Jg" firstAttribute="centerX" secondItem="hNW-Tx-Rr8" secondAttribute="centerX" id="tJu-bv-osU"/>
+                            <constraint firstItem="wZp-3N-mRk" firstAttribute="top" secondItem="o6j-a8-X0K" secondAttribute="top" id="oYp-bW-32s"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="createPostButton" destination="edd-lo-6yP" id="UQ0-Lp-cYu"/>
+                        <outlet property="tableView" destination="wZp-3N-mRk" id="x9q-uk-Fkl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGx-es-Qev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="184" y="26"/>
+            <point key="canvasLocation" x="182.60869565217394" y="25.446428571428569"/>
         </scene>
     </scenes>
     <resources>

@@ -22,7 +22,7 @@ struct CreatePostService: CreatePostUseCase {
         guard let user = user else {
             return .error(CreatePostError.userNotFound)
         }
-        if content.contains("fucking") {
+        if content.lowercased().contains("fucking") {
             return .error(CreatePostError.foundRudeWords)
         }
         return Single.create { (observer) -> Disposable in

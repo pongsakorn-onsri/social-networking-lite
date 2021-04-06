@@ -38,20 +38,24 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
         case .signout:
-            let alertController = UIAlertController(title: "Are you sure to sign out ?", message: nil, preferredStyle: .actionSheet)
-            let actionConfirm = UIAlertAction(title: "Sign out", style: .destructive) { _ in
+            let alertController = MDCAlertController(title: "Are you sure to sign out ?",
+                                                     message: nil)
+            let actionSignOut = MDCAlertAction(title: "Sign out", emphasis: .high) { _ in
                 UserManager.shared.signOut()
             }
-            let actionCancel = UIAlertAction(title: "Cancel", style: .default) { _ in
-                
-            }
-            alertController.addAction(actionConfirm)
+            let actionCancel = MDCAlertAction(title: "Cancel", emphasis: .low, handler: nil)
+            
+            alertController.addAction(actionSignOut)
             alertController.addAction(actionCancel)
+            alertController.applyTheme(withScheme: containerScheme)
+            
             return .present(alertController)
         case let .alert(error):
-            let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-            let actionConfirm = UIAlertAction(title: "Confirm", style: .default, handler: nil)
+            let alertController = MDCAlertController(title: "Error!",
+                                                     message: error.localizedDescription)
+            let actionConfirm = MDCAlertAction(title: "Confirm", emphasis: .high, handler: nil)
             alertController.addAction(actionConfirm)
+            alertController.applyTheme(withScheme: containerScheme)
             return .present(alertController)
         case .dismiss:
             return .dismiss()

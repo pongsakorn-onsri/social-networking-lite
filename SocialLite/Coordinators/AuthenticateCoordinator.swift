@@ -7,6 +7,7 @@
 
 import Foundation
 import XCoordinator
+import MaterialComponents.MaterialDialogs
 
 final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
     override func prepareTransition(for route: RouteType) -> TransitionType {
@@ -22,9 +23,11 @@ final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
         case .close:
             return .dismissToRoot()
         case let .alert(error):
-            let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-            let actionConfirm = UIAlertAction(title: "Confirm", style: .default, handler: nil)
+            let alertController = MDCAlertController(title: "Error!",
+                                                     message: error.localizedDescription)
+            let actionConfirm = MDCAlertAction(title: "Confirm", emphasis: .high, handler: nil)
             alertController.addAction(actionConfirm)
+            alertController.applyTheme(withScheme: containerScheme)
             return .present(alertController)
         }
     }

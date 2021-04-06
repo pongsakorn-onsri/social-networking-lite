@@ -17,12 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edd-lo-6yP">
-                                <rect key="frame" x="300" y="808" width="94" height="34"/>
-                                <state key="normal" title="Create Post">
-                                    <color key="titleColor" systemColor="systemIndigoColor"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wZp-3N-mRk">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -33,14 +27,11 @@
                         <constraints>
                             <constraint firstItem="wZp-3N-mRk" firstAttribute="trailing" secondItem="o6j-a8-X0K" secondAttribute="trailing" id="77N-tP-ISx"/>
                             <constraint firstItem="wZp-3N-mRk" firstAttribute="bottom" secondItem="o6j-a8-X0K" secondAttribute="bottom" id="BaS-NM-wff"/>
-                            <constraint firstItem="o6j-a8-X0K" firstAttribute="bottom" secondItem="edd-lo-6yP" secondAttribute="bottom" constant="20" id="FOM-x3-bGA"/>
                             <constraint firstItem="wZp-3N-mRk" firstAttribute="leading" secondItem="o6j-a8-X0K" secondAttribute="leading" id="Pxz-jq-sFL"/>
-                            <constraint firstItem="o6j-a8-X0K" firstAttribute="trailing" secondItem="edd-lo-6yP" secondAttribute="trailing" constant="20" id="fpU-7Q-qcx"/>
                             <constraint firstItem="wZp-3N-mRk" firstAttribute="top" secondItem="o6j-a8-X0K" secondAttribute="top" id="oYp-bW-32s"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="createPostButton" destination="edd-lo-6yP" id="UQ0-Lp-cYu"/>
                         <outlet property="tableView" destination="wZp-3N-mRk" id="x9q-uk-Fkl"/>
                     </connections>
                 </viewController>
@@ -52,9 +43,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

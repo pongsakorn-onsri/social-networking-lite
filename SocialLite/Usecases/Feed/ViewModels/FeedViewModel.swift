@@ -14,12 +14,15 @@ class FeedViewModel: BaseViewModel {
     
     struct Input {
         let createPostTapped: Observable<Void>
+        let signOutTapped: Observable<Void>
         let userChanged: Observable<User?>
     }
     
     struct Output {
         let user: Driver<User?>
     }
+    
+    var refreshAction: PublishSubject<Void> = PublishSubject()
     
     func transform(input: Input) -> Output {
         input.userChanged
@@ -34,6 +37,12 @@ class FeedViewModel: BaseViewModel {
         input.createPostTapped
             .subscribe(onNext: { [weak self]_ in
                 self?.router.trigger(.post)
+            })
+            .disposed(by: disposeBag)
+        
+        input.signOutTapped
+            .subscribe(onNext: {
+                self.router.trigger(.signout)
             })
             .disposed(by: disposeBag)
         

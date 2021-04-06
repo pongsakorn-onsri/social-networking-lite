@@ -14,5 +14,6 @@ public enum AppRoute: Route {
     case post
     case authenticate
     case signout
+    case alert(Error)
     case dismiss
 }

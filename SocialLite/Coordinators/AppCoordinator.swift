@@ -7,6 +7,7 @@
 
 import Foundation
 import XCoordinator
+import MaterialComponents
 
 final class AppCoordinator: NavigationCoordinator<AppRoute> {
     init() {
@@ -34,6 +35,7 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             return .none()
         case .post:
             let viewModel = CreatePostViewModel(with: weakRouter)
+            viewModel.service = CreatePostService(user: UserManager.shared.currentUser)
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
         case .signout:
@@ -46,6 +48,11 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             }
             alertController.addAction(actionConfirm)
             alertController.addAction(actionCancel)
+            return .present(alertController)
+        case let .alert(error):
+            let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+            let actionConfirm = UIAlertAction(title: "Confirm", style: .default, handler: nil)
+            alertController.addAction(actionConfirm)
             return .present(alertController)
         case .dismiss:
             return .dismiss()

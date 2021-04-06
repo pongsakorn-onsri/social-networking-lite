@@ -24,7 +24,9 @@ final class CreatePostViewModel: BaseViewModel {
         let validate: Driver<Error?>
     }
     
-    lazy var service: CreatePostUseCase = CreatePostService()
+    lazy var service: CreatePostUseCase = {
+        CreatePostService(user: UserManager.shared.currentUser)
+    }()
     let isPostingBehavior: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     let createPostErrorPublish: PublishSubject<Error> = PublishSubject()
     

@@ -35,7 +35,6 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             return .none()
         case .post:
             let viewModel = CreatePostViewModel(with: weakRouter)
-            viewModel.service = CreatePostService(user: UserManager.shared.currentUser)
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
         case .signout:

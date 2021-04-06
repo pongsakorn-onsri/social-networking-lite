@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import FirebaseFirestore
 
 protocol CreatePostUseCase {
     func create(content: String) -> Single<Post>
@@ -15,6 +16,7 @@ protocol CreatePostUseCase {
 struct CreatePostService: CreatePostUseCase {
     
     var user: User?
+    let database = Firestore.firestore()
     
     func create(content: String) -> Single<Post> {
         guard let user = user else {
@@ -23,8 +25,24 @@ struct CreatePostService: CreatePostUseCase {
         if content.contains("fucking") {
             return .error(CreatePostError.foundRudeWords)
         }
-        let newPost = Post(userId:  user.uid, content: content, timestamp: Date())
-        return .just(newPost)
+        return Single.create { (observer) -> Disposable in
+            
+            let newPost = Post(userId:  user.uid,
+                               displayName: user.postDisplayName,
+                               content: content,
+                               timestamp: Date())
+            
+            database.collection("posts")
+                .addDocument(data: newPost.toJSON()) { (error) in
+                    if let error = error {
+                        observer(.error(error))
+                    } else {
+                        observer(.success(newPost))
+                    }
+                }
+            
+            return Disposables.create()
+        }
     }
 }
 

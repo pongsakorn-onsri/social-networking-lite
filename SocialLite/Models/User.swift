@@ -21,6 +21,17 @@ public class User: UserAccount {
     var photoUrl: URL?
     var phoneNumber: String?
     
+    var postDisplayName: String {
+        if let name = displayName {
+            return name
+        } else if let email = email,
+                  let signIndex = email.firstIndex(of: "@") {
+            return String(email.prefix(upTo: signIndex))
+        } else {
+            return "Anonymous"
+        }
+    }
+    
     init(uid: String, providerID: String) {
         self.uid = uid
         self.providerID = providerID

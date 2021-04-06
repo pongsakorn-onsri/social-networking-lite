@@ -17,7 +17,7 @@ target 'SocialLite' do
   pod 'ObjectMapper'
   
   # Base
-  pod 'Firebase', :subspecs => ['Auth', 'RemoteConfig', "Firestore", 'Storage', 'Performance', 'Analytics', 'Crashlytics']
+  pod 'Firebase', :subspecs => ['Auth', 'RemoteConfig', "Firestore", 'Storage']
   pod 'XCoordinator/RxSwift', '~> 2.0.3'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'

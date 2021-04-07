@@ -9,13 +9,17 @@ import Foundation
 import ObjectMapper
 import FirebaseFirestore
 
-public struct Post {
+public struct Post: Hashable {
     var userId: String
     var displayName: String
     var content: String
     var timestamp: Timestamp
     var document: QueryDocumentSnapshot?
     var documentId: String?
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(documentId)
+    }
     
     init(userId: String, displayName: String, content: String, timestamp: Date) {
         self.userId = userId
@@ -46,5 +50,15 @@ extension Post {
             "content": content,
             "timestamp": timestamp
         ]
+    }
+}
+
+extension Array where Element == Post {
+    func withoutDuplicates() -> [Element] {
+        reduce(into: [Element]()) { (result, element) in
+            if !result.contains(where: { $0.documentId == element.documentId }) {
+                result.append(element)
+            }
+        }
     }
 }

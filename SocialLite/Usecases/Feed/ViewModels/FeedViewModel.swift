@@ -17,14 +17,14 @@ class FeedViewModel: BaseViewModel {
         let createPostTapped: Observable<Void>
         let signOutTapped: Observable<Void>
         let userChanged: Observable<User?>
-        let refresh: Observable<Void>
-        let loadMore: Observable<Void>
+        let refreshTrigger: Driver<Void>
+        let loadMoreTrigger: Driver<Void>
     }
     
     struct Output {
-        let user: Driver<User?>
-        let tableData: Driver<[SectionModel]>
-        let isFetching: Driver<Bool>
+        let tableData = BehaviorRelay<[SectionModel]>(value: [])
+        let isRefreshing: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+        let isLoadingMore: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     }
     
     var service: FeedUseCaseProtocol = { FeedUseCaseService() }()
@@ -33,9 +33,34 @@ class FeedViewModel: BaseViewModel {
     let createdPost: PublishSubject<Post> = PublishSubject()
     private let pageSize = 20
     
-    func transform(input: Input) -> Output {
-        let allPosts = BehaviorRelay<[Post]>(value: [])
-        let activityTracker = ActivityTracker()
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        let refreshingTracker = ActivityTracker()
+        let loadingMoreTracker = ActivityTracker()
+        
+        // Loading
+        refreshingTracker
+            .asDriver()
+            .drive(output.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        loadingMoreTracker
+            .asDriver()
+            .drive(output.isLoadingMore)
+            .disposed(by: disposeBag)
+        
+        // Get
+        let postSubject = BehaviorRelay<[Post]>(value: [])
+        
+        let getPostResult = service
+            .fetch(type: .new, document: nil)
+            .asDriver(onErrorJustReturn: [])
+            .do(onNext: { posts in
+                postSubject.accept(posts)
+            })
+        
+        let postList = Driver.merge(getPostResult, postSubject.asDriver())
         
         input.userChanged
             .distinctUntilChanged()
@@ -52,6 +77,7 @@ class FeedViewModel: BaseViewModel {
             .subscribe(onNext: { [weak self]_ in
                 guard let self = self else { return }
                 self.router.trigger(.post(delegate: self.createdPost))
+                self.router.rx.trigger(<#T##route: AppRoute##AppRoute#>)
             })
             .disposed(by: disposeBag)
         
@@ -62,81 +88,70 @@ class FeedViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         createdPost
-            .observeOn(MainScheduler.asyncInstance)
-            .withLatestFrom(allPosts) { (post, posts) -> [Post] in
-                [post] + posts
-            }
-            .bind(to: allPosts)
+            .asDriver { _ in Driver.empty() }
+            .drive(onNext: { post in
+                let posts = postSubject.value
+                postSubject.accept([post] + posts)
+            })
             .disposed(by: disposeBag)
         
         deletePostAction
-            .flatMap { post in
+            .asDriver { _ in Driver.empty() }
+            .flatMapLatest { post in
                 self.service.delete(post: post)
-                    .trackActivity(activityTracker)
-                    .withLatestFrom(allPosts)
-                    .map { posts in
-                        posts.filter { $0.documentId != post.documentId }
-                    }
-                    .do(onError: { [weak self]error in
-                        self?.router.trigger(.alert(error))
-                    })
-                    .catchErrorJustReturn(allPosts.value)
+                    .trackActivity(refreshingTracker)
+                    .map { _ in post }
+                    .asDriver(onErrorJustReturn: post)
             }
-            .bind(to: allPosts)
+            .drive(onNext: { post in
+                var posts = postSubject.value
+                posts.removeAll(where: { $0 == post })
+                postSubject.accept(posts)
+            })
             .disposed(by: disposeBag)
         
-        Observable.merge(input.refresh, refreshAction)
-            .withLatestFrom(allPosts)
-            .flatMap { posts -> Single<[Post]> in
-                let firstPost = posts.compactMap { $0.document }.first
+        Driver.merge(input.refreshTrigger, refreshAction.asDriver(onErrorJustReturn: ()))
+            .flatMapLatest { posts -> Driver<[Post]> in
+                let firstPost = postSubject.value.compactMap { $0.document }.first
                 return self.service.fetch(type: .new, document: firstPost)
-                    .trackActivity(activityTracker)
-                    .map { (newPosts) in
-                        var posts = posts
-                        posts.insert(contentsOf: newPosts, at: 0)
-                        return posts
-                    }
-                    .asSingle()
+                    .trackActivity(refreshingTracker)
+                    .asDriver(onErrorJustReturn: [])
             }
-            .bind(to: allPosts)
+            .drive(onNext: { newPosts in
+                let posts = newPosts + postSubject.value
+                let postsWithoutDuplicates = posts.withoutDuplicates()
+                postSubject.accept(postsWithoutDuplicates)
+            })
             .disposed(by: disposeBag)
         
-        input.loadMore
-            .withLatestFrom(allPosts)
-            .flatMap { posts -> Single<[Post]> in
-                let lastPost = posts.compactMap { $0.document }.last
+        input.loadMoreTrigger
+            .flatMapLatest { posts -> Driver<[Post]> in
+                let lastPost = postSubject.value.compactMap { $0.document }.last
                 return self.service.fetch(type: .old, document: lastPost)
-                    .trackActivity(activityTracker)
-                    .map { (oldPosts) in
-                        var posts = posts
-                        posts.append(contentsOf: oldPosts)
-                        return posts
-                    }
-                    .asSingle()
+                    .trackActivity(loadingMoreTracker)
+                    .asDriver(onErrorJustReturn: [])
             }
-            .bind(to: allPosts)
+            .drive(onNext: { oldPosts in
+                let posts = postSubject.value + oldPosts
+                let postsWithoutDuplicates = posts.withoutDuplicates()
+                postSubject.accept(postsWithoutDuplicates)
+            })
             .disposed(by: disposeBag)
         
-        let sectionItems = allPosts.map { (posts) -> [SectionItem] in
+        let sectionItems = postList.map { (posts) -> [SectionItem] in
             posts.map { post in
                 let viewModel = PostCellViewModel(post: post)
                 return SectionItem.post(viewModel: viewModel)
             }
         }
         
-        let tableData = sectionItems
+        sectionItems
             .map { [SectionModel(items: $0)] }
             .asDriver(onErrorJustReturn: [])
+            .drive(output.tableData)
+            .disposed(by: disposeBag)
         
-        return Output(
-            user: input.userChanged
-                .compactMap { $0 }
-                .asDriver(onErrorJustReturn: nil),
-            tableData: tableData,
-            isFetching: activityTracker
-                .debounce(.seconds(1))
-                .asDriver()
-        )
+        return output
     }
 }
 

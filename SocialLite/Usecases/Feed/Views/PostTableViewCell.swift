@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 import FirebaseFirestore
 
 final class PostTableViewCell: UITableViewCell {
@@ -13,6 +14,13 @@ final class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
+    
+    var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 }
 
 extension PostTableViewCell {

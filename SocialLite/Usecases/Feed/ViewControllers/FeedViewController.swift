@@ -8,17 +8,49 @@
 import Foundation
 import UIKit
 import EmptyDataSet_Swift
-import RxDataSources
 import MaterialComponents
+import RxCocoa
+import RxSwift
+import RxDataSources
+import ESPullToRefresh
 
 final class FeedViewController: BaseViewController<FeedViewModel> {
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
     
     var createPostButton: UIBarButtonItem!
     var signOutButton: UIBarButtonItem!
     var refreshControl = UIRefreshControl()
-    @IBOutlet weak var tableView: UITableView!
-    
     let appBarViewController = MDCAppBarViewController()
+    private var loadMoreTrigger = PublishSubject<Void>()
+    
+    var isRefreshing: Binder<Bool> {
+        return Binder(refreshControl) { refreshControl, loading in
+            if loading {
+                refreshControl.beginRefreshing()
+            } else {
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    var isLoadingMore: Binder<Bool> {
+        return Binder(tableView) { tableView, loading in
+            if loading {
+                tableView.es.base.footer?.startRefreshing()
+            } else {
+                tableView.es.stopLoadingMore()
+            }
+        }
+    }
+    
+    // MARK: - Life Cycle
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -34,36 +66,36 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     func configureViewModel() {
         guard let viewModel = viewModel else { return }
         
-        let refresh = refreshControl.rx.controlEvent(.valueChanged)
-        let loadMore = tableView.rx.prefetchRows.map { _ in () }
+        let refreshTrigger = refreshControl.rx.controlEvent(.valueChanged).asDriver()
         
         let input = FeedViewModel.Input(
             createPostTapped: createPostButton.rx.tap.asObservable(),
             signOutTapped: signOutButton.rx.tap.asObservable(),
             userChanged: UserManager.shared.userObservable.asObservable(),
-            refresh: refresh.asObservable(),
-            loadMore: loadMore.asObservable()
+            refreshTrigger: refreshTrigger,
+            loadMoreTrigger: loadMoreTrigger.asDriver(onErrorJustReturn: ())
         )
-        let output = viewModel.transform(input: input)
-        output.user
-            .compactMap { $0 }
-            .drive(onNext: { user in
-                self.title = user.displayName
-            })
-            .disposed(by: disposeBag)
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
         let itemsDataSource = dataSource()
         output.tableData
+            .asDriver()
             .drive(tableView.rx.items(dataSource: itemsDataSource))
             .disposed(by: disposeBag)
         
-        output.isFetching
-            .drive(refreshControl.rx.isRefreshing)
+        output.isRefreshing
+            .asDriver()
+            .drive(isRefreshing)
+            .disposed(by: disposeBag)
+        
+        output.isLoadingMore
+            .asDriver()
+            .drive(isLoadingMore)
             .disposed(by: disposeBag)
     }
     
     override func applyTheme(with containerScheme: MDCContainerScheming) {
-        appBarViewController.applySurfaceTheme(withScheme: containerScheme)
+        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
     }
     
 }
@@ -122,6 +154,10 @@ extension FeedViewController {
                     self?.viewModel?.refreshAction.onNext(())
                 }
         }
+        
+        tableView.es.addInfiniteScrolling { [weak self] in
+            self?.loadMoreTrigger.onNext(())
+        }
     }
     
     func dataSource() -> RxTableViewSectionedReloadDataSource<FeedViewModel.SectionModel> {
@@ -130,15 +166,16 @@ extension FeedViewController {
             case let .post(cellViewModel):
                 let identifier = String(describing: PostTableViewCell.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-                let postCell = cell as? PostTableViewCell
-                postCell?.configure(with: cellViewModel)
-                postCell?.deleteButton.rx.tap
-                    .subscribe(onNext: { [weak self]_ in
-                        guard let viewModel = self?.viewModel else { return }
-                        viewModel.router.trigger(.deleteAlert(post: cellViewModel.post,      
-                                                              delegate: viewModel.deletePostAction))
-                    })
-                    .disposed(by: self.disposeBag)
+                if let postCell = cell as? PostTableViewCell {
+                    postCell.configure(with: cellViewModel)
+                    postCell.deleteButton.rx.tap
+                        .subscribe(onNext: { [weak self]_ in
+                            guard let viewModel = self?.viewModel else { return }
+                            viewModel.router.trigger(.deleteAlert(post: cellViewModel.post,
+                                                                  delegate: viewModel.deletePostAction))
+                        })
+                        .disposed(by: postCell.disposeBag)
+                }
                 return cell
             }
         })

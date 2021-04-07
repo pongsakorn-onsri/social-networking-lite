@@ -9,6 +9,7 @@ target 'SocialLite' do
   pod 'MaterialComponents'
   pod 'EmptyDataSet-Swift', '~> 5.0.0'
   pod 'GoogleSignIn'
+  pod 'MGLoadMore', '~> 3.0.2'
   
   # Linter
   pod 'SwiftLint'

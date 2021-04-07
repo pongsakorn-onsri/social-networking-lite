@@ -27,8 +27,15 @@ final class CreatePostViewModel: BaseViewModel {
     lazy var service: CreatePostUseCase = {
         CreatePostService(user: UserManager.shared.currentUser)
     }()
+    
+    var createdPostPublish: PublishSubject<Post>?
     let isPostingBehavior: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     let createPostErrorPublish: PublishSubject<Error> = PublishSubject()
+    
+    convenience init(with router: WeakRouter<RouteType>, createdPostPublish: PublishSubject<Post>) {
+        self.init(with: router)
+        self.createdPostPublish = createdPostPublish
+    }
     
     func transform(input: Input) -> Output {
         input.closeTapped
@@ -49,6 +56,9 @@ final class CreatePostViewModel: BaseViewModel {
         
         let requestCreatePost = {
             self.service.create(content: $0)
+                .do(onSuccess: { [weak self]post in
+                    self?.createdPostPublish?.onNext(post)
+                })
                 .map { post -> Post? in post }
                 .catchError { error in
                     self.createPostErrorPublish.onNext(error)

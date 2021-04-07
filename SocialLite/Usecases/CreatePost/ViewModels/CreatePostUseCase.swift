@@ -27,16 +27,19 @@ struct CreatePostService: CreatePostUseCase {
         }
         return Single.create { (observer) -> Disposable in
             
-            let newPost = Post(userId:  user.uid,
+            var newPost = Post(userId:  user.uid,
                                displayName: user.postDisplayName,
                                content: content,
                                timestamp: Date())
-            
-            database.collection("posts")
-                .addDocument(data: newPost.toJSON()) { (error) in
+            let data = newPost.toJSON()
+            var reference: DocumentReference? = nil
+            reference = database
+                .collection("posts")
+                .addDocument(data: data) { (error) in
                     if let error = error {
                         observer(.error(error))
                     } else {
+                        newPost.documentId = reference?.documentID
                         observer(.success(newPost))
                     }
                 }

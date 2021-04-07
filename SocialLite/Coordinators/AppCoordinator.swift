@@ -34,8 +34,8 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             return .set([controller])
         case .timeline:
             return .none()
-        case .post:
-            let viewModel = CreatePostViewModel(with: weakRouter)
+        case let .post(delegate):
+            let viewModel = CreatePostViewModel(with: weakRouter, createdPostPublish: delegate)
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
         case .signout:
@@ -58,7 +58,7 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             alertController.addAction(actionConfirm)
             alertController.applyTheme(withScheme: containerScheme)
             return .present(alertController)
-        case let .delete(post, observer):
+        case let .deleteAlert(post, observer):
             let alertController = MDCAlertController(title: "Are you sure to delete?",
                                                      message: nil)
             let actionConfirm = MDCAlertAction(title: "Confirm", emphasis: .high) { _ in

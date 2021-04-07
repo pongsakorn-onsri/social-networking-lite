@@ -13,10 +13,10 @@ import RxCocoa
 public enum AppRoute: Route {
     case feed
     case timeline
-    case post
+    case post(delegate: PublishSubject<Post>)
     case authenticate
     case signout
     case alert(Error)
-    case delete(Post, PublishSubject<Post>)
+    case deleteAlert(post: Post, delegate: PublishSubject<Post>)
     case dismiss
 }

@@ -22,7 +22,7 @@ protocol FeedUseCaseProtocol {
 struct FeedUseCaseService: FeedUseCaseProtocol {
     
     let database = Firestore.firestore()
-    let pageSize = 2
+    let pageSize = 20
     
     func fetch(type: FetchType, document: DocumentSnapshot?) -> Single<[Post]> {
         Single.create { (observer) -> Disposable in

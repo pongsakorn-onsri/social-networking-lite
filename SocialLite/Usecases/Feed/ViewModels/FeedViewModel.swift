@@ -14,11 +14,12 @@ import RxDataSources
 class FeedViewModel: BaseViewModel {
     
     struct Input {
-        let createPostTapped: Observable<Void>
         let signOutTapped: Observable<Void>
         let userChanged: Observable<User?>
         let refreshTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
+        let createdPostTrigger: Driver<Void>
+        let deletePostTrigger: Driver<Post>
     }
     
     struct Output {
@@ -73,30 +74,26 @@ class FeedViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.createPostTapped
-            .subscribe(onNext: { [weak self]_ in
-                guard let self = self else { return }
-                self.router.trigger(.post(delegate: self.createdPost))
-                self.router.rx.trigger(<#T##route: AppRoute##AppRoute#>)
-            })
-            .disposed(by: disposeBag)
-        
         input.signOutTapped
             .subscribe(onNext: {
                 self.router.trigger(.signout)
             })
             .disposed(by: disposeBag)
         
-        createdPost
-            .asDriver { _ in Driver.empty() }
+        input.createdPostTrigger
+            .flatMapLatest { _ in
+                self.router.triggerToCreatePost()
+            }
             .drive(onNext: { post in
                 let posts = postSubject.value
                 postSubject.accept([post] + posts)
             })
             .disposed(by: disposeBag)
         
-        deletePostAction
-            .asDriver { _ in Driver.empty() }
+        input.deletePostTrigger
+            .flatMapLatest { (post) in
+                self.router.confirmDeletePost(post: post)
+            }
             .flatMapLatest { post in
                 self.service.delete(post: post)
                     .trackActivity(refreshingTracker)

@@ -27,6 +27,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     var refreshControl = UIRefreshControl()
     let appBarViewController = MDCAppBarViewController()
     private var loadMoreTrigger = PublishSubject<Void>()
+    private var deletePostTrigger = PublishSubject<Post>()
     
     var isRefreshing: Binder<Bool> {
         return Binder(refreshControl) { refreshControl, loading in
@@ -69,11 +70,12 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
         let refreshTrigger = refreshControl.rx.controlEvent(.valueChanged).asDriver()
         
         let input = FeedViewModel.Input(
-            createPostTapped: createPostButton.rx.tap.asObservable(),
             signOutTapped: signOutButton.rx.tap.asObservable(),
             userChanged: UserManager.shared.userObservable.asObservable(),
             refreshTrigger: refreshTrigger,
-            loadMoreTrigger: loadMoreTrigger.asDriver(onErrorJustReturn: ())
+            loadMoreTrigger: loadMoreTrigger.asDriver(onErrorJustReturn: ()),
+            createdPostTrigger: createPostButton.rx.tap.asDriver(),
+            deletePostTrigger: deletePostTrigger.asDriverOnErrorJustComplete()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
@@ -161,19 +163,16 @@ extension FeedViewController {
     }
     
     func dataSource() -> RxTableViewSectionedReloadDataSource<FeedViewModel.SectionModel> {
-        return .init(configureCell: { source, tableView, indexPath, _ in
+        return .init(configureCell: { [weak self]source, tableView, indexPath, _ in
             switch source[indexPath] {
             case let .post(cellViewModel):
                 let identifier = String(describing: PostTableViewCell.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-                if let postCell = cell as? PostTableViewCell {
+                if let postCell = cell as? PostTableViewCell, let self = self {
                     postCell.configure(with: cellViewModel)
                     postCell.deleteButton.rx.tap
-                        .subscribe(onNext: { [weak self]_ in
-                            guard let viewModel = self?.viewModel else { return }
-                            viewModel.router.trigger(.deleteAlert(post: cellViewModel.post,
-                                                                  delegate: viewModel.deletePostAction))
-                        })
+                        .map { cellViewModel.post }
+                        .bind(to: self.deletePostTrigger)
                         .disposed(by: postCell.disposeBag)
                 }
                 return cell

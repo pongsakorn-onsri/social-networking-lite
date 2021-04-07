@@ -68,6 +68,8 @@
 		11B53CEC261CB7BE0056B822 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B53CEA261CB7BE0056B822 /* PostTableViewCell.xib */; };
 		11B53CF4261D41230056B822 /* UITableView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CF3261D41230056B822 /* UITableView+Rx.swift */; };
 		11B53CF9261D50960056B822 /* ActivityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CF8261D50960056B822 /* ActivityTracker.swift */; };
+		11B53D5E261E06B80056B822 /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D5D261E06B80056B822 /* ObservableType+Extensions.swift */; };
+		11B53D63261E08320056B822 /* FeedNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D62261E08320056B822 /* FeedNavigator.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -160,6 +162,8 @@
 		11B53CEA261CB7BE0056B822 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		11B53CF3261D41230056B822 /* UITableView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Rx.swift"; sourceTree = "<group>"; };
 		11B53CF8261D50960056B822 /* ActivityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTracker.swift; sourceTree = "<group>"; };
+		11B53D5D261E06B80056B822 /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
+		11B53D62261E08320056B822 /* FeedNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavigator.swift; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				11338B1826163FCF000D8823 /* FeedViewModel.swift */,
+				11B53D62261E08320056B822 /* FeedNavigator.swift */,
 				11B53CE1261CA4800056B822 /* FeedUseCase.swift */,
 				11B53CD7261C9D380056B822 /* PostCellViewModel.swift */,
 			);
@@ -462,6 +467,7 @@
 				11B53B1D261813F60056B822 /* UIFont+Extensions.swift */,
 				11B53B25261814000056B822 /* UIColor+Extensions.swift */,
 				11B53CF3261D41230056B822 /* UITableView+Rx.swift */,
+				11B53D5D261E06B80056B822 /* ObservableType+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -926,7 +932,9 @@
 			files = (
 				11338B0A26163DB2000D8823 /* AuthenticateRoute.swift in Sources */,
 				11B53CF4261D41230056B822 /* UITableView+Rx.swift in Sources */,
+				11B53D5E261E06B80056B822 /* ObservableType+Extensions.swift in Sources */,
 				11338B3826164103000D8823 /* BaseViewModel.swift in Sources */,
+				11B53D63261E08320056B822 /* FeedNavigator.swift in Sources */,
 				11B53CE2261CA4800056B822 /* FeedUseCase.swift in Sources */,
 				11B53CF9261D50960056B822 /* ActivityTracker.swift in Sources */,
 				11338B0526163D02000D8823 /* AppRouter.swift in Sources */,

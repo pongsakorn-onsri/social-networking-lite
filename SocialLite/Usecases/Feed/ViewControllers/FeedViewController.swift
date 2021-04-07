@@ -15,6 +15,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     
     var createPostButton: UIBarButtonItem!
     var signOutButton: UIBarButtonItem!
+    var refreshControl = UIRefreshControl()
     @IBOutlet weak var tableView: UITableView!
     
     let appBarViewController = MDCAppBarViewController()
@@ -32,10 +33,16 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     
     func configureViewModel() {
         guard let viewModel = viewModel else { return }
+        
+        let refresh = refreshControl.rx.controlEvent(.valueChanged)
+        let loadMore = tableView.rx.prefetchRows.map { _ in () }
+        
         let input = FeedViewModel.Input(
             createPostTapped: createPostButton.rx.tap.asObservable(),
             signOutTapped: signOutButton.rx.tap.asObservable(),
-            userChanged: UserManager.shared.userObservable.asObservable()
+            userChanged: UserManager.shared.userObservable.asObservable(),
+            refresh: refresh.asObservable(),
+            loadMore: loadMore.asObservable()
         )
         let output = viewModel.transform(input: input)
         output.user
@@ -48,6 +55,10 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
         let itemsDataSource = dataSource()
         output.tableData
             .drive(tableView.rx.items(dataSource: itemsDataSource))
+            .disposed(by: disposeBag)
+        
+        output.isFetching
+            .drive(refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
     
@@ -98,6 +109,7 @@ extension FeedViewController {
         let postCellNib = UINib(nibName: identifier, bundle: Bundle.main)
         tableView.register(postCellNib, forCellReuseIdentifier: identifier)
         tableView.tableFooterView = UIView()
+        tableView.refreshControl = refreshControl
         
         tableView.emptyDataSetView { (customView) in
             customView
@@ -115,14 +127,16 @@ extension FeedViewController {
     func dataSource() -> RxTableViewSectionedReloadDataSource<FeedViewModel.SectionModel> {
         return .init(configureCell: { source, tableView, indexPath, _ in
             switch source[indexPath] {
-            case let .post(viewModel):
+            case let .post(cellViewModel):
                 let identifier = String(describing: PostTableViewCell.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
                 let postCell = cell as? PostTableViewCell
-                postCell?.configure(with: viewModel)
+                postCell?.configure(with: cellViewModel)
                 postCell?.deleteButton.rx.tap
-                    .subscribe(onNext: { _ in
-                        self.viewModel?.willDeletePostAction.onNext(viewModel.post)
+                    .subscribe(onNext: { [weak self]_ in
+                        guard let viewModel = self?.viewModel else { return }
+                        viewModel.router.trigger(.deleteAlert(post: cellViewModel.post,      
+                                                              delegate: viewModel.deletePostAction))
                     })
                     .disposed(by: self.disposeBag)
                 return cell

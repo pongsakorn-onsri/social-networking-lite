@@ -17,22 +17,25 @@ class FeedViewModel: BaseViewModel {
         let createPostTapped: Observable<Void>
         let signOutTapped: Observable<Void>
         let userChanged: Observable<User?>
+        let refresh: Observable<Void>
+        let loadMore: Observable<Void>
     }
     
     struct Output {
         let user: Driver<User?>
         let tableData: Driver<[SectionModel]>
+        let isFetching: Driver<Bool>
     }
     
     var service: FeedUseCaseProtocol = { FeedUseCaseService() }()
     var refreshAction: PublishSubject<Void> = PublishSubject()
-    var loadMoreAction: PublishSubject<Void> = PublishSubject()
-    var willDeletePostAction: PublishSubject<Post> = PublishSubject()
-    var confirmDeletePost: PublishSubject<Post> = PublishSubject()
+    let deletePostAction: PublishSubject<Post> = PublishSubject()
+    let createdPost: PublishSubject<Post> = PublishSubject()
     private let pageSize = 20
     
     func transform(input: Input) -> Output {
         let allPosts = BehaviorRelay<[Post]>(value: [])
+        let activityTracker = ActivityTracker()
         
         input.userChanged
             .distinctUntilChanged()
@@ -47,7 +50,8 @@ class FeedViewModel: BaseViewModel {
         
         input.createPostTapped
             .subscribe(onNext: { [weak self]_ in
-                self?.router.trigger(.post)
+                guard let self = self else { return }
+                self.router.trigger(.post(delegate: self.createdPost))
             })
             .disposed(by: disposeBag)
         
@@ -57,50 +61,61 @@ class FeedViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        willDeletePostAction
-            .subscribe(onNext: { post in
-                self.router.trigger(.delete(post, self.confirmDeletePost))
-            })
+        createdPost
+            .observeOn(MainScheduler.asyncInstance)
+            .withLatestFrom(allPosts) { (post, posts) -> [Post] in
+                [post] + posts
+            }
+            .bind(to: allPosts)
             .disposed(by: disposeBag)
         
-        confirmDeletePost
+        deletePostAction
             .flatMap { post in
                 self.service.delete(post: post)
-                    .map { _ in post }
+                    .trackActivity(activityTracker)
+                    .withLatestFrom(allPosts)
+                    .map { posts in
+                        posts.filter { $0.documentId != post.documentId }
+                    }
+                    .do(onError: { [weak self]error in
+                        self?.router.trigger(.alert(error))
+                    })
+                    .catchErrorJustReturn(allPosts.value)
             }
-            .subscribe(onNext: { _ in
-                self.refreshAction.onNext(())
-            }, onError: { error in
-                self.router.trigger(.alert(error))
-            })
+            .bind(to: allPosts)
             .disposed(by: disposeBag)
         
-        refreshAction
+        Observable.merge(input.refresh, refreshAction)
             .withLatestFrom(allPosts)
             .flatMap { posts -> Single<[Post]> in
-                self.service.fetch(type: .new, document: posts.first?.document)
+                let firstPost = posts.compactMap { $0.document }.first
+                return self.service.fetch(type: .new, document: firstPost)
+                    .trackActivity(activityTracker)
                     .map { (newPosts) in
                         var posts = posts
                         posts.insert(contentsOf: newPosts, at: 0)
                         return posts
                     }
+                    .asSingle()
             }
             .bind(to: allPosts)
             .disposed(by: disposeBag)
         
-        loadMoreAction
+        input.loadMore
             .withLatestFrom(allPosts)
             .flatMap { posts -> Single<[Post]> in
-                self.service.fetch(type: .old, document: posts.last?.document)
+                let lastPost = posts.compactMap { $0.document }.last
+                return self.service.fetch(type: .old, document: lastPost)
+                    .trackActivity(activityTracker)
                     .map { (oldPosts) in
                         var posts = posts
                         posts.append(contentsOf: oldPosts)
                         return posts
                     }
+                    .asSingle()
             }
             .bind(to: allPosts)
             .disposed(by: disposeBag)
-        
         
         let sectionItems = allPosts.map { (posts) -> [SectionItem] in
             posts.map { post in
@@ -117,7 +132,10 @@ class FeedViewModel: BaseViewModel {
             user: input.userChanged
                 .compactMap { $0 }
                 .asDriver(onErrorJustReturn: nil),
-            tableData: tableData
+            tableData: tableData,
+            isFetching: activityTracker
+                .debounce(.seconds(1))
+                .asDriver()
         )
     }
 }

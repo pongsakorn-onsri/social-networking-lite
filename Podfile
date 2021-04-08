@@ -9,7 +9,15 @@ target 'SocialLite' do
   pod 'MaterialComponents'
   pod 'EmptyDataSet-Swift', '~> 5.0.0'
   pod 'GoogleSignIn'
+  
+  # Validation
+  pod 'ValidatedPropertyKit'
+  
+  # Clean Architecture
+  pod 'MGArchitecture', '~> 2.0.1'
   pod 'MGLoadMore', '~> 3.0.2'
+  pod 'Dto'
+  pod 'Resolver'
   
   # Linter
   pod 'SwiftLint'
@@ -24,6 +32,7 @@ target 'SocialLite' do
   pod 'RxCocoa', '~> 5'
   pod 'RxDataSources'
   pod 'RxGesture'
+  pod 'Then', '~> 2.7'
 
   target 'SocialLiteTests' do
     inherit! :search_paths

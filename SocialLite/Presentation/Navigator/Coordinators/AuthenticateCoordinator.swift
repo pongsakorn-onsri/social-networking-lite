@@ -13,7 +13,7 @@ final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
     override func prepareTransition(for route: RouteType) -> TransitionType {
         switch route {
         case .signin:
-            let viewModel = SignInViewModel(with: weakRouter)
+            let viewModel = SignInViewModel(router: weakRouter)
             let controller = SignInViewController.newInstance(with: viewModel)
             return .push(controller)
         case .signup:

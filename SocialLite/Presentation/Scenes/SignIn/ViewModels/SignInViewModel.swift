@@ -11,103 +11,105 @@ import RxSwift
 import RxCocoa
 import GoogleSignIn
 import Firebase
+import Resolver
+import MGArchitecture
 
-final class SignInViewModel: NSObject, ViewModelProtocol {
-    typealias RouteType = AuthenticateRoute
-    var router: WeakRouter<RouteType>
-    var errorSubject: PublishSubject<Error> = PublishSubject()
-    var disposeBag: DisposeBag = DisposeBag()
-    
-    required init(with router: WeakRouter<AuthenticateRoute>) {
-        self.router = router
-    }
-    
+struct SignInViewModel {
+    let router: WeakRouter<AuthenticateRoute>
+    @Injected var useCase: SignInUseCaseType
+}
+
+extension SignInViewModel: ViewModel {
     struct Input {
-        let email: Observable<String>
-        let password: Observable<String>
-        let signInTapped: Observable<Void>
-        let signUpTapped: Observable<Void>
+        let email: Driver<String>
+        let password: Driver<String>
+        let signInTapped: Driver<Void>
+        let signUpTapped: Driver<Void>
+        let signInGoogle: Driver<AuthCredential>
     }
     
     struct Output {
-        let emailError: Driver<Error?>
-        let passwordError: Driver<Error?>
+        @Property var emailValidationMessage = ""
+        @Property var passwordValidationMessage = ""
+        @Property var isLoading = false
     }
     
-    let inputEmail: BehaviorRelay<String> = BehaviorRelay(value: "")
-    let inputPassword: BehaviorRelay<String> = BehaviorRelay(value: "")
-    let outputEmailError: PublishSubject<Error?> = PublishSubject()
-    let outputPasswordError: PublishSubject<Error?> = PublishSubject()
-    let signInErrorSubject: PublishSubject<Error?> = PublishSubject()
-    
-    func transform(input: Input) -> Output {
-        input.email
-            .bind(to: inputEmail)
-            .disposed(by: disposeBag)
-        input.password
-            .bind(to: inputPassword)
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        let errorTracker = ErrorTracker()
+        let activityIndicator = ActivityIndicator()
+        
+        errorTracker
+            .drive(onNext: { error in
+                router.trigger(.alert(error))
+            })
             .disposed(by: disposeBag)
         
+        let isLoading = activityIndicator.asDriver()
+        
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        let emailValidation = Driver.combineLatest(input.email, input.signInTapped)
+            .map { $0.0 }
+            .map(useCase.validateEmail(_:))
+        
+        emailValidation
+            .map { $0.message }
+            .drive(output.$emailValidationMessage)
+            .disposed(by: disposeBag)
+        
+        let passwordValidation = Driver.combineLatest(input.password, input.signInTapped)
+            .map { $0.0 }
+            .map(useCase.validatePassword(_:))
+        
+        passwordValidation
+            .map { $0.message }
+            .drive(output.$passwordValidationMessage)
+            .disposed(by: disposeBag)
+        
+        let validation = Driver.and(
+            emailValidation.map { $0.isValid },
+            passwordValidation.map { $0.isValid }
+        )
+        .startWith(true)
+        
         input.signInTapped
-            .map { _ in (self.inputEmail.value, self.inputPassword.value) }
-            .filter(validate)
-            .subscribe(onNext: { [weak self](email, password) in
-                self?.signIn(with: email, password: password)
+            .withLatestFrom(Driver.merge(validation, isLoading.not()))
+            .filter { $0 }
+            .withLatestFrom(Driver.combineLatest(input.email, input.password))
+            .flatMapLatest { (email, password) -> Driver<User> in
+                self.useCase.signIn(dto: SignInDto(email: email, password: password))
+                    .trackActivity(activityIndicator)
+                    .trackError(errorTracker)
+                    .asDriverOnErrorJustComplete()
+            }
+            .drive(onNext: { user in
+                router.trigger(.close)
+            })
+            .disposed(by: disposeBag)
+        
+        input.signInGoogle
+            .flatMapLatest { (credential) -> Driver<User> in
+                self.useCase.signIn(with: credential)
+                    .trackActivity(activityIndicator)
+                    .trackError(errorTracker)
+                    .asDriverOnErrorJustComplete()
+            }
+            .drive(onNext: { user in
+                router.trigger(.close)
             })
             .disposed(by: disposeBag)
         
         input.signUpTapped
-            .subscribe(onNext: { [weak self]_ in
-                self?.router.trigger(.signup)
+            .drive(onNext: {
+                router.trigger(.signup)
             })
             .disposed(by: disposeBag)
         
-        signInErrorSubject
-            .subscribe(onNext: { [weak self]error in
-                if let error = error {
-                    self?.router.trigger(.alert(error))
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        return Output(
-            emailError: outputEmailError.asDriver(onErrorJustReturn: nil),
-            passwordError: outputPasswordError.asDriver(onErrorJustReturn: nil)
-        )
+        return output
     }
     
-    func signIn(with credential: AuthCredential) {
-        UserManager.shared.signIn(with: credential)
-            .subscribe(onSuccess: { [weak self]_ in
-                self?.outputEmailError.onNext(nil)
-                self?.outputPasswordError.onNext(nil)
-                self?.signInErrorSubject.onNext(nil)
-                self?.router.trigger(.close)
-            }, onError: { [weak self]error in
-                self?.signInErrorSubject.onNext(error)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    func signIn(with email: String, password: String) {
-        UserManager.shared.signIn(with: email, password: password)
-            .subscribe(onSuccess: { [weak self]_ in
-                self?.outputEmailError.onNext(nil)
-                self?.outputPasswordError.onNext(nil)
-                self?.signInErrorSubject.onNext(nil)
-                self?.router.trigger(.close)
-            }, onError: { [weak self]error in
-                self?.signInErrorSubject.onNext(error)
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func validate(_ email: String, _ password: String) -> Bool {
-        let emailValid = !email.trimmingCharacters(in: .whitespaces).isEmpty
-        outputEmailError.onNext(emailValid ? nil : SignInError.message("Please input email account."))
-        
-        let passwordValid = !password.trimmingCharacters(in: .whitespaces).isEmpty
-        outputPasswordError.onNext(passwordValid ? nil : SignInError.message("Please input your password."))
-        return emailValid && passwordValid
-    }
 }

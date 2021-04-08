@@ -224,6 +224,8 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - Differentiator (4.0.1)
+  - Dto (0.2.0):
+    - ValidatedPropertyKit (~> 0.0.4)
   - EmptyDataSet-Swift (5.0.0)
   - ESPullToRefresh (2.9.3)
   - Firebase/Auth (7.9.0):
@@ -977,6 +979,9 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (2.0.0)
   - MDFTextAccessibility (2.0.1)
+  - MGArchitecture (2.0.1):
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
   - MGLoadMore (3.0.2):
     - ESPullToRefresh (~> 2.9)
     - RxCocoa (~> 5.1)
@@ -993,6 +998,7 @@ PODS:
   - ObjectMapper (4.2.0)
   - PromisesObjC (1.2.12)
   - Quick (3.1.2)
+  - Resolver (1.4.1)
   - RxBlocking (5.1.1):
     - RxSwift (~> 5)
   - RxCocoa (5.1.1):
@@ -1011,12 +1017,15 @@ PODS:
   - RxTest (5.1.2):
     - RxSwift (~> 5)
   - SwiftLint (0.43.0)
+  - Then (2.7.0)
+  - ValidatedPropertyKit (0.0.4)
   - XCoordinator/Core (2.0.7)
   - XCoordinator/RxSwift (2.0.7):
     - RxSwift (~> 5.0)
     - XCoordinator/Core
 
 DEPENDENCIES:
+  - Dto
   - EmptyDataSet-Swift (~> 5.0.0)
   - Firebase/Auth
   - Firebase/Firestore
@@ -1024,10 +1033,12 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - MaterialComponents
+  - MGArchitecture (~> 2.0.1)
   - MGLoadMore (~> 3.0.2)
   - Nimble
   - ObjectMapper
   - Quick
+  - Resolver
   - RxBlocking
   - RxCocoa (~> 5)
   - RxDataSources
@@ -1035,6 +1046,8 @@ DEPENDENCIES:
   - RxSwift (~> 5)
   - RxTest
   - SwiftLint
+  - Then (~> 2.7)
+  - ValidatedPropertyKit
   - XCoordinator/RxSwift (~> 2.0.3)
 
 SPEC REPOS:
@@ -1043,6 +1056,7 @@ SPEC REPOS:
     - AppAuth
     - BoringSSL-GRPC
     - Differentiator
+    - Dto
     - EmptyDataSet-Swift
     - ESPullToRefresh
     - Firebase
@@ -1065,6 +1079,7 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
+    - MGArchitecture
     - MGLoadMore
     - MotionAnimator
     - MotionInterchange
@@ -1073,6 +1088,7 @@ SPEC REPOS:
     - ObjectMapper
     - PromisesObjC
     - Quick
+    - Resolver
     - RxBlocking
     - RxCocoa
     - RxDataSources
@@ -1081,6 +1097,8 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - SwiftLint
+    - Then
+    - ValidatedPropertyKit
     - XCoordinator
 
 SPEC CHECKSUMS:
@@ -1088,6 +1106,7 @@ SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Dto: 0346adb2a98017204d384e981352c7f864296a1f
   EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
   Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
@@ -1110,6 +1129,7 @@ SPEC CHECKSUMS:
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
+  MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
   MGLoadMore: c43a39da03c2ac7697f6c3fa1812681f7f751f25
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
@@ -1118,6 +1138,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
+  Resolver: c293d0177cbc69fcb700cfd49922ae2122c1829c
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -1126,8 +1147,10 @@ SPEC CHECKSUMS:
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
+  ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
   XCoordinator: 9ee654fedef1ffede33d5c11677708a555c00542
 
-PODFILE CHECKSUM: 9f4fb91cbed0ecea118597360f0c8fa71de0e673
+PODFILE CHECKSUM: b4c9e06632da60069fbbcc40762d471097e173bd
 
 COCOAPODS: 1.10.1

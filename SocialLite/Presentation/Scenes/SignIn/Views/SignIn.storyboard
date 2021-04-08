@@ -37,18 +37,18 @@
                                     <constraint firstAttribute="height" constant="48" id="kGi-MP-bY2"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="*********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-NI-PcB" customClass="MDCOutlinedTextField">
-                                <rect key="frame" x="45" y="268" width="324" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="lMz-Rc-S7A"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john.doe@email.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwu-xA-EhV" customClass="MDCOutlinedTextField">
                                 <rect key="frame" x="45" y="164" width="324" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="VvS-fT-jBT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="*********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-NI-PcB" customClass="MDCOutlinedTextField">
+                                <rect key="frame" x="45" y="268" width="324" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="lMz-Rc-S7A"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -61,6 +61,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign in"/>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Uns-tD-Pwe">
+                                <rect key="frame" x="197" y="386" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQF-Fd-y7b">
                                 <rect key="frame" x="193.5" y="428" width="27" height="24"/>
                                 <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
@@ -89,11 +92,14 @@
                             <constraint firstItem="dOg-jR-VpA" firstAttribute="leading" secondItem="iwu-xA-EhV" secondAttribute="leading" id="ouc-vr-Vht"/>
                             <constraint firstItem="ElM-RM-1B2" firstAttribute="trailing" secondItem="iwu-xA-EhV" secondAttribute="trailing" id="rUS-u0-Ppw"/>
                             <constraint firstItem="iwu-xA-EhV" firstAttribute="centerX" secondItem="JVZ-FE-HPg" secondAttribute="centerX" id="wqW-H4-Aiz"/>
+                            <constraint firstItem="Uns-tD-Pwe" firstAttribute="centerY" secondItem="tsp-05-mbu" secondAttribute="centerY" id="xW0-Xx-iYb"/>
+                            <constraint firstItem="Uns-tD-Pwe" firstAttribute="centerX" secondItem="tsp-05-mbu" secondAttribute="centerX" id="y2n-Tt-eUw"/>
                             <constraint firstItem="dOg-jR-VpA" firstAttribute="top" secondItem="tsp-05-mbu" secondAttribute="bottom" constant="40" id="zQi-BH-vG5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="iwu-xA-EhV" id="Uek-IT-ORq"/>
+                        <outlet property="loadingView" destination="Uns-tD-Pwe" id="hVI-vc-VWG"/>
                         <outlet property="passwordTextField" destination="C9A-NI-PcB" id="FId-os-hCh"/>
                         <outlet property="signInButton" destination="tsp-05-mbu" id="3AG-au-TUq"/>
                         <outlet property="signInWithGoogle" destination="ElM-RM-1B2" id="Spn-Do-G5f"/>

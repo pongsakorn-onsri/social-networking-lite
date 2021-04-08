@@ -70,6 +70,21 @@
 		11B53CF9261D50960056B822 /* ActivityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53CF8261D50960056B822 /* ActivityTracker.swift */; };
 		11B53D5E261E06B80056B822 /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D5D261E06B80056B822 /* ObservableType+Extensions.swift */; };
 		11B53D63261E08320056B822 /* FeedNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D62261E08320056B822 /* FeedNavigator.swift */; };
+		11B53D80261E9FC10056B822 /* AuthenGatewayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D7F261E9FC10056B822 /* AuthenGatewayType.swift */; };
+		11B53D88261E9FCD0056B822 /* PostGatewayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D87261E9FCD0056B822 /* PostGatewayType.swift */; };
+		11B53D9C261EA6460056B822 /* CreatingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53D9B261EA6460056B822 /* CreatingPost.swift */; };
+		11B53DA7261EA70A0056B822 /* DeletingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53DA6261EA70A0056B822 /* DeletingPost.swift */; };
+		11B53DAF261EA75A0056B822 /* GettingPostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53DAE261EA75A0056B822 /* GettingPostList.swift */; };
+		11B53DB8261EAA850056B822 /* SigningIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53DB7261EAA840056B822 /* SigningIn.swift */; };
+		11B53DC0261EAA8E0056B822 /* SigningOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53DBF261EAA8E0056B822 /* SigningOut.swift */; };
+		11B53DC5261EAA980056B822 /* SigningUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53DC4261EAA980056B822 /* SigningUp.swift */; };
+		11B53E54261F35AF0056B822 /* Validation+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53E53261F35AF0056B822 /* Validation+Collection.swift */; };
+		11B53E5D261F37230056B822 /* SignInDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53E5C261F37230056B822 /* SignInDto.swift */; };
+		11B53E65261F3B180056B822 /* Validation+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53E64261F3B180056B822 /* Validation+String.swift */; };
+		11B53E6A261F3DDE0056B822 /* AuthenGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53E69261F3DDE0056B822 /* AuthenGateway.swift */; };
+		11B53E6F261F4A060056B822 /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53E6E261F4A060056B822 /* SignInUseCase.swift */; };
+		11B53EB7261F50BB0056B822 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53EB6261F50BB0056B822 /* AppDelegate+Injection.swift */; };
+		11B53EBC261F51530056B822 /* SignInUseCase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53EBB261F51530056B822 /* SignInUseCase+Injection.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -164,6 +179,21 @@
 		11B53CF8261D50960056B822 /* ActivityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTracker.swift; sourceTree = "<group>"; };
 		11B53D5D261E06B80056B822 /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
 		11B53D62261E08320056B822 /* FeedNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavigator.swift; sourceTree = "<group>"; };
+		11B53D7F261E9FC10056B822 /* AuthenGatewayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenGatewayType.swift; sourceTree = "<group>"; };
+		11B53D87261E9FCD0056B822 /* PostGatewayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGatewayType.swift; sourceTree = "<group>"; };
+		11B53D9B261EA6460056B822 /* CreatingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingPost.swift; sourceTree = "<group>"; };
+		11B53DA6261EA70A0056B822 /* DeletingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingPost.swift; sourceTree = "<group>"; };
+		11B53DAE261EA75A0056B822 /* GettingPostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingPostList.swift; sourceTree = "<group>"; };
+		11B53DB7261EAA840056B822 /* SigningIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningIn.swift; sourceTree = "<group>"; };
+		11B53DBF261EAA8E0056B822 /* SigningOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningOut.swift; sourceTree = "<group>"; };
+		11B53DC4261EAA980056B822 /* SigningUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningUp.swift; sourceTree = "<group>"; };
+		11B53E53261F35AF0056B822 /* Validation+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+Collection.swift"; sourceTree = "<group>"; };
+		11B53E5C261F37230056B822 /* SignInDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDto.swift; sourceTree = "<group>"; };
+		11B53E64261F3B180056B822 /* Validation+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+String.swift"; sourceTree = "<group>"; };
+		11B53E69261F3DDE0056B822 /* AuthenGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenGateway.swift; sourceTree = "<group>"; };
+		11B53E6E261F4A060056B822 /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		11B53EB6261F50BB0056B822 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		11B53EBB261F51530056B822 /* SignInUseCase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignInUseCase+Injection.swift"; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */,
+				11B53EB6261F50BB0056B822 /* AppDelegate+Injection.swift */,
 				11338A9B261639CB000D8823 /* SceneDelegate.swift */,
 				11338B3C26164177000D8823 /* BaseClasses */,
 			);
@@ -356,6 +387,8 @@
 			isa = PBXGroup;
 			children = (
 				11338B5F26164E67000D8823 /* SignInViewModel.swift */,
+				11B53EBB261F51530056B822 /* SignInUseCase+Injection.swift */,
+				11B53E6E261F4A060056B822 /* SignInUseCase.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -517,6 +550,8 @@
 			isa = PBXGroup;
 			children = (
 				11B53C35261B50DB0056B822 /* Entities */,
+				11B53D7E261E9EFB0056B822 /* GatewayProtocols */,
+				11B53D7D261E9EEA0056B822 /* UseCases */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -559,8 +594,58 @@
 		11B53D79261E9CC80056B822 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
+				11B53E69261F3DDE0056B822 /* AuthenGateway.swift */,
 			);
 			path = Gateways;
+			sourceTree = "<group>";
+		};
+		11B53D7D261E9EEA0056B822 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				11B53E58261F35C30056B822 /* Validations */,
+				11B53DB6261EAA6E0056B822 /* Authentication */,
+				11B53D8E261EA0770056B822 /* Post */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		11B53D7E261E9EFB0056B822 /* GatewayProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				11B53D7F261E9FC10056B822 /* AuthenGatewayType.swift */,
+				11B53D87261E9FCD0056B822 /* PostGatewayType.swift */,
+			);
+			path = GatewayProtocols;
+			sourceTree = "<group>";
+		};
+		11B53D8E261EA0770056B822 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				11B53DAE261EA75A0056B822 /* GettingPostList.swift */,
+				11B53D9B261EA6460056B822 /* CreatingPost.swift */,
+				11B53DA6261EA70A0056B822 /* DeletingPost.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		11B53DB6261EAA6E0056B822 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				11B53DB7261EAA840056B822 /* SigningIn.swift */,
+				11B53E5C261F37230056B822 /* SignInDto.swift */,
+				11B53DBF261EAA8E0056B822 /* SigningOut.swift */,
+				11B53DC4261EAA980056B822 /* SigningUp.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		11B53E58261F35C30056B822 /* Validations */ = {
+			isa = PBXGroup;
+			children = (
+				11B53E53261F35AF0056B822 /* Validation+Collection.swift */,
+				11B53E64261F3B180056B822 /* Validation+String.swift */,
+			);
+			path = Validations;
 			sourceTree = "<group>";
 		};
 		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
@@ -981,30 +1066,45 @@
 				11338B0A26163DB2000D8823 /* AuthenticateRoute.swift in Sources */,
 				11B53CF4261D41230056B822 /* UITableView+Rx.swift in Sources */,
 				11B53D5E261E06B80056B822 /* ObservableType+Extensions.swift in Sources */,
+				11B53D80261E9FC10056B822 /* AuthenGatewayType.swift in Sources */,
 				11338B3826164103000D8823 /* BaseViewModel.swift in Sources */,
 				11B53D63261E08320056B822 /* FeedNavigator.swift in Sources */,
 				11B53CE2261CA4800056B822 /* FeedUseCase.swift in Sources */,
+				11B53DAF261EA75A0056B822 /* GettingPostList.swift in Sources */,
 				11B53CF9261D50960056B822 /* ActivityTracker.swift in Sources */,
+				11B53EB7261F50BB0056B822 /* AppDelegate+Injection.swift in Sources */,
+				11B53DC0261EAA8E0056B822 /* SigningOut.swift in Sources */,
 				11338B0526163D02000D8823 /* AppRouter.swift in Sources */,
 				11B53CD8261C9D380056B822 /* PostCellViewModel.swift in Sources */,
 				11B53C97261C4EA40056B822 /* Post.swift in Sources */,
+				11B53DC5261EAA980056B822 /* SigningUp.swift in Sources */,
+				11B53D88261E9FCD0056B822 /* PostGatewayType.swift in Sources */,
 				11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */,
 				11B53CEB261CB7BE0056B822 /* PostTableViewCell.swift in Sources */,
 				11B53B26261814000056B822 /* UIColor+Extensions.swift in Sources */,
 				11338AFD26163C69000D8823 /* AppCoordinator.swift in Sources */,
 				11338B0F26163E5F000D8823 /* AuthenticateCoordinator.swift in Sources */,
 				11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */,
+				11B53E5D261F37230056B822 /* SignInDto.swift in Sources */,
+				11B53DB8261EAA850056B822 /* SigningIn.swift in Sources */,
 				9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */,
 				11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */,
+				11B53E6A261F3DDE0056B822 /* AuthenGateway.swift in Sources */,
+				11B53EBC261F51530056B822 /* SignInUseCase+Injection.swift in Sources */,
+				11B53E54261F35AF0056B822 /* Validation+Collection.swift in Sources */,
+				11B53E6F261F4A060056B822 /* SignInUseCase.swift in Sources */,
 				11B53C37261B50FE0056B822 /* User.swift in Sources */,
 				11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */,
 				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
+				11B53E65261F3B180056B822 /* Validation+String.swift in Sources */,
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,
 				11338B33261640FC000D8823 /* BaseViewController.swift in Sources */,
 				11B53ADA2617FC150056B822 /* Theme.swift in Sources */,
 				11338A9C261639CB000D8823 /* SceneDelegate.swift in Sources */,
+				11B53D9C261EA6460056B822 /* CreatingPost.swift in Sources */,
 				11338B1926163FCF000D8823 /* FeedViewModel.swift in Sources */,
 				11338B1426163FBD000D8823 /* FeedViewController.swift in Sources */,
+				11B53DA7261EA70A0056B822 /* DeletingPost.swift in Sources */,
 				11338B5B26164E59000D8823 /* SignInViewController.swift in Sources */,
 				11B53B1E261813F60056B822 /* UIFont+Extensions.swift in Sources */,
 				11B53C92261C4E8A0056B822 /* CreatePostUseCase.swift in Sources */,

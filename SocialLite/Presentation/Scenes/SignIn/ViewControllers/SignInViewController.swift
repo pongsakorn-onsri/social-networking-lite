@@ -18,27 +18,41 @@ extension SignInViewController: UseStoryboard {
     static var storyboardName: String { "SignIn" }
 }
 
-final class SignInViewController: BaseViewController<SignInViewModel> {
+final class SignInViewController: UIViewController, UseViewModel {
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var emailTextField: MDCOutlinedTextField!
     @IBOutlet weak var passwordTextField: MDCOutlinedTextField!
-    
     @IBOutlet weak var signInButton: MDCButton!
     @IBOutlet weak var signUpButton: MDCButton!
     @IBOutlet weak var signInWithGoogle: GIDSignInButton!
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
+    
+    // MARK: - Properties
     
     let appBarViewController = MDCAppBarViewController()
+    var viewModel: SignInViewModel?
+    var disposeBag = DisposeBag()
+    
+    private var signInTrigger = PublishSubject<AuthCredential>()
+    
+    // MARK: - Life Cycle
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addChild(appBarViewController)
     }
     
+    func bind(to model: SignInViewModel) {
+        viewModel = model
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.addSubview(appBarViewController.view)
         appBarViewController.didMove(toParent: self)
-        super.viewDidLoad()
         configureUI()
         configureSignInProviders()
         configureBinding()
@@ -71,10 +85,11 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         guard let viewModel = viewModel else { return }
         
         let input = SignInViewModel.Input(
-            email: emailTextField.rx.text.orEmpty.asObservable(),
-            password: passwordTextField.rx.text.orEmpty.asObservable(),
-            signInTapped: signInButton.rx.tap.asObservable(),
-            signUpTapped: signUpButton.rx.tap.asObservable()
+            email: emailTextField.rx.text.orEmpty.asDriver(),
+            password: passwordTextField.rx.text.orEmpty.asDriver(),
+            signInTapped: signInButton.rx.tap.asDriver(),
+            signUpTapped: signUpButton.rx.tap.asDriver(),
+            signInGoogle: signInTrigger.asDriverOnErrorJustComplete()
         )
         
         signInWithGoogle.rx.tapGesture()
@@ -85,29 +100,26 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
             })
             .disposed(by: disposeBag)
         
-        let output = viewModel.transform(input: input)
-        output.emailError
-            .drive(onNext: { [weak self]error in
-                if let error = error {
-                    self?.emailTextField.leadingAssistiveLabel.text = error.localizedDescription
-                    self?.emailTextField.applyErrorTheme(withScheme: containerScheme)
-                } else {
-                    self?.emailTextField.leadingAssistiveLabel.text = nil
-                    self?.emailTextField.applyTheme(withScheme: containerScheme)
-                }
-            })
+        let output = viewModel.transform(input, disposeBag: disposeBag)
+        
+        output.$emailValidationMessage
+            .asDriver()
+            .drive(emailValidationMessageBinder)
             .disposed(by: disposeBag)
         
-        output.passwordError
-            .drive(onNext: { [weak self]error in
-                if let error = error {
-                    self?.passwordTextField.leadingAssistiveLabel.text = error.localizedDescription
-                    self?.passwordTextField.applyErrorTheme(withScheme: containerScheme)
-                } else {
-                    self?.passwordTextField.leadingAssistiveLabel.text = nil
-                    self?.passwordTextField.applyTheme(withScheme: containerScheme)
-                }
-            })
+        output.$passwordValidationMessage
+            .asDriver()
+            .drive(passwordValidationMessageBinder)
+            .disposed(by: disposeBag)
+        
+        output.$isLoading
+            .asDriver()
+            .drive(loadingView.rx.isAnimating)
+            .disposed(by: disposeBag)
+            
+        output.$isLoading
+            .asDriver()
+            .drive(isLoadingBinder)
             .disposed(by: disposeBag)
     }
     
@@ -117,7 +129,7 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
         GIDSignIn.sharedInstance()?.delegate = self
     }
     
-    override func applyTheme(with containerScheme: MDCContainerScheming) {
+    func applyTheme(with containerScheme: MDCContainerScheming) {
         appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
         emailTextField.applyTheme(withScheme: containerScheme)
         passwordTextField.applyTheme(withScheme: containerScheme)
@@ -126,11 +138,42 @@ final class SignInViewController: BaseViewController<SignInViewModel> {
     }
 }
 
+// MARK: - Binders
+extension SignInViewController {
+    var isLoadingBinder: Binder<Bool> {
+        return Binder(signInButton) { button, isLoading in
+            button.setTitle(isLoading ? "": "SIGN IN", for: .normal)
+        }
+    }
+    
+    var emailValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.emailTextField.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                vc.emailTextField.applyTheme(withScheme: containerScheme)
+            } else {
+                vc.emailTextField.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+    
+    var passwordValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.passwordTextField.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                vc.passwordTextField.applyTheme(withScheme: containerScheme)
+            } else {
+                vc.passwordTextField.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+}
+
 extension SignInViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn, didSignInFor user: GIDGoogleUser, withError error: Error) {
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        viewModel?.signIn(with: credential)
+        signInTrigger.onNext(credential)
     }
 }

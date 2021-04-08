@@ -14,12 +14,12 @@ enum FetchType {
     case old
 }
 
-protocol FeedUseCaseProtocol {
+protocol FeedUseCaseType {
     func fetch(type: FetchType, document: DocumentSnapshot?) -> Single<[Post]>
     func delete(post: Post) -> Single<Bool>
 }
 
-struct FeedUseCaseService: FeedUseCaseProtocol {
+struct FeedUseCaseService: FeedUseCaseType {
     
     let database = Firestore.firestore()
     let pageSize = 20
@@ -37,11 +37,10 @@ struct FeedUseCaseService: FeedUseCaseProtocol {
                 case .old:
                     query = query.start(afterDocument: cursorDocument)
                 }
-            } else {
-                query = query.limit(to: pageSize)
             }
                 
             query
+                .limit(to: pageSize)
                 .getDocuments { (snapshot, error) in
                     guard let documents = snapshot?.documents else {
                         if let error = error {

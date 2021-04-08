@@ -28,7 +28,7 @@ class FeedViewModel: BaseViewModel {
         let isLoadingMore: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     }
     
-    var service: FeedUseCaseProtocol = { FeedUseCaseService() }()
+    var service: FeedUseCaseType = { FeedUseCaseService() }()
     var refreshAction: PublishSubject<Void> = PublishSubject()
     let deletePostAction: PublishSubject<Post> = PublishSubject()
     let createdPost: PublishSubject<Post> = PublishSubject()

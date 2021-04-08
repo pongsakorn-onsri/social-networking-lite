@@ -240,7 +240,7 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		11338AFB26163C36000D8823 /* Usecases */ = {
+		11338AFB26163C36000D8823 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				11B53AC32617ECB70056B822 /* CreatePost */,
@@ -248,7 +248,7 @@
 				11338B6926164E72000D8823 /* SignIn */,
 				11338B7F26164FA4000D8823 /* SignUp */,
 			);
-			path = Usecases;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		11338B1D26163FEC000D8823 /* Feed */ = {
@@ -298,16 +298,6 @@
 				11338B46261641C4000D8823 /* BaseProtocols.swift */,
 			);
 			path = BaseClasses;
-			sourceTree = "<group>";
-		};
-		11338B5126164CE4000D8823 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				11338B5226164CF4000D8823 /* UserManager.swift */,
-				11B53AD92617FC150056B822 /* Theme.swift */,
-				11B53CF8261D50960056B822 /* ActivityTracker.swift */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		11338B6926164E72000D8823 /* SignIn */ = {
@@ -489,13 +479,13 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		11B53C35261B50DB0056B822 /* Models */ = {
+		11B53C35261B50DB0056B822 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				11B53C36261B50FE0056B822 /* User.swift */,
 				11B53C96261C4EA40056B822 /* Post.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		11B53C7F261B5A9C0056B822 /* Extensions */ = {
@@ -512,6 +502,65 @@
 				11B53C89261B5C750056B822 /* UserManagerTests.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		11B53D67261E9B590056B822 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				11338AFB26163C36000D8823 /* Scenes */,
+				11B53D6A261E9BAE0056B822 /* Navigator */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		11B53D68261E9B8B0056B822 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				11B53C35261B50DB0056B822 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		11B53D69261E9B900056B822 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				11B53D79261E9CC80056B822 /* Gateways */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		11B53D6A261E9BAE0056B822 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				11338AFA26163B9E000D8823 /* Coordinators */,
+				11338AF926163B99000D8823 /* Routers */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
+		11B53D71261E9C190056B822 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				11B53B1C261813CD0056B822 /* Extensions */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		11B53D78261E9C460056B822 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				11338B5226164CF4000D8823 /* UserManager.swift */,
+				11B53AD92617FC150056B822 /* Theme.swift */,
+				11B53CF8261D50960056B822 /* ActivityTracker.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		11B53D79261E9CC80056B822 /* Gateways */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Gateways;
 			sourceTree = "<group>";
 		};
 		24E60DD7F92E6DF2FDC9B858 /* Pods */ = {
@@ -562,15 +611,13 @@
 		9AB4C7EA2615E74C00CDCE38 /* SocialLite */ = {
 			isa = PBXGroup;
 			children = (
-				11338AFA26163B9E000D8823 /* Coordinators */,
+				11B53D78261E9C460056B822 /* Config */,
+				11B53D68261E9B8B0056B822 /* Domain */,
+				11B53D69261E9B900056B822 /* Data */,
+				11B53D67261E9B590056B822 /* Presentation */,
 				11338AF826163B94000D8823 /* Core */,
-				11B53B1C261813CD0056B822 /* Extensions */,
-				11B53C35261B50DB0056B822 /* Models */,
+				11B53D71261E9C190056B822 /* Support */,
 				9AB4C8F2261632F600CDCE38 /* Resources */,
-				11338AF926163B99000D8823 /* Routers */,
-				11338B5126164CE4000D8823 /* Shared */,
-				11B53B3C2618E83C0056B822 /* SocialLite.entitlements */,
-				11338AFB26163C36000D8823 /* Usecases */,
 			);
 			path = SocialLite;
 			sourceTree = "<group>";
@@ -599,12 +646,13 @@
 		9AB4C8F2261632F600CDCE38 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */,
 				11B53ADE2618091B0056B822 /* Fonts */,
 				11B53A0526174E0B0056B822 /* GoogleService-Info.plist */,
-				9AB4C7F12615E74C00CDCE38 /* Main.storyboard */,
-				9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */,
-				9AB4C7F42615E74D00CDCE38 /* Assets.xcassets */,
 				9AB4C7F92615E74D00CDCE38 /* Info.plist */,
+				9AB4C7F62615E74D00CDCE38 /* LaunchScreen.storyboard */,
+				9AB4C7F12615E74C00CDCE38 /* Main.storyboard */,
+				11B53B3C2618E83C0056B822 /* SocialLite.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

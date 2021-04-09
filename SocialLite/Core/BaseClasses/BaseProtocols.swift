@@ -11,7 +11,7 @@ import UIKit
 public protocol UseViewModel {
     associatedtype Model
     var viewModel: Model? { get set }
-    func bind(to model: Model)
+    mutating func bind(to model: Model)
 }
 
 public protocol UseStoryboard {
@@ -28,11 +28,17 @@ public extension UseViewModel where Self: UIViewController, Self: UseStoryboard 
         let storyboard = UIStoryboard(name: Self.storyboardName, bundle: Bundle.main)
         let vcIdentifier = Self.storyboardIdentifier
         let instantiateVC = storyboard.instantiateViewController(withIdentifier: vcIdentifier)
-        if let viewController = instantiateVC as? Self {
+        if var viewController = instantiateVC as? Self {
             viewController.bind(to: viewModel)
             return viewController
         } else {
             return Self()
         }
+    }
+}
+
+public extension UseViewModel {
+    mutating func bind(to model: Model) {
+        self.viewModel = model
     }
 }

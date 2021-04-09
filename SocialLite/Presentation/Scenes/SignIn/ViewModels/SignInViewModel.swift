@@ -58,7 +58,7 @@ extension SignInViewModel: ViewModel {
             .map(useCase.validateEmail(_:))
         
         emailValidation
-            .map { $0.message }
+            .map { $0.firstMessage }
             .drive(output.$emailValidationMessage)
             .disposed(by: disposeBag)
         
@@ -67,7 +67,7 @@ extension SignInViewModel: ViewModel {
             .map(useCase.validatePassword(_:))
         
         passwordValidation
-            .map { $0.message }
+            .map { $0.firstMessage }
             .drive(output.$passwordValidationMessage)
             .disposed(by: disposeBag)
         

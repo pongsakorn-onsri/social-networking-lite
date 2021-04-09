@@ -44,10 +44,6 @@ final class SignInViewController: UIViewController, UseViewModel {
         addChild(appBarViewController)
     }
     
-    func bind(to model: SignInViewModel) {
-        viewModel = model
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)

@@ -34,7 +34,7 @@ extension SignUpDto {
         self.confirmPassword = confirmPassword
     }
     
-    static func validateUserName(_ email: String) -> Result<String, ValidationError> {
+    static func validateEmail(_ email: String) -> Result<String, ValidationError> {
         SignUpDto()._email.isValid(value: email)
     }
     
@@ -42,10 +42,10 @@ extension SignUpDto {
         SignUpDto()._password.isValid(value: password)
     }
     
-    static func validateConfirmPassword(_ password: String) -> Result<String, ValidationError> {
-        SignUpDto()._confirmPassword.isValid(value: password)
+    static func validateConfirmPassword(_ confirmPassword: String, _ password: String) -> Result<String, ValidationError> {
+        SignUpDto()._confirmPassword.isValid(value: confirmPassword)
             .flatMap { (confirmPassword) -> Result<String, ValidationError> in
-                if SignUpDto()._password.wrappedValue == confirmPassword {
+                if confirmPassword == password {
                     return .success(confirmPassword)
                 } else {
                     return .failure(ValidationError(message: "Confirm password should be match password"))
@@ -67,5 +67,15 @@ extension SigningUp {
         }
         
         return authenGateway.signUp(dto: dto)
+    }
+    
+    func validateEmail(_ email: String) -> ValidationResult {
+        SignUpDto.validateEmail(email).mapToVoid()
+    }
+    func validatePassword(_ password: String) -> ValidationResult {
+        SignUpDto.validatePassword(password).mapToVoid()
+    }
+    func validateConfirmPassword(_ confirmPassword: String, _ password: String) -> ValidationResult {
+        SignUpDto.validateConfirmPassword(confirmPassword, password).mapToVoid()
     }
 }

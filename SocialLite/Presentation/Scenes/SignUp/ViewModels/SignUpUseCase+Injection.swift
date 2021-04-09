@@ -1,8 +1,8 @@
 //
-//  SignInUseCase+Injection.swift
+//  SignUpUseCase+Injection.swift
 //  SocialLite
 //
-//  Created by Pongsakorn Onsri on 8/4/2564 BE.
+//  Created by Pongsakorn Onsri on 9/4/2564 BE.
 //
 
 import Resolver
@@ -10,14 +10,14 @@ import FirebaseAuth
 
 extension Resolver {
     
-    public static func registerSignInUseCase() {
+    public static func registerSignUpUseCase() {
         register { () -> AuthenGatewayType? in
             let auth = Auth.auth()
             return AuthenGateway(auth: auth) as AuthenGatewayType
         }
         
         register {
-            SignInUseCase() as SignInUseCaseType
+            SignUpUseCase() as SignUpUseCaseType
         }
     }
 }

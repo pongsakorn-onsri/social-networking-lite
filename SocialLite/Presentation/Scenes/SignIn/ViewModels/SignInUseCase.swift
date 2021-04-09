@@ -10,6 +10,7 @@ import RxSwift
 import FirebaseAuth
 import Dto
 import ValidatedPropertyKit
+import Resolver
 
 protocol SignInUseCaseType {
     func validateEmail(_ email: String) -> ValidationResult
@@ -20,5 +21,5 @@ protocol SignInUseCaseType {
 }
 
 struct SignInUseCase: SignInUseCaseType, SigningIn {
-    let authenGateway: AuthenGatewayType
+    @Injected var authenGateway: AuthenGatewayType
 }

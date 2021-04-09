@@ -7,20 +7,32 @@
 
 import UIKit
 import MaterialComponents
+import Resolver
+import RxSwift
+import RxCocoa
 
 extension SignUpViewController: UseStoryboard {
     static var storyboardName: String { "SignUp" }
 }
 
-class SignUpViewController: BaseViewController<SignUpViewModel> {
-
+class SignUpViewController: UIViewController, UseViewModel {
+    
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var emailTextField: MDCOutlinedTextField!
     @IBOutlet weak var passwordTextField: MDCOutlinedTextField!
     @IBOutlet weak var confirmPasswordTextField: MDCOutlinedTextField!
-    
     @IBOutlet weak var confirmButton: MDCButton!
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
+    
+    // MARK: - Properties
+    typealias Model = SignUpViewModel
     
     let appBarViewController = MDCAppBarViewController()
+    var viewModel: SignUpViewModel?
+    var disposeBag = DisposeBag()
+    
+    // MARK: - Life Cycle
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -28,10 +40,10 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.addSubview(appBarViewController.view)
         appBarViewController.didMove(toParent: self)
-        super.viewDidLoad()
         configureUI()
         configureBinding()
     }
@@ -62,30 +74,44 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         
         confirmButton.setTitle("Confirm", for: .normal)
         confirmButton.accessibilityLabel = "Confirm"
+        
+        applyTheme(with: containerScheme)
     }
     
     func configureBinding() {
         guard let viewModel = viewModel else { return }
+        
         let input = SignUpViewModel.Input(
-            email: emailTextField.rx.text.orEmpty.asObservable(),
-            password: passwordTextField.rx.text.orEmpty.asObservable(),
-            confirmPassword: confirmPasswordTextField.rx.text.orEmpty.asObservable(),
-            submitTapped: confirmButton.rx.tap.asObservable())
+            email: emailTextField.rx.text.orEmpty.asDriver(),
+            password: passwordTextField.rx.text.orEmpty.asDriver(),
+            confirmPassword: confirmPasswordTextField.rx.text.orEmpty.asDriver(),
+            submitTrigger: confirmButton.rx.tap.asDriver()
+        )
         
-        let output = viewModel.transform(input: input)
-        output.emailError
-            .map { (self.emailTextField, $0) }
-            .drive(onNext: handleTextFieldOnError)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
+        output.$emailValidationMessage
+            .asDriver()
+            .drive(emailValidationMessageBinder)
             .disposed(by: disposeBag)
         
-        output.passwordError
-            .map { (self.passwordTextField, $0) }
-            .drive(onNext: handleTextFieldOnError)
+        output.$passwordValidationMessage
+            .asDriver()
+            .drive(passwordValidationMessageBinder)
             .disposed(by: disposeBag)
         
-        output.confirmPasswordError
-            .map { (self.confirmPasswordTextField, $0) }
-            .drive(onNext: handleTextFieldOnError)
+        output.$confirmPasswordValidationMessage
+            .asDriver()
+            .drive(confirmPasswordValidationMessageBinder)
+            .disposed(by: disposeBag)
+        
+        output.$isLoading
+            .asDriver()
+            .drive(isLoadingBinder)
+            .disposed(by: disposeBag)
+        
+        output.$isLoading
+            .asDriver()
+            .drive(loadingView.rx.isAnimating)
             .disposed(by: disposeBag)
     }
     
@@ -99,7 +125,7 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
         }
     }
     
-    override func applyTheme(with containerScheme: MDCContainerScheming) {
+    func applyTheme(with containerScheme: MDCContainerScheming) {
         appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
         emailTextField.applyTheme(withScheme: containerScheme)
         passwordTextField.applyTheme(withScheme: containerScheme)
@@ -108,3 +134,44 @@ class SignUpViewController: BaseViewController<SignUpViewModel> {
     }
 }
 
+// MARK: - Binders
+extension SignUpViewController {
+    var isLoadingBinder: Binder<Bool> {
+        return Binder(confirmButton) { button, isLoading in
+            button.setTitle(isLoading ? "": "SIGN IN", for: .normal)
+        }
+    }
+    
+    var emailValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.emailTextField.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                vc.emailTextField.applyTheme(withScheme: containerScheme)
+            } else {
+                vc.emailTextField.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+    
+    var passwordValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.passwordTextField.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                vc.passwordTextField.applyTheme(withScheme: containerScheme)
+            } else {
+                vc.passwordTextField.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+    
+    var confirmPasswordValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.confirmPasswordTextField.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                vc.confirmPasswordTextField.applyTheme(withScheme: containerScheme)
+            } else {
+                vc.confirmPasswordTextField.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+}

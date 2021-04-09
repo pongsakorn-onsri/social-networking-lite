@@ -24,4 +24,5 @@ extension DeletingPost {
     func removePost(_ post: DeletePostDto) -> Observable<Void> {
         return postGateway.removePost(post)
     }
+    
 }

@@ -10,8 +10,15 @@ import XCoordinator
 import RxSwift
 import RxCocoa
 import RxDataSources
+import MGArchitecture
+import Resolver
 
-class FeedViewModel: BaseViewModel {
+struct FeedViewModel {
+    let router: WeakRouter<AppRoute>
+    @Injected var useCase: FeedUseCaseType
+}
+
+extension FeedViewModel: ViewModel {
     
     struct Input {
         let signOutTapped: Driver<Void>
@@ -27,11 +34,7 @@ class FeedViewModel: BaseViewModel {
         let isLoadingMore: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     }
     
-    var useCase: FeedUseCaseType = { FeedUseCaseService() }()
-    let deletePostAction: PublishSubject<Post> = PublishSubject()
-    let createdPost: PublishSubject<Post> = PublishSubject()
-    
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
         let refreshingTracker = ActivityTracker()
@@ -53,7 +56,7 @@ class FeedViewModel: BaseViewModel {
         let userSubject = BehaviorRelay<User?>(value: nil)
         
         let getPostResult = useCase
-            .fetch(type: .new, document: nil)
+            .getPostList(dto: GetPostListDto(type: .new, document: nil))
             .asDriver(onErrorJustReturn: [])
             .do(onNext: { posts in
                 postSubject.accept(posts)
@@ -104,13 +107,17 @@ class FeedViewModel: BaseViewModel {
         
         input.deletePostTrigger
             .flatMapLatest { (post) in
-                self.router.confirmDeletePost(post: post)
+                router.confirmDeletePost(post: post)
             }
-            .flatMapLatest { post in
-                self.useCase.delete(post: post)
-                    .trackActivity(refreshingTracker)
-                    .map { _ in post }
-                    .asDriver(onErrorJustReturn: post)
+            .flatMapLatest { post -> Driver<Post> in
+                if let documentId = post.documentId {
+                    return self.useCase.removePost(DeletePostDto(id: documentId))
+                        .trackActivity(refreshingTracker)
+                        .map { _ in post }
+                        .asDriver(onErrorJustReturn: post)
+                } else {
+                    return .just(post)
+                }
             }
             .drive(onNext: { post in
                 var posts = postSubject.value
@@ -125,7 +132,7 @@ class FeedViewModel: BaseViewModel {
         )
         .flatMapLatest { posts -> Driver<[Post]> in
             let firstPost = postSubject.value.compactMap { $0.document }.first
-            return self.useCase.fetch(type: .new, document: firstPost)
+            return useCase.getPostList(dto: GetPostListDto(type: .new, document: firstPost))
                 .trackActivity(refreshingTracker)
                 .asDriver(onErrorJustReturn: [])
         }
@@ -139,7 +146,7 @@ class FeedViewModel: BaseViewModel {
         input.loadMoreTrigger
             .flatMapLatest { posts -> Driver<[Post]> in
                 let lastPost = postSubject.value.compactMap { $0.document }.last
-                return self.useCase.fetch(type: .old, document: lastPost)
+                return useCase.getPostList(dto: GetPostListDto(type: .old, document: lastPost))
                     .trackActivity(loadingMoreTracker)
                     .asDriver(onErrorJustReturn: [])
             }

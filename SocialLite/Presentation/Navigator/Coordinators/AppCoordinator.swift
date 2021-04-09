@@ -29,7 +29,7 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
         case let .authenticate(delegate):
             return authTransition(.signin(delegate: delegate))
         case .feed:
-            let viewModel = FeedViewModel(with: weakRouter)
+            let viewModel = FeedViewModel(router: weakRouter)
             let controller = FeedViewController.newInstance(with: viewModel)
             return .set([controller])
         case .timeline:

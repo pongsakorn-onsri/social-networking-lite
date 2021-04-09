@@ -33,7 +33,7 @@ class CreatePostViewController: UIViewController, UseViewModel {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
-        configureBinding()
+        bindViewModel()
         textArea.textView.becomeFirstResponder()
     }
     
@@ -42,7 +42,7 @@ class CreatePostViewController: UIViewController, UseViewModel {
         textArea.sizeToFit()
     }
     
-    func configureBinding() {
+    func bindViewModel() {
         guard let viewModel = viewModel else { return }
         let input = CreatePostViewModel.Input(
             textInput: textArea.textView.rx.text.orEmpty.asDriver(),

@@ -12,9 +12,41 @@ import RxSwift
 struct PostGateway: PostGatewayType {
     
     let database = Firestore.firestore()
+    let pageSize = 5
     
     func getPostList(dto: GetPostListDto) -> Observable<[Post]> {
-        return .just([])
+        Observable.create { (observer) -> Disposable in
+            
+            var query = database.collection("posts")
+                .order(by: "timestamp", descending: true)
+                
+            if let cursorDocument = dto.document {
+                switch dto.type {
+                case .new:
+                    query = query.end(beforeDocument: cursorDocument)
+                case .old:
+                    query = query.start(afterDocument: cursorDocument)
+                }
+            }
+                
+            query
+                .limit(to: pageSize)
+                .getDocuments { (snapshot, error) in
+                    guard let documents = snapshot?.documents else {
+                        if let error = error {
+                            observer.onError(error)
+                        } else {
+                            observer.onNext([]) // prevent no return value
+                        }
+                        return
+                    }
+                    let posts = documents.compactMap { Post(with: $0) }
+                    observer.onNext(posts)
+                    observer.onCompleted()
+                }
+            
+            return Disposables.create()
+        }
     }
     
     func createPost(dto: CreatePostDto) -> Observable<Post> {

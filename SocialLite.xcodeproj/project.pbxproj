@@ -25,6 +25,7 @@
 		11338B7126164F8B000D8823 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* SignUp.storyboard */; };
 		11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* SignUpViewController.swift */; };
 		11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* SignUpViewModel.swift */; };
+		11A7A4EC262092C8003ECAF4 /* FeedUseCase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -136,6 +137,7 @@
 		11338B7526164F93000D8823 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		11338B7A26164FA1000D8823 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUseCase+Injection.swift"; sourceTree = "<group>"; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				11338B1826163FCF000D8823 /* FeedViewModel.swift */,
 				11B53D62261E08320056B822 /* FeedNavigator.swift */,
 				11B53CE1261CA4800056B822 /* FeedUseCase.swift */,
+				11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */,
 				11B53CD7261C9D380056B822 /* PostCellViewModel.swift */,
 			);
 			path = ViewModels;
@@ -1119,6 +1122,7 @@
 				11338B5326164CF4000D8823 /* UserManager.swift in Sources */,
 				11338B33261640FC000D8823 /* BaseViewController.swift in Sources */,
 				11B53ADA2617FC150056B822 /* Theme.swift in Sources */,
+				11A7A4EC262092C8003ECAF4 /* FeedUseCase+Injection.swift in Sources */,
 				11338A9C261639CB000D8823 /* SceneDelegate.swift in Sources */,
 				11B53D9C261EA6460056B822 /* CreatingPost.swift in Sources */,
 				11338B1926163FCF000D8823 /* FeedViewModel.swift in Sources */,

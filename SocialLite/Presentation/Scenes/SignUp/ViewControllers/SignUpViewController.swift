@@ -41,14 +41,14 @@ class SignUpViewController: UIViewController, UseViewModel {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        view.addSubview(appBarViewController.view)
-        appBarViewController.didMove(toParent: self)
         configureUI()
-        configureBinding()
+        bindViewModel()
     }
     
     func configureUI() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.addSubview(appBarViewController.view)
+        appBarViewController.didMove(toParent: self)
         appBarViewController.navigationBar.title = "Sign Up"
         
         emailTextField.label.text = "Email account"
@@ -78,7 +78,7 @@ class SignUpViewController: UIViewController, UseViewModel {
         applyTheme(with: containerScheme)
     }
     
-    func configureBinding() {
+    func bindViewModel() {
         guard let viewModel = viewModel else { return }
         
         let input = SignUpViewModel.Input(

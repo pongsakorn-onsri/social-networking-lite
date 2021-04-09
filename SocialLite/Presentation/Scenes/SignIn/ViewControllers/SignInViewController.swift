@@ -51,7 +51,7 @@ final class SignInViewController: UIViewController, UseViewModel {
         appBarViewController.didMove(toParent: self)
         configureUI()
         configureSignInProviders()
-        configureBinding()
+        bindViewModel()
     }
     
     func configureUI() {
@@ -77,7 +77,7 @@ final class SignInViewController: UIViewController, UseViewModel {
         applyTheme(with: containerScheme)
     }
     
-    func configureBinding() {
+    func bindViewModel() {
         guard let viewModel = viewModel else { return }
         
         let input = SignInViewModel.Input(

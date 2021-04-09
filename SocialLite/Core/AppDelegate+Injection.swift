@@ -12,5 +12,6 @@ extension Resolver: ResolverRegistering {
         registerSignInUseCase()
         registerSignUpUseCase()
         registerCreatePostUseCase()
+        registerFeedUseCase()
     }
 }

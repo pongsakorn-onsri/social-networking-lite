@@ -14,7 +14,11 @@ import RxSwift
 import RxDataSources
 import ESPullToRefresh
 
-final class FeedViewController: BaseViewController<FeedViewModel> {
+extension FeedViewController: UseStoryboard {
+    static var storyboardName: String { "Feed" }
+}
+
+final class FeedViewController: UIViewController, UseViewModel {
     
     // MARK: - IBOutlets
     
@@ -26,31 +30,12 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     var signOutButton: UIBarButtonItem!
     var refreshControl = UIRefreshControl()
     let appBarViewController = MDCAppBarViewController()
+    
     private var loadMoreTrigger = PublishSubject<Void>()
     private var deletePostTrigger = PublishSubject<Post>()
     private var refreshPostTrigger = PublishSubject<Void>()
-    
-    var isRefreshing: Binder<Bool> {
-        return Binder(refreshControl) { refreshControl, loading in
-            if loading {
-                refreshControl.beginRefreshing()
-            } else {
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
-                }
-            }
-        }
-    }
-    
-    var isLoadingMore: Binder<Bool> {
-        return Binder(tableView) { tableView, loading in
-            if loading {
-                tableView.es.base.footer?.startRefreshing()
-            } else {
-                tableView.es.stopLoadingMore()
-            }
-        }
-    }
+    var viewModel: FeedViewModel?
+    var disposeBag = DisposeBag()
     
     // MARK: - Life Cycle
     
@@ -80,7 +65,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
             createdPostTrigger: createPostButton.rx.tap.asDriver(),
             deletePostTrigger: deletePostTrigger.asDriverOnErrorJustComplete()
         )
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         let itemsDataSource = dataSource()
         output.tableData
@@ -98,24 +83,20 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
             .drive(isLoadingMore)
             .disposed(by: disposeBag)
     }
-    
-    override func applyTheme(with containerScheme: MDCContainerScheming) {
-        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
-    }
-    
-}
-
-extension FeedViewController: UseStoryboard {
-    static var storyboardName: String { "Feed" }
 }
 
 extension FeedViewController {
+    
+    func applyTheme(with containerScheme: MDCContainerScheming) {
+        appBarViewController.applyPrimaryTheme(withScheme: containerScheme)
+    }
     
     func configureViews() {
         navigationItem.title = "Timeline"
         configureSignOutButton()
         configureNavigationBar()
         configureTableView()
+        applyTheme(with: containerScheme)
     }
     
     func configureNavigationBar() {
@@ -181,5 +162,30 @@ extension FeedViewController {
                 return cell
             }
         })
+    }
+}
+
+// MARK: - Binders
+extension FeedViewController {
+    var isRefreshing: Binder<Bool> {
+        return Binder(refreshControl) { refreshControl, loading in
+            if loading {
+                refreshControl.beginRefreshing()
+            } else {
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    var isLoadingMore: Binder<Bool> {
+        return Binder(tableView) { tableView, loading in
+            if loading {
+                tableView.es.base.footer?.startRefreshing()
+            } else {
+                tableView.es.stopLoadingMore()
+            }
+        }
     }
 }

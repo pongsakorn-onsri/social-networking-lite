@@ -26,6 +26,8 @@
 		11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* SignUpViewController.swift */; };
 		11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* SignUpViewModel.swift */; };
 		11A7A4EC262092C8003ECAF4 /* FeedUseCase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */; };
+		11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A4F72620BB7F003ECAF4 /* UserTests.swift */; };
+		11A7A5072620BB8E003ECAF4 /* PostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A5062620BB8E003ECAF4 /* PostTests.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -138,6 +140,8 @@
 		11338B7A26164FA1000D8823 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUseCase+Injection.swift"; sourceTree = "<group>"; };
+		11A7A4F72620BB7F003ECAF4 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
+		11A7A5062620BB8E003ECAF4 /* PostTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTests.swift; sourceTree = "<group>"; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
@@ -414,6 +418,23 @@
 				11338B5A26164E59000D8823 /* SignInViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		11A7A4F62620BB4C003ECAF4 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				11A7A4FF2620BB82003ECAF4 /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		11A7A4FF2620BB82003ECAF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11A7A4F72620BB7F003ECAF4 /* UserTests.swift */,
+				11A7A5062620BB8E003ECAF4 /* PostTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		11B53AC32617ECB70056B822 /* CreatePost */ = {
@@ -728,6 +749,7 @@
 		9AB4C8012615E74D00CDCE38 /* SocialLiteTests */ = {
 			isa = PBXGroup;
 			children = (
+				11A7A4F62620BB4C003ECAF4 /* Domain */,
 				11B53C88261B5C6A0056B822 /* Shared */,
 				11B53C7F261B5A9C0056B822 /* Extensions */,
 				11B53B522619AAF50056B822 /* ViewModels */,
@@ -1140,8 +1162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */,
 				11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */,
 				11B53C8A261B5C750056B822 /* UserManagerTests.swift in Sources */,
+				11A7A5072620BB8E003ECAF4 /* PostTests.swift in Sources */,
 				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
 				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
 				11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */,

@@ -35,9 +35,11 @@ class SignUpViewModelTests: QuickSpec {
             
             var viewModel: ViewModel!
             var scheduler: TestScheduler!
+            var delegate: PublishSubject<SocialLite.User>!
 
             beforeEach {
-                viewModel = ViewModel(with: self.router)
+                delegate = PublishSubject()
+                viewModel = ViewModel(router: self.router, delegate: delegate)
                 scheduler = TestScheduler(initialClock: 0)
                 self.disposeBag = DisposeBag()
             }
@@ -46,24 +48,27 @@ class SignUpViewModelTests: QuickSpec {
                 
                 /// Given
                 let inputEmail = scheduler.createHotObservable([
+                    .next(200, ""),
                     .next(220, "aaa"),
                     .next(240, "john.doe@gmail.com"),
                 ])
-                .asObservable()
+                .asDriverOnErrorJustComplete()
                 
                 let inputPassword = scheduler.createHotObservable([
+                    .next(200, ""),
                     .next(220, "bbb"),
                     .next(260, "ccc"),
                     .next(280, "ccc88888"),
                 ])
-                .asObservable()
+                .asDriverOnErrorJustComplete()
                 
                 let inputConfirmPassword = scheduler.createHotObservable([
+                    .next(200, ""),
                     .next(220, "ccc"),
                     .next(260, "ccc77777"),
                     .next(300, "ccc88888"),
                 ])
-                .asObservable()
+                .asDriverOnErrorJustComplete()
                 
                 let submitTapped = scheduler.createHotObservable([
                     .next(210, ()),
@@ -73,50 +78,54 @@ class SignUpViewModelTests: QuickSpec {
                     .next(290, ()),
                     .next(310, ()),
                 ])
-                .asObservable()
-            
+                .asDriverOnErrorJustComplete()
+
                 let input = ViewModel.Input(email: inputEmail,
                                             password: inputPassword,
                                             confirmPassword: inputConfirmPassword,
-                                            submitTapped: submitTapped)
+                                            submitTrigger: submitTapped)
                 
-                let output = viewModel.transform(input: input)
+                let output = viewModel.transform(input, disposeBag: self.disposeBag)
                 
                 /// When
-                let outputEmail = scheduler.record(output.emailError.map { $0?.localizedDescription })
-                let outputPassword = scheduler.record(output.passwordError.map { $0?.localizedDescription })
-                let outputConfirmPassword = scheduler.record(output.confirmPasswordError.map { $0?.localizedDescription })
+                let outputEmail = scheduler.record(output.$emailValidationMessage)
+                let outputPassword = scheduler.record(output.$passwordValidationMessage)
+                let outputConfirmPassword = scheduler.record(output.$confirmPasswordValidationMessage)
                 
                 scheduler.start()
                 
                 /// Then
                 
-                let expectedEmailErrors: [Recorded<Event<String?>>] = Recorded.events([
+                let expectedEmailErrors: [Recorded<Event<String>>] = Recorded.events([
+                    .next(0, ""),
                     .next(210, "Please input your email address."),
                     .next(230, "Your email address incorrect format."),
-                    .next(250, nil),
-                    .next(270, nil),
-                    .next(290, nil),
-                    .next(310, nil),
+                    .next(250, ""),
+                    .next(270, ""),
+                    .next(290, ""),
+                    .next(310, ""),
                 ])
                 
-                let expectedPasswordErrors: [Recorded<Event<String?>>] = Recorded.events([
+                let expectedPasswordErrors: [Recorded<Event<String>>] = Recorded.events([
+                    .next(0, ""),
                     .next(210, "Please input your password."),
                     .next(230, "Password is too short"),
                     .next(250, "Password is too short"),
                     .next(270, "Password is too short"),
-                    .next(290, nil),
-                    .next(310, nil),
+                    .next(290, ""),
+                    .next(310, ""),
                 ])
                 
-                let expectedConfirmPasswordErrors: [Recorded<Event<String?>>] = Recorded.events([
+                let expectedConfirmPasswordErrors: [Recorded<Event<String>>] = Recorded.events([
+                    .next(0, ""),
                     .next(210, "Please input your confirm password."),
                     .next(230, "Password is too short"),
-                    .next(250, "Password is too short"),
+                    .next(250, "Confirm password should be match password"),
                     .next(270, "Confirm password should be match password"),
                     .next(290, "Confirm password should be match password"),
-                    .next(310, nil),
+                    .next(310, "Confirm password should be match password"),
                 ])
+
                 
                 expect(outputEmail.events).to(equal(expectedEmailErrors))
                 expect(outputPassword.events).to(equal(expectedPasswordErrors))

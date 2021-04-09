@@ -15,14 +15,9 @@ protocol SignUpUseCaseType {
     func validatePassword(_ password: String) -> ValidationResult
     func validateConfirmPassword(_ confirmPassword: String, _ password: String) -> ValidationResult
     
-    func signUp(with email: String, password: String) -> Observable<User>
+    func signUp(dto: SignUpDto) -> Observable<User>
 }
 
 struct SignUpUseCase: SignUpUseCaseType, SigningUp {
     @Injected var authenGateway: AuthenGatewayType
-    
-    func signUp(with email: String, password: String) -> Observable<User> {
-        let dto = SignUpDto(email: email, password: password, confirmPassword: password)
-        return authenGateway.signUp(dto: dto)
-    }
 }

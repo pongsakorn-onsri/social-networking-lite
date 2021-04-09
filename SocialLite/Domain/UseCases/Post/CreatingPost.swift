@@ -8,6 +8,7 @@
 import Foundation
 import Dto
 import ValidatedPropertyKit
+import RxSwift
 
 struct CreatePostDto: Dto {
     
@@ -42,5 +43,12 @@ protocol CreatingPost {
 extension CreatingPost {
     func validate(_ post: Post?) -> ValidationResult {
         CreatePostDto.validateContent(post).mapToVoid()
+    }
+    
+    func createPost(_ dto: CreatePostDto) -> Observable<Post> {
+        if let error = dto.validationError {
+            return .error(error)
+        }
+        return postGateway.createPost(dto: dto)
     }
 }

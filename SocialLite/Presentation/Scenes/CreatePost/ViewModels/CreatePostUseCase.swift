@@ -17,13 +17,5 @@ protocol CreatePostUseCaseType {
 }
 
 struct CreatePostUseCase: CreatePostUseCaseType, CreatingPost {
-    
     @Injected var postGateway: PostGatewayType
-    
-    func createPost(_ dto: CreatePostDto) -> Observable<Post> {
-        if let error = dto.validationError {
-            return .error(error)
-        }
-        return postGateway.createPost(dto: dto)
-    }
 }

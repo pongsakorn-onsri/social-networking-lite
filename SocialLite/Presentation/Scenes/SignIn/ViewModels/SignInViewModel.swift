@@ -82,7 +82,7 @@ extension SignInViewModel: ViewModel {
             .filter { $0 }
             .withLatestFrom(Driver.combineLatest(input.email, input.password))
             .flatMapLatest { (email, password) -> Driver<User> in
-                self.useCase.signIn(dto: SignInDto(email: email, password: password))
+                useCase.signIn(dto: SignInDto(email: email, password: password))
                     .trackActivity(activityIndicator)
                     .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()
@@ -95,7 +95,7 @@ extension SignInViewModel: ViewModel {
         
         input.signInGoogle
             .flatMapLatest { (credential) -> Driver<User> in
-                self.useCase.signIn(with: credential)
+                useCase.signIn(with: credential)
                     .trackActivity(activityIndicator)
                     .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()

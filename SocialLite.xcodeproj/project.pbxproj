@@ -383,9 +383,9 @@
 		11338B8826165064000D8823 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11338B7A26164FA1000D8823 /* SignUpViewModel.swift */,
 				11B53F1526202BC80056B822 /* SignUpUseCase.swift */,
 				11B53F1A26202D150056B822 /* SignUpUseCase+Injection.swift */,
+				11338B7A26164FA1000D8823 /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -401,9 +401,9 @@
 		11338B932616507A000D8823 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11338B5F26164E67000D8823 /* SignInViewModel.swift */,
-				11B53EBB261F51530056B822 /* SignInUseCase+Injection.swift */,
 				11B53E6E261F4A060056B822 /* SignInUseCase.swift */,
+				11B53EBB261F51530056B822 /* SignInUseCase+Injection.swift */,
+				11338B5F26164E67000D8823 /* SignInViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -445,9 +445,9 @@
 		11B53AC62617ECE10056B822 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */,
 				11B53C91261C4E8A0056B822 /* CreatePostUseCase.swift */,
 				11B53F3126204C180056B822 /* CreatePostUseCase+Injected.swift */,
+				11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

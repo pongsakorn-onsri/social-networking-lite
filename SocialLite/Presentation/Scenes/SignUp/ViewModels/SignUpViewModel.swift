@@ -108,7 +108,8 @@ extension SignUpViewModel: ViewModel {
             .filter { $0 }
             .withLatestFrom(Driver.combineLatest(input.email, input.password))
             .flatMapLatest { (email, password) -> Driver<User> in
-                self.useCase.signUp(with: email, password: password)
+                let dto = SignUpDto(email: email, password: password, confirmPassword: password)
+                return useCase.signUp(dto: dto)
                     .trackActivity(activityIndicator)
                     .trackError(errorTracker)
                     .asDriverOnErrorJustComplete()

@@ -11,5 +11,5 @@ import RxSwift
 protocol PostGatewayType {
     func getPostList(dto: GetPostListDto) -> Observable<[Post]>
     func createPost(dto: CreatePostDto) -> Observable<Post>
-    func removePost(_ post: DeletePostDto) -> Observable<Void>
+    func removePost(_ dto: DeletePostDto) -> Observable<Void>
 }

@@ -34,8 +34,10 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             return .set([controller])
         case .timeline:
             return .none()
-        case let .post(delegate):
-            let viewModel = CreatePostViewModel(with: weakRouter, createdPostPublish: delegate)
+        case let .post(user, delegate):
+            let viewModel = CreatePostViewModel(router: weakRouter,
+                                                user: user,
+                                                delegate: delegate)
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
         case let .signout(delegate):

@@ -9,97 +9,95 @@ import UIKit
 import RxSwift
 import RxCocoa
 import XCoordinator
+import MGArchitecture
+import Resolver
 
-final class CreatePostViewModel: BaseViewModel {
+struct CreatePostViewModel {
+    let router: WeakRouter<AppRoute>
+    let user: User
+    let delegate: PublishSubject<Post>
+    @Injected var useCase: CreatePostUseCaseType
+}
+
+extension CreatePostViewModel: ViewModel {
 
     struct Input {
-        let closeTapped: Observable<Void>
-        let createTapped: Observable<Void>
-        let textInput: Observable<String>
+        let textInput: Driver<String>
+        let closeTapped: Driver<Void>
+        let createTapped: Driver<Void>
     }
     
     struct Output {
-        let countingText: Observable<String>
-        let isPosting: Driver<Bool>
-        let validate: Driver<Error?>
+        @Property var countingText: String = "0 / 1024"
+        @Property var isLoading: Bool = false
+        @Property var validateMessage: String = ""
     }
     
-    lazy var service: CreatePostUseCase = {
-        CreatePostService(user: UserManager.shared.currentUser)
-    }()
-    
-    var createdPostPublish: PublishSubject<Post>?
-    let isPostingBehavior: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-    let createPostErrorPublish: PublishSubject<Error> = PublishSubject()
-    
-    convenience init(with router: WeakRouter<RouteType>, createdPostPublish: PublishSubject<Post>) {
-        self.init(with: router)
-        self.createdPostPublish = createdPostPublish
-    }
-    
-    func transform(input: Input) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        let errorTracker = ErrorTracker()
+        let activityIndicator = ActivityIndicator()
+        
+        errorTracker
+            .drive(onNext: { error in
+                router.trigger(.alert(error))
+            })
+            .disposed(by: disposeBag)
+        
+        let isLoading = activityIndicator.asDriver()
+        
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
         input.closeTapped
-            .subscribe(onNext: { _ in
-                self.router.trigger(.dismiss)
+            .drive(onNext: {
+                router.trigger(.dismiss)
             })
             .disposed(by: disposeBag)
         
         let textInputCount = input.textInput
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).count }
         
-        let validateError = textInputCount
-            .map { (count) -> Error? in
-                if count == 0 { return CreatePostError.textInputEmpty }
-                if count > 1024 { return CreatePostError.textInputExceed }
-                return nil
+        textInputCount
+            .map { "\($0) / 1024" }
+            .drive(output.$countingText)
+            .disposed(by: disposeBag)
+        
+        let createPostSubject = input.createTapped
+            .withLatestFrom(input.textInput)
+            .map { (content) -> Post in
+                Post(userId: user.uid,
+                     displayName: user.postDisplayName,
+                     content: content,
+                     timestamp: Date())
             }
         
-        let requestCreatePost = {
-            self.service.create(content: $0)
-                .do(onSuccess: { [weak self]post in
-                    self?.createdPostPublish?.onNext(post)
-                })
-                .map { post -> Post? in post }
-                .catchError { error in
-                    self.createPostErrorPublish.onNext(error)
-                    return .just(nil)
-                }
-        }
-        
-        let contentValidation = input.createTapped
-            .withLatestFrom(validateError)
-            .map { $0 == nil }
-        
-        contentValidation
-            .filter { $0 }
-            .bind(to: isPostingBehavior)
+        let validation = createPostSubject
+            .map(useCase.validate(_:))
+            
+        validation
+            .map(\.firstMessage)
+            .drive(output.$validateMessage)
             .disposed(by: disposeBag)
         
-        contentValidation
+        createPostSubject
+            .withLatestFrom(Driver.and(validation.map { $0.isValid }, isLoading.not()))
             .filter { $0 }
-            .withLatestFrom(input.textInput)
-            .flatMap(requestCreatePost)
-            .subscribe(onNext: { post in
-                self.isPostingBehavior.onNext(false)
-                guard post != nil else { return }
-                self.router.trigger(.dismiss)
+            .withLatestFrom(createPostSubject)
+            .flatMapLatest { (post) in
+                useCase.createPost(CreatePostDto(post: post))
+                    .trackActivity(activityIndicator)
+                    .trackError(errorTracker)
+                    .asDriverOnErrorJustComplete()
+            }
+            .drive(onNext: { newPost in
+                delegate.onNext(newPost)
+                router.trigger(.dismiss)
             })
             .disposed(by: disposeBag)
         
-        createPostErrorPublish
-            .subscribe(onNext: { [weak self]error in
-                self?.router.trigger(.alert(error))
-            }, onError: { [weak self]error in
-                self?.router.trigger(.alert(error))
-            })
-            .disposed(by: disposeBag)
-        
-        let validate =  Observable.combineLatest(validateError, contentValidation)
-            .map { $0.0 }
-
-        return Output(
-            countingText: textInputCount.map { "\($0) / 1024" },
-            isPosting: isPostingBehavior.asDriver(onErrorJustReturn: false),
-            validate: validate.asDriver(onErrorJustReturn: nil))
+        return output
     }
 }

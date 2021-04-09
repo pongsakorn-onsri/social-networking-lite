@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 struct DeletePostDto {
-    var documentId: String?
+    var documentId: String
     
     init(id: String) {
         documentId = id

@@ -88,6 +88,8 @@
 		11B53F1626202BC80056B822 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53F1526202BC80056B822 /* SignUpUseCase.swift */; };
 		11B53F1B26202D150056B822 /* SignUpUseCase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53F1A26202D150056B822 /* SignUpUseCase+Injection.swift */; };
 		11B53F282620403E0056B822 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53F272620403E0056B822 /* Result+Extensions.swift */; };
+		11B53F2D2620498E0056B822 /* PostGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53F2C2620498E0056B822 /* PostGateway.swift */; };
+		11B53F3226204C180056B822 /* CreatePostUseCase+Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53F3126204C180056B822 /* CreatePostUseCase+Injected.swift */; };
 		56186C06423DCAEB7B76AD93 /* Pods_SocialLite_SocialLiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73AA6A21327E5A4385DACC1 /* Pods_SocialLite_SocialLiteUITests.framework */; };
 		9AB4C7EC2615E74C00CDCE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB4C7EB2615E74C00CDCE38 /* AppDelegate.swift */; };
 		9AB4C7F32615E74C00CDCE38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB4C7F12615E74C00CDCE38 /* Main.storyboard */; };
@@ -200,6 +202,8 @@
 		11B53F1526202BC80056B822 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		11B53F1A26202D150056B822 /* SignUpUseCase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpUseCase+Injection.swift"; sourceTree = "<group>"; };
 		11B53F272620403E0056B822 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
+		11B53F2C2620498E0056B822 /* PostGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGateway.swift; sourceTree = "<group>"; };
+		11B53F3126204C180056B822 /* CreatePostUseCase+Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreatePostUseCase+Injected.swift"; sourceTree = "<group>"; };
 		1D0C30E055CAFAE6A249D8DE /* Pods-SocialLiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLiteTests.release.xcconfig"; path = "Target Support Files/Pods-SocialLiteTests/Pods-SocialLiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3132C548F3E1218695D34B96 /* Pods-SocialLite-SocialLiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite-SocialLiteUITests.release.xcconfig"; path = "Target Support Files/Pods-SocialLite-SocialLiteUITests/Pods-SocialLite-SocialLiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4974714C1DBF04BCDC2660DA /* Pods-SocialLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLite.release.xcconfig"; path = "Target Support Files/Pods-SocialLite/Pods-SocialLite.release.xcconfig"; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 			children = (
 				11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */,
 				11B53C91261C4E8A0056B822 /* CreatePostUseCase.swift */,
+				11B53F3126204C180056B822 /* CreatePostUseCase+Injected.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				11B53E69261F3DDE0056B822 /* AuthenGateway.swift */,
+				11B53F2C2620498E0056B822 /* PostGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -1085,9 +1091,11 @@
 				11B53EB7261F50BB0056B822 /* AppDelegate+Injection.swift in Sources */,
 				11B53DC0261EAA8E0056B822 /* SigningOut.swift in Sources */,
 				11338B0526163D02000D8823 /* AppRouter.swift in Sources */,
+				11B53F3226204C180056B822 /* CreatePostUseCase+Injected.swift in Sources */,
 				11B53CD8261C9D380056B822 /* PostCellViewModel.swift in Sources */,
 				11B53C97261C4EA40056B822 /* Post.swift in Sources */,
 				11B53DC5261EAA980056B822 /* SigningUp.swift in Sources */,
+				11B53F2D2620498E0056B822 /* PostGateway.swift in Sources */,
 				11B53D88261E9FCD0056B822 /* PostGatewayType.swift in Sources */,
 				11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */,
 				11B53CEB261CB7BE0056B822 /* PostTableViewCell.swift in Sources */,

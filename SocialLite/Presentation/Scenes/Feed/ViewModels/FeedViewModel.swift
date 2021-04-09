@@ -91,8 +91,10 @@ class FeedViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         input.createdPostTrigger
-            .flatMapLatest {
-                self.router.triggerToCreatePost()
+            .withLatestFrom(userSubject.asDriver())
+            .compactMap { $0 }
+            .flatMapLatest { user in
+                self.router.triggerToCreatePost(user: user)
             }
             .drive(onNext: { post in
                 let posts = postSubject.value

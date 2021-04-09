@@ -17,9 +17,9 @@ extension Router where RouteType == AppRoute {
         return delegate.asDriverOnErrorJustComplete()
     }
     
-    public func triggerToCreatePost() -> Driver<Post> {
+    public func triggerToCreatePost(user: User) -> Driver<Post> {
         let delegate = PublishSubject<Post>()
-        trigger(.post(delegate: delegate))
+        trigger(.post(user: user, delegate: delegate))
         return delegate.asDriverOnErrorJustComplete()
     }
     

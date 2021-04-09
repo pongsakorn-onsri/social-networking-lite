@@ -8,6 +8,31 @@
 import ValidatedPropertyKit
 
 extension Validation where Value == String {
+    
+    static func contains<S: StringProtocol>(_ string: S,
+                                            options: NSString.CompareOptions = .init(),
+                                            _ message: String) -> Validation {
+        return .init { value in
+            if value.range(of: string, options: options) != nil {
+                return .success(())
+            } else {
+                return .failure(ValidationError(message: message))
+            }
+        }
+    }
+    
+    static func notContains<S: StringProtocol>(_ string: S,
+                                            options: NSString.CompareOptions = .init(),
+                                            _ message: String) -> Validation {
+        return .init { value in
+            if value.range(of: string, options: options) == nil {
+                return .success(())
+            } else {
+                return .failure(ValidationError(message: message))
+            }
+        }
+    }
+    
     public static func matches(_ pattern: String,
                                options: NSRegularExpression.Options = .init(),
                                matchingOptions: NSRegularExpression.MatchingOptions = .init(),

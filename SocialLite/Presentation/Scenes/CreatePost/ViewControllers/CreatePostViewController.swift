@@ -8,17 +8,27 @@
 import UIKit
 import RxSwift
 import MaterialComponents
+import RxCocoa
 
 extension CreatePostViewController: UseStoryboard {
     static var storyboardName: String { "CreatePost" }
 }
 
-class CreatePostViewController: BaseViewController<CreatePostViewModel> {
+class CreatePostViewController: UIViewController, UseViewModel {
 
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var createButton: UIBarButtonItem!
     @IBOutlet weak var textArea: MDCOutlinedTextArea!
+    
+    // MARK: - Properties
+    typealias Model = CreatePostViewModel
+    var viewModel: Model?
+    var disposeBag = DisposeBag()
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,36 +45,53 @@ class CreatePostViewController: BaseViewController<CreatePostViewModel> {
     func configureBinding() {
         guard let viewModel = viewModel else { return }
         let input = CreatePostViewModel.Input(
-            closeTapped: closeButton.rx.tap.asObservable(),
-            createTapped: createButton.rx.tap.asObservable(),
-            textInput: textArea.textView.rx.text.orEmpty.asObservable()
+            textInput: textArea.textView.rx.text.orEmpty.asDriver(),
+            closeTapped: closeButton.rx.tap.asDriver(),
+            createTapped: createButton.rx.tap.asDriver()
         )
         
-        let output = viewModel.transform(input: input)
-        output.countingText
+        let output = viewModel.transform(input, disposeBag: disposeBag)
+        output.$countingText
             .bind(to: textArea.trailingAssistiveLabel.rx.text)
             .disposed(by: disposeBag)
         
-        output.isPosting
+        output.$isLoading
+            .asDriver()
             .drive(loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        output.validate
-            .drive(onNext: { [weak self]error in
-                if let error = error {
-                    self?.textArea.applyErrorTheme(withScheme: containerScheme)
-                    self?.textArea.leadingAssistiveLabel.text = error.localizedDescription
-                } else {
-                    self?.textArea.applyTheme(withScheme: containerScheme)
-                    self?.textArea.leadingAssistiveLabel.text = nil
-                }
-            })
+        output.$isLoading
+            .asDriver()
+            .drive(isLoadingBinder)
+            .disposed(by: disposeBag)
+        
+        output.$validateMessage
+            .asDriver()
+            .drive(validationMessageBinder)
             .disposed(by: disposeBag)
     }
     
-    override func applyTheme(with containerScheme: MDCContainerScheming) {
+    func applyTheme(with containerScheme: MDCContainerScheming) {
         textArea.applyTheme(withScheme: containerScheme)
     }
 }
 
-
+// MARK: - Binders
+extension CreatePostViewController {
+    var isLoadingBinder: Binder<Bool> {
+        return Binder(createButton) { button, isLoading in
+            button.title = isLoading ? "" : "CREATE"
+        }
+    }
+    
+    var validationMessageBinder: Binder<String> {
+        return Binder(textArea) { textArea, message in
+            textArea.leadingAssistiveLabel.text = message
+            if message.isEmpty {
+                textArea.applyTheme(withScheme: containerScheme)
+            } else {
+                textArea.applyErrorTheme(withScheme: containerScheme)
+            }
+        }
+    }
+}

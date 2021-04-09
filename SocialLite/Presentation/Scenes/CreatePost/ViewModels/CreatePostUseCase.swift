@@ -8,61 +8,22 @@
 import Foundation
 import RxSwift
 import FirebaseFirestore
+import Resolver
+import Dto
 
-protocol CreatePostUseCase {
-    func create(content: String) -> Single<Post>
+protocol CreatePostUseCaseType {
+    func validate(_ post: Post?) -> ValidationResult
+    func createPost(_ dto: CreatePostDto) -> Observable<Post>
 }
 
-struct CreatePostService: CreatePostUseCase {
+struct CreatePostUseCase: CreatePostUseCaseType, CreatingPost {
     
-    var user: User?
-    let database = Firestore.firestore()
+    @Injected var postGateway: PostGatewayType
     
-    func create(content: String) -> Single<Post> {
-        guard let user = user else {
-            return .error(CreatePostError.userNotFound)
+    func createPost(_ dto: CreatePostDto) -> Observable<Post> {
+        if let error = dto.validationError {
+            return .error(error)
         }
-        if content.lowercased().contains("fucking") {
-            return .error(CreatePostError.foundRudeWords)
-        }
-        return Single.create { (observer) -> Disposable in
-            
-            var newPost = Post(userId:  user.uid,
-                               displayName: user.postDisplayName,
-                               content: content,
-                               timestamp: Date())
-            let data = newPost.toJSON()
-            var reference: DocumentReference? = nil
-            reference = database
-                .collection("posts")
-                .addDocument(data: data) { (error) in
-                    if let error = error {
-                        observer(.error(error))
-                    } else {
-                        newPost.documentId = reference?.documentID
-                        observer(.success(newPost))
-                    }
-                }
-            
-            return Disposables.create()
-        }
-    }
-}
-
-enum CreatePostError: Error {
-    case userNotFound
-    case textInputEmpty
-    case textInputExceed
-    case foundRudeWords
-}
-
-extension CreatePostError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .userNotFound: return "User not found ❌"
-        case .textInputEmpty: return "Please input your content."
-        case .textInputExceed: return "Text input exceed limit 1024 charactors."
-        case .foundRudeWords: return "Found rude words. Please change your text."
-        }
+        return postGateway.createPost(dto: dto)
     }
 }

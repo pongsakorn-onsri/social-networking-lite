@@ -17,6 +17,7 @@ import MGArchitecture
 struct SignInViewModel {
     let router: WeakRouter<AuthenticateRoute>
     @Injected var useCase: SignInUseCaseType
+    let delegate: PublishSubject<User>
 }
 
 extension SignInViewModel: ViewModel {
@@ -87,6 +88,7 @@ extension SignInViewModel: ViewModel {
                     .asDriverOnErrorJustComplete()
             }
             .drive(onNext: { user in
+                delegate.onNext(user)
                 router.trigger(.close)
             })
             .disposed(by: disposeBag)
@@ -105,7 +107,7 @@ extension SignInViewModel: ViewModel {
         
         input.signUpTapped
             .drive(onNext: {
-                router.trigger(.signup)
+                router.trigger(.signup(delegate: delegate))
             })
             .disposed(by: disposeBag)
         

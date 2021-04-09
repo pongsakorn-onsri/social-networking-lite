@@ -12,11 +12,11 @@ import MaterialComponents.MaterialDialogs
 final class AuthenticateCoordinator: NavigationCoordinator<AuthenticateRoute> {
     override func prepareTransition(for route: RouteType) -> TransitionType {
         switch route {
-        case .signin:
-            let viewModel = SignInViewModel(router: weakRouter)
+        case let .signin(delegate):
+            let viewModel = SignInViewModel(router: weakRouter, delegate: delegate)
             let controller = SignInViewController.newInstance(with: viewModel)
             return .push(controller)
-        case .signup:
+        case let .signup(delegate):
             let viewModel = SignUpViewModel(with: weakRouter)
             let controller = SignUpViewController.newInstance(with: viewModel)
             return .push(controller)

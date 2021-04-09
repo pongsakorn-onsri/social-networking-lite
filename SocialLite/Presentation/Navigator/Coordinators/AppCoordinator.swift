@@ -17,7 +17,7 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
     
     private var authenCoordinator: AuthenticateCoordinator?
     
-    fileprivate func authTransition(_ route: AuthenticateRoute = .signin) -> NavigationTransition {
+    fileprivate func authTransition(_ route: AuthenticateRoute) -> NavigationTransition {
         let coor = AuthenticateCoordinator(initialRoute: route)
         coor.rootViewController.modalPresentationStyle = .fullScreen
         authenCoordinator = coor
@@ -26,8 +26,8 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
     
     override func prepareTransition(for route: RouteType) -> TransitionType {
         switch route {
-        case .authenticate:
-            return authTransition(.signin)
+        case let .authenticate(delegate):
+            return authTransition(.signin(delegate: delegate))
         case .feed:
             let viewModel = FeedViewModel(with: weakRouter)
             let controller = FeedViewController.newInstance(with: viewModel)
@@ -38,11 +38,11 @@ final class AppCoordinator: NavigationCoordinator<AppRoute> {
             let viewModel = CreatePostViewModel(with: weakRouter, createdPostPublish: delegate)
             let controller = CreatePostViewController.newInstance(with: viewModel)
             return .present(controller)
-        case .signout:
+        case let .signout(delegate):
             let alertController = MDCAlertController(title: "Are you sure to sign out ?",
                                                      message: nil)
             let actionSignOut = MDCAlertAction(title: "Sign out", emphasis: .high) { _ in
-                UserManager.shared.signOut()
+                delegate.onNext(())
             }
             let actionCancel = MDCAlertAction(title: "Cancel", emphasis: .low, handler: nil)
             

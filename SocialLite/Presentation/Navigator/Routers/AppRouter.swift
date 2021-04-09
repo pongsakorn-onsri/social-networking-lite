@@ -14,8 +14,8 @@ public enum AppRoute: Route {
     case feed
     case timeline
     case post(delegate: PublishSubject<Post>)
-    case authenticate
-    case signout
+    case authenticate(delegate: PublishSubject<User>)
+    case signout(delegate: PublishSubject<Void>)
     case alert(Error)
     case deleteAlert(post: Post, delegate: PublishSubject<Post>)
     case dismiss

@@ -10,6 +10,7 @@ import RxSwift
 import FirebaseAuth
 
 protocol AuthenGatewayType {
+    func getUser() -> Observable<User>
     func signUp(dto: SignUpDto) -> Observable<User>
     func signIn(dto: SignInDto) -> Observable<User>
     func signIn(with credential: AuthCredential) -> Observable<User>

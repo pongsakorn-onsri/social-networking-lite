@@ -13,6 +13,20 @@ struct AuthenGateway: AuthenGatewayType {
     
     var auth: Auth = Auth.auth()
     
+    func getUser() -> Observable<User> {
+        return Observable.create { (observer) -> Disposable in
+            
+            if let firebaseUser = auth.currentUser,
+               let user = User(firebaseUser: firebaseUser) {
+                observer.onNext(user)
+            } else {
+                observer.onError(SignInError.message("not found user"))
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
+    
     func signUp(dto: SignUpDto) -> Observable<User> {
         return Observable.create { (observer) -> Disposable in
             auth.createUser(withEmail: dto.email ?? "", password: dto.password ?? "") { (authResult, error) in

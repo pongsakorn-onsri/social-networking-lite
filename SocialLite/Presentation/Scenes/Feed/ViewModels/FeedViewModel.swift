@@ -14,8 +14,7 @@ import RxDataSources
 class FeedViewModel: BaseViewModel {
     
     struct Input {
-        let signOutTapped: Observable<Void>
-        let userChanged: Observable<User?>
+        let signOutTapped: Driver<Void>
         let refreshTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
         let createdPostTrigger: Driver<Void>
@@ -28,11 +27,9 @@ class FeedViewModel: BaseViewModel {
         let isLoadingMore: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     }
     
-    var service: FeedUseCaseType = { FeedUseCaseService() }()
-    var refreshAction: PublishSubject<Void> = PublishSubject()
+    var useCase: FeedUseCaseType = { FeedUseCaseService() }()
     let deletePostAction: PublishSubject<Post> = PublishSubject()
     let createdPost: PublishSubject<Post> = PublishSubject()
-    private let pageSize = 20
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
@@ -53,8 +50,9 @@ class FeedViewModel: BaseViewModel {
         
         // Get
         let postSubject = BehaviorRelay<[Post]>(value: [])
+        let userSubject = BehaviorRelay<User?>(value: nil)
         
-        let getPostResult = service
+        let getPostResult = useCase
             .fetch(type: .new, document: nil)
             .asDriver(onErrorJustReturn: [])
             .do(onNext: { posts in
@@ -63,25 +61,37 @@ class FeedViewModel: BaseViewModel {
         
         let postList = Driver.merge(getPostResult, postSubject.asDriver())
         
-        input.userChanged
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self]user in
-                if user == nil {
-                    self?.router.trigger(.authenticate)
-                } else {
-                    self?.refreshAction.onNext(())
-                }
-            })
+        let userChangedTrigger = PublishSubject<User>()
+        
+        useCase.getUser()
+            .mapToOptional()
+            .asDriver(onErrorJustReturn: nil)
+            .drive(userSubject)
+            .disposed(by: disposeBag)
+            
+        userSubject
+            .filter { $0 == nil }
+            .flatMapLatest { _ in
+                self.router.triggerToSignIn()
+            }
+            .asDriverOnErrorJustComplete()
+            .drive(userChangedTrigger)
             .disposed(by: disposeBag)
         
         input.signOutTapped
-            .subscribe(onNext: {
-                self.router.trigger(.signout)
-            })
+            .flatMapLatest {
+                self.router.confirmSignOut()
+            }
+            .flatMapLatest {
+                self.useCase.signOut()
+                    .asDriverOnErrorJustComplete()
+            }
+            .map { _ in nil }
+            .drive(userSubject)
             .disposed(by: disposeBag)
         
         input.createdPostTrigger
-            .flatMapLatest { _ in
+            .flatMapLatest {
                 self.router.triggerToCreatePost()
             }
             .drive(onNext: { post in
@@ -95,7 +105,7 @@ class FeedViewModel: BaseViewModel {
                 self.router.confirmDeletePost(post: post)
             }
             .flatMapLatest { post in
-                self.service.delete(post: post)
+                self.useCase.delete(post: post)
                     .trackActivity(refreshingTracker)
                     .map { _ in post }
                     .asDriver(onErrorJustReturn: post)
@@ -107,24 +117,27 @@ class FeedViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        Driver.merge(input.refreshTrigger, refreshAction.asDriver(onErrorJustReturn: ()))
-            .flatMapLatest { posts -> Driver<[Post]> in
-                let firstPost = postSubject.value.compactMap { $0.document }.first
-                return self.service.fetch(type: .new, document: firstPost)
-                    .trackActivity(refreshingTracker)
-                    .asDriver(onErrorJustReturn: [])
-            }
-            .drive(onNext: { newPosts in
-                let posts = newPosts + postSubject.value
-                let postsWithoutDuplicates = posts.withoutDuplicates()
-                postSubject.accept(postsWithoutDuplicates)
-            })
-            .disposed(by: disposeBag)
+        Driver.merge(
+            input.refreshTrigger,
+            userChangedTrigger.mapToVoid().asDriver(onErrorJustReturn: ())
+        )
+        .flatMapLatest { posts -> Driver<[Post]> in
+            let firstPost = postSubject.value.compactMap { $0.document }.first
+            return self.useCase.fetch(type: .new, document: firstPost)
+                .trackActivity(refreshingTracker)
+                .asDriver(onErrorJustReturn: [])
+        }
+        .drive(onNext: { newPosts in
+            let posts = newPosts + postSubject.value
+            let postsWithoutDuplicates = posts.withoutDuplicates()
+            postSubject.accept(postsWithoutDuplicates)
+        })
+        .disposed(by: disposeBag)
         
         input.loadMoreTrigger
             .flatMapLatest { posts -> Driver<[Post]> in
                 let lastPost = postSubject.value.compactMap { $0.document }.last
-                return self.service.fetch(type: .old, document: lastPost)
+                return self.useCase.fetch(type: .old, document: lastPost)
                     .trackActivity(loadingMoreTracker)
                     .asDriver(onErrorJustReturn: [])
             }

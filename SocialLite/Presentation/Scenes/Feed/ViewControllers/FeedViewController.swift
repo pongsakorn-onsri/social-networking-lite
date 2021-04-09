@@ -28,6 +28,7 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     let appBarViewController = MDCAppBarViewController()
     private var loadMoreTrigger = PublishSubject<Void>()
     private var deletePostTrigger = PublishSubject<Post>()
+    private var refreshPostTrigger = PublishSubject<Void>()
     
     var isRefreshing: Binder<Bool> {
         return Binder(refreshControl) { refreshControl, loading in
@@ -67,11 +68,13 @@ final class FeedViewController: BaseViewController<FeedViewModel> {
     func configureViewModel() {
         guard let viewModel = viewModel else { return }
         
-        let refreshTrigger = refreshControl.rx.controlEvent(.valueChanged).asDriver()
+        let refreshTrigger = Driver.merge(
+            refreshPostTrigger.asDriver(onErrorJustReturn: ()),
+            refreshControl.rx.controlEvent(.valueChanged).asDriver()
+        )
         
         let input = FeedViewModel.Input(
-            signOutTapped: signOutButton.rx.tap.asObservable(),
-            userChanged: UserManager.shared.userObservable.asObservable(),
+            signOutTapped: signOutButton.rx.tap.asDriver(),
             refreshTrigger: refreshTrigger,
             loadMoreTrigger: loadMoreTrigger.asDriver(onErrorJustReturn: ()),
             createdPostTrigger: createPostButton.rx.tap.asDriver(),
@@ -153,7 +156,7 @@ extension FeedViewController {
                 .buttonTitle(.init(string: "Refresh!"), for: .highlighted)
                 .isScrollAllowed(true)
                 .didTapDataButton { [weak self] in
-                    self?.viewModel?.refreshAction.onNext(())
+                    self?.refreshPostTrigger.onNext(())
                 }
         }
         

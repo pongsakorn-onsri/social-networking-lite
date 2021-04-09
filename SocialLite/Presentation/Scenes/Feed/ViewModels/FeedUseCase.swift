@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import FirebaseFirestore
+import Resolver
 
 enum FetchType {
     case new
@@ -15,14 +16,21 @@ enum FetchType {
 }
 
 protocol FeedUseCaseType {
+    func getUser() -> Observable<User>
     func fetch(type: FetchType, document: DocumentSnapshot?) -> Single<[Post]>
     func delete(post: Post) -> Single<Bool>
+    func signOut() -> Observable<Void>
 }
 
 struct FeedUseCaseService: FeedUseCaseType {
     
+    @Injected var authenGateway: AuthenGatewayType
     let database = Firestore.firestore()
     let pageSize = 20
+    
+    func getUser() -> Observable<User> {
+        authenGateway.getUser()
+    }
     
     func fetch(type: FetchType, document: DocumentSnapshot?) -> Single<[Post]> {
         Single.create { (observer) -> Disposable in
@@ -74,6 +82,10 @@ struct FeedUseCaseService: FeedUseCaseType {
                 }
             return Disposables.create()
         }
+    }
+    
+    func signOut() -> Observable<Void> {
+        authenGateway.signOut()
     }
 }
 

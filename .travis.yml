@@ -1,0 +1,6 @@
+os: osx
+osx_image: xcode12.2
+jobs:
+  include:
+    - stage: Install Dependencies
+      script: pod install

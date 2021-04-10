@@ -31,6 +31,6 @@ extension PostTableViewCell {
         titleLabel.text = post.displayName
         timeLabel.text = dateString
         descriptionLabel.text = post.content
-        deleteButton.isHidden = post.userId != UserManager.shared.currentUser?.uid
+        deleteButton.isHidden = viewModel.isHideDelete
     }
 }

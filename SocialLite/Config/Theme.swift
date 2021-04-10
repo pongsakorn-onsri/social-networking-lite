@@ -10,11 +10,11 @@ import MaterialComponents.MaterialContainerScheme
 
 func globalContainerScheme() -> MDCContainerScheming {
     let containerScheme = MDCContainerScheme()
-    containerScheme.colorScheme.primaryColor = UIColor(hex: 0x37966F) ?? .green
-    containerScheme.colorScheme.primaryColorVariant = UIColor(hex: 0x356859) ?? .green
-    containerScheme.colorScheme.onPrimaryColor = UIColor(hex: 0xB9E4C9) ?? .white
-    containerScheme.colorScheme.secondaryColor = UIColor(hex: 0xFD5523) ?? .orange
-    containerScheme.colorScheme.onSecondaryColor = UIColor(hex: 0xFFFBE6) ?? .lightText
+    containerScheme.colorScheme.primaryColor = UIColor(hex: 0x37966F)!
+    containerScheme.colorScheme.primaryColorVariant = UIColor(hex: 0x356859)!
+    containerScheme.colorScheme.onPrimaryColor = UIColor(hex: 0xB9E4C9)!
+    containerScheme.colorScheme.secondaryColor = UIColor(hex: 0xFD5523)!
+    containerScheme.colorScheme.onSecondaryColor = UIColor(hex: 0xFFFBE6)!
     
     let fontLekton = UIFont(name: "Lekton", size: 20)!
     let fontMontserrat = UIFont(name: "Montserrat", size: 20)!

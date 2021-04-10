@@ -20,7 +20,7 @@ struct AuthenGateway: AuthenGatewayType {
                let user = User(firebaseUser: firebaseUser) {
                 observer.onNext(user)
             } else {
-                observer.onError(SignInError.message("not found user"))
+                observer.onError(NSError(domain: "authen", code: 404, userInfo: [:]))
             }
             observer.onCompleted()
             return Disposables.create()

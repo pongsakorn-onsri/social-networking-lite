@@ -7,27 +7,50 @@
 
 import Foundation
 import FirebaseAuth
+import RxSwift
 
 @testable import SocialLite
-class MockAuthen: NSObject, AuthenProtocol {
-    var currentUser: SocialLite.User?
+class MockAuthen: NSObject, AuthenGatewayType {
     
-    func signUp(with email: String, password: String, completion: ((SocialLite.User?, Error?) -> Void)?) {
+    typealias User = SocialLite.User
+    var currentUser: User?
+    
+    var getUserCalled = false
+    func getUser() -> Observable<User> {
         let user = User(uid: "", providerID: "")
-        completion?(user, nil)
+        getUserCalled = true
+        return Observable.just(currentUser ?? user)
     }
     
-    func signIn(with credential: AuthCredential, completion: ((SocialLite.User?, Error?) -> Void)?) {
-        let user = User(uid: "", providerID: "")
-        completion?(user, nil)
+    var signUpCalled = false
+    func signUp(dto: SignUpDto) -> Observable<User> {
+        let user = User(uid: dto.email ?? "", providerID: "test")
+        currentUser = user
+        signUpCalled = true
+        return Observable.just(user)
     }
     
-    func signIn(with email: String, password: String, completion: ((SocialLite.User?, Error?) -> Void)?) {
-        let user = User(uid: "", providerID: "")
-        completion?(user, nil)
+    var signInCalled = false
+    func signIn(dto: SignInDto) -> Observable<User> {
+        let user = User(uid: "", providerID: "test")
+        currentUser = user
+        signInCalled = true
+        return Observable.just(user)
     }
     
-    func signOut() {
+    var signInCredentialCalled = false
+    func signIn(with credential: AuthCredential) -> Observable<User> {
+        let user = User(uid: "", providerID: credential.provider)
+        currentUser = user
+        signInCredentialCalled = true
+        return Observable.just(user)
+    }
+    
+    var signOutCalled = false
+    func signOut() -> Observable<Void> {
         currentUser = nil
+        signOutCalled = true
+        return Observable.just(())
     }
+    
 }

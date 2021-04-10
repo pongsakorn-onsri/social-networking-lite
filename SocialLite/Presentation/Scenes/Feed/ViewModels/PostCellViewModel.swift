@@ -9,4 +9,5 @@ import Foundation
 
 struct PostCellViewModel {
     let post: Post
+    let isHideDelete: Bool
 }

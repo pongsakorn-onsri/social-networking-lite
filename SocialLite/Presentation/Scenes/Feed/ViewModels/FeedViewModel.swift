@@ -159,7 +159,8 @@ extension FeedViewModel: ViewModel {
         
         let sectionItems = postList.map { (posts) -> [SectionItem] in
             posts.map { post in
-                let viewModel = PostCellViewModel(post: post)
+                let isHideDelete = post.userId != userSubject.value?.uid
+                let viewModel = PostCellViewModel(post: post, isHideDelete: isHideDelete)
                 return SectionItem.post(viewModel: viewModel)
             }
         }

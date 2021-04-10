@@ -1,7 +1,9 @@
 os: osx
 osx_image: xcode12.2
 language: swift
+cache: cocoapods
 before_install:
 - pod install
 script:
 - xcodebuild build test -workspace SocialLite.xcworkspace -scheme SocialLite -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12,OS=latest" CODE_SIGNING_REQUIRED=NO
+

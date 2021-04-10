@@ -33,6 +33,8 @@
 		11A7A53526214723003ECAF4 /* PostGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A53426214723003ECAF4 /* PostGatewayMock.swift */; };
 		11A7A54626214E95003ECAF4 /* CreatingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A54526214E95003ECAF4 /* CreatingPost.swift */; };
 		11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */; };
+		11A7A56C26215471003ECAF4 /* CreatePostUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A56B26215471003ECAF4 /* CreatePostUseCaseMock.swift */; };
+		11A7A577262154A0003ECAF4 /* CreatePostViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A576262154A0003ECAF4 /* CreatePostViewModelTests.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -151,6 +153,8 @@
 		11A7A53426214723003ECAF4 /* PostGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGatewayMock.swift; sourceTree = "<group>"; };
 		11A7A54526214E95003ECAF4 /* CreatingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingPost.swift; sourceTree = "<group>"; };
 		11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingPost.swift; sourceTree = "<group>"; };
+		11A7A56B26215471003ECAF4 /* CreatePostUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCaseMock.swift; sourceTree = "<group>"; };
+		11A7A576262154A0003ECAF4 /* CreatePostViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModelTests.swift; sourceTree = "<group>"; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
@@ -489,6 +493,49 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		11A7A559262153DF003ECAF4 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				11A7A56826215428003ECAF4 /* CreatePost */,
+				11A7A56726215419003ECAF4 /* Feed */,
+				11A7A5692621542D003ECAF4 /* SignIn */,
+				11A7A56A26215432003ECAF4 /* SignUp */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		11A7A56726215419003ECAF4 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		11A7A56826215428003ECAF4 /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				11A7A56B26215471003ECAF4 /* CreatePostUseCaseMock.swift */,
+				11A7A576262154A0003ECAF4 /* CreatePostViewModelTests.swift */,
+			);
+			path = CreatePost;
+			sourceTree = "<group>";
+		};
+		11A7A5692621542D003ECAF4 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				11B53B532619AB650056B822 /* SignInViewModelTests.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		11A7A56A26215432003ECAF4 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		11B53AC32617ECB70056B822 /* CreatePost */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,15 +630,6 @@
 				11B53F272620403E0056B822 /* Result+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		11B53B522619AAF50056B822 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				11B53B532619AB650056B822 /* SignInViewModelTests.swift */,
-				11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		11B53BA82619C2FF0056B822 /* Gateways */ = {
@@ -794,11 +832,11 @@
 			isa = PBXGroup;
 			children = (
 				11A7A50B26212B66003ECAF4 /* Config */,
+				11A7A54F26215375003ECAF4 /* Data */,
 				11A7A4F62620BB4C003ECAF4 /* Domain */,
 				11B53C7F261B5A9C0056B822 /* Extensions */,
-				11B53B522619AAF50056B822 /* ViewModels */,
 				9AB4C8042615E74D00CDCE38 /* Info.plist */,
-				11A7A54F26215375003ECAF4 /* Data */,
+				11A7A559262153DF003ECAF4 /* Scenes */,
 			);
 			path = SocialLiteTests;
 			sourceTree = "<group>";
@@ -1205,6 +1243,8 @@
 			files = (
 				11A7A51E2621343C003ECAF4 /* SigningInTests.swift in Sources */,
 				11A7A530262146AE003ECAF4 /* GettingPostListTests.swift in Sources */,
+				11A7A577262154A0003ECAF4 /* CreatePostViewModelTests.swift in Sources */,
+				11A7A56C26215471003ECAF4 /* CreatePostUseCaseMock.swift in Sources */,
 				11A7A53526214723003ECAF4 /* PostGatewayMock.swift in Sources */,
 				11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */,
 				11B53BA42619C2FC0056B822 /* AuthenGatewayMock.swift in Sources */,

@@ -42,7 +42,7 @@ public struct Post: Hashable {
     }
 }
 
-extension Post {
+extension Post: Equatable {
     func toJSON() -> [String: Any] {
         [
             "author_id": userId,
@@ -50,6 +50,10 @@ extension Post {
             "content": content,
             "timestamp": timestamp
         ]
+    }
+    
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.documentId == rhs.documentId
     }
 }
 

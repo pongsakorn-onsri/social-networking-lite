@@ -1,4 +1,5 @@
 # SocialLite
+[![Build Status](https://travis-ci.com/pongsakorn-onsri/social-networking-lite.svg?branch=develop)](https://travis-ci.com/pongsakorn-onsri/social-networking-lite)
 
 # Features
 * [ ] Signup, Sign in, Sign out with social provider.
@@ -21,6 +22,10 @@
 * `cd social-networking-lite.git`
 * `pod install` require ([CocoaPods](https://cocoapods.org/))
 * Open `SocialLite.xcworkspace` in Xcode 12.0 or higher
+
+## How to test
+* Open `SocialLite.xcworkspace` in Xcode 12.0 or higher
+* `CMD+U` or Product -> Test
 
 
 ## License(MIT)

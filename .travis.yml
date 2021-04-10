@@ -4,4 +4,20 @@ language: swift
 xcode_workspace: SocialLite.xcworkspace
 xcode_scheme: SocialLite
 xcode_destination: platform=iOS Simulator,OS=latest,name=iPhone 12
-cache: cocoapods
+
+addons:
+  sonarcloud:
+    organization: "sonarcloud"
+    token:
+      secure: "a3VqIAEYmc7MK37D3LL93nEk7Dt/Og/bMHKc4eSHNlMzUv/4iJTHsWfcmzJ01Y6NJlT26kIcZN97O2frlmeWzWU9tsUT/HWK9DZl4XJgdnkabEPrMW/YcwiDevvRfsppZzUxPZXjeabtazmObOFrFkoMv7aVurmt+3ZEZ9v91njAS8LDqveWXg4wZehCSwqnArKN6qzpk8TmxVdMUqVnzISVKaovL3heXd5g2ZSXhkHTw8SxJiP5MHQUwnmVF2rJO+PZGS9QgrBw/MxI7Dbm2pwdBdqjNoCzyLCusve1djmYDib6DtlQ8kVx8GQZwS/aVpbYigvR9UXZtk9XrHx9I+MRRu9RNCkj+xczVFy1pWs2zNQ5S+0qcRDj9FGBC2fHVbWJjfTHkaxi63AHC0EiJA5aB/j4J9xtaJ5fCbCBupEXSh6JawhLHxj63THOqieWCjbcC4s0Dzsrpl+WPH7ior3RRVASk2oPBS5RtSwn3VgR+CifGrNUPGVoIZSVs35FsKyU/q2RFZlJw9HlAoUvM3beUHNQRB8Gekwt8P6q4dEypOlC8q0BkbSFbUX1BmLj2hTxId8ljZVDoV1busIFROxfG9LJfG6dVOPU1s6t6VjM0zQRkJkuj1Sw4/6TjxlAExAq9r+erFcniZYMD+R/XENN6K9ARGZyTzHOiJmhQbw="
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
+cache:
+  directories:
+    - $HOME/.sonar/cache
+    # This contains the CFamily cache. According to https://docs.travis-ci.com/user/caching/#pull-request-builds-and-caches,
+    # for a PR, it will use the cache of the target branch if the branch of the PR does not already have its cache.
+    - $HOME/.cfamily
+    - cocoapods

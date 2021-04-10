@@ -10,36 +10,77 @@ import Quick
 import Nimble
 import RxSwift
 import RxTest
-import RxBlocking
 import XCoordinator
 import GoogleSignIn
 import FirebaseAuth
+import Resolver
 
 @testable import SocialLite
 class SignInViewModelTests: QuickSpec {
+    typealias User = SocialLite.User
+    private var viewModel: SignInViewModel!
+    private var router: WeakRouter<AuthenticateRoute>!
+    private var useCase: SignInUseCaseMock? { viewModel.useCase as? SignInUseCaseMock }
+    private var delegate: PublishSubject<User>!
+    private var input: SignInViewModel.Input!
+    private var output: SignInViewModel.Output!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
     
-    typealias ViewModel = SignInViewModel
+    // Outputs
+    private var emailValidationOutput: TestableObserver<String>!
+    private var passwordValidationOutput: TestableObserver<String>!
+    private var isLoadingOutput: TestableObserver<Bool>!
     
-    var disposeBag: DisposeBag!
-    var router: WeakRouter<AuthenticateRoute>!
+    // Triggers
+    private let emailTrigger = PublishSubject<String>()
+    private let passwordTrigger = PublishSubject<String>()
+    private let signInTrigger = PublishSubject<Void>()
+    private let signUpTrigger = PublishSubject<Void>()
+    private let signInGoogleTrigger = PublishSubject<AuthCredential>()
 
     override func spec() {
         beforeSuite {
-            let coordinator = AuthenticateCoordinator()
-            self.router = coordinator.weakRouter
+            Resolver.main.register { SignInUseCaseMock() as SignInUseCaseType }
         }
         
         describe("As a SignInViewModel") {
-            
-            var viewModel: ViewModel!
-            var scheduler: TestScheduler!
-            var delegate: PublishSubject<SocialLite.User>!
 
             beforeEach {
-                delegate = PublishSubject()
-                viewModel = ViewModel(router: self.router, delegate: delegate)
-                scheduler = TestScheduler(initialClock: 0)
+                self.router = AuthenticateCoordinator().weakRouter
+                self.delegate = PublishSubject()
+                self.viewModel = SignInViewModel(
+                    router: self.router,
+                    delegate: self.delegate
+                )
+                
+                self.input = SignInViewModel.Input(
+                    email: self.emailTrigger.asDriverOnErrorJustComplete(),
+                    password: self.passwordTrigger.asDriverOnErrorJustComplete(),
+                    signInTapped: self.signInTrigger.asDriverOnErrorJustComplete(),
+                    signUpTapped: self.signUpTrigger.asDriverOnErrorJustComplete(),
+                    signInGoogle: self.signInGoogleTrigger.asDriverOnErrorJustComplete()
+                )
+                
                 self.disposeBag = DisposeBag()
+                self.scheduler = TestScheduler(initialClock: 0)
+                
+                self.output = self.viewModel.transform(self.input, disposeBag: self.disposeBag)
+                self.isLoadingOutput = self.scheduler.createObserver(Bool.self)
+                self.emailValidationOutput = self.scheduler.createObserver(String.self)
+                self.passwordValidationOutput = self.scheduler.createObserver(String.self)
+                
+                self.output.$emailValidationMessage
+                    .subscribe(self.emailValidationOutput)
+                    .disposed(by: self.disposeBag)
+                
+                self.output.$passwordValidationMessage
+                    .subscribe(self.passwordValidationOutput)
+                    .disposed(by: self.disposeBag)
+                
+                self.output.$isLoading
+                    .subscribe(self.isLoadingOutput)
+                    .disposed(by: self.disposeBag)
             }
             
             context("input email and password") {
@@ -47,267 +88,120 @@ class SignInViewModelTests: QuickSpec {
                 it("press sign in") {
 
                     /// Given
-                    let signInTapped = scheduler.createHotObservable([
+                    let emailInput = self.scheduler.createColdObservable([
+                        .next(0, ""),
+                    ])
+                    
+                    let passwordInput = self.scheduler.createColdObservable([
+                        .next(0, ""),
+                    ])
+                    
+                    let signInTapped = self.scheduler.createColdObservable([
                         .next(230, ()),
                     ])
                     
-                    let input = ViewModel.Input(email: .just(""),
-                                                password: .just(""),
-                                                signInTapped: signInTapped.asDriver(onErrorJustReturn: ()),
-                                                signUpTapped: .never(),
-                                                signInGoogle: .never())
-                    let output = viewModel.transform(input, disposeBag: self.disposeBag)
-                    
                     /// When
-                    let outputEmail = scheduler.record(output.$emailValidationMessage)
-                    let outputPassword = scheduler.record(output.$passwordValidationMessage)
-
-                    scheduler.start()
+                    emailInput
+                        .bind(to: self.emailTrigger)
+                        .disposed(by: self.disposeBag)
+                    
+                    passwordInput
+                        .bind(to: self.passwordTrigger)
+                        .disposed(by: self.disposeBag)
+                    
+                    signInTapped
+                        .bind(to: self.signInTrigger)
+                        .disposed(by: self.disposeBag)
+                    
+                    self.scheduler.start()
                     
                     /// Then
-                    expect(outputEmail.events).to(equal([ .next(0, ""),
-                                                          .next(230, "Please input email account.") ]))
-                    expect(outputPassword.events).to(equal([ .next(0, ""),
-                                                             .next(230, "Please input your password.") ]))
+                    let loadingExpected: [Recorded<Event<Bool>>] = [
+                        .next(0, false)
+                    ]
+                    
+                    expect(self.emailValidationOutput.events).to(equal([ .next(0, ""),
+                                                                         .next(230, "Please input email account.") ]))
+                    expect(self.passwordValidationOutput.events).to(equal([ .next(0, ""),
+                                                                            .next(230, "Please input your password.") ]))
+                    expect(self.isLoadingOutput.events).to(equal(loadingExpected))
                 }
                 
                 it("input email & password -> press sign in") {
 
                     /// Given
-                    let inputEmail = scheduler.createHotObservable([
+                    let inputEmail = self.scheduler.createHotObservable([
                         .next(210, "aaaa"),
                         .next(240, "pongsakorn@gmail.com"),
                     ])
                     
-                    let inputPassword = scheduler.createHotObservable([
+                    let inputPassword = self.scheduler.createHotObservable([
                         .next(220, "bbbb"),
                         .next(250, "Welcome1"),
                     ])
                     
-                    let signInTapped = scheduler.createHotObservable([
+                    let signInTapped = self.scheduler.createHotObservable([
                         .next(230, ()),
                         .next(260, ()),
                     ])
-
-                    let input = ViewModel.Input(email: inputEmail.asDriverOnErrorJustComplete(),
-                                                password: inputPassword.asDriverOnErrorJustComplete(),
-                                                signInTapped: signInTapped.asDriver(onErrorJustReturn: ()),
-                                                signUpTapped: .never(),
-                                                signInGoogle: .never())
-                    let output = viewModel.transform(input, disposeBag: self.disposeBag)
                     
                     /// When
-                    let outputEmail = scheduler.record(output.$emailValidationMessage)
-                    let outputPassword = scheduler.record(output.$passwordValidationMessage)
+                    inputEmail
+                        .bind(to: self.emailTrigger)
+                        .disposed(by: self.disposeBag)
                     
-                    scheduler.start()
+                    inputPassword
+                        .bind(to: self.passwordTrigger)
+                        .disposed(by: self.disposeBag)
+                    
+                    signInTapped
+                        .bind(to: self.signInTrigger)
+                        .disposed(by: self.disposeBag)
+                    
+                    let delegateTriggered = self.scheduler.record(self.delegate)
+                    
+                    self.scheduler.start()
                     
                     /// Then
-                    expect(outputEmail.events).to(equal([ .next(0, ""),
-                                                          .next(230, "Not valid email format."),
-                                                          .next(240, ""),
-                                                          .next(260, "") ]))
-                    expect(outputPassword.events).to(equal([ .next(0, ""),
-                                                             .next(230, "Password is too short"),
-                                                             .next(250, ""),
-                                                             .next(260, "") ]))
+                    let loadingExpected: [Recorded<Event<Bool>>] = [
+                        .next(0, false),
+                        .next(260, true),
+                        .next(260, false)
+                    ]
+                    let delegateExpected: [Recorded<Event<User>>] = [
+                        .next(260, User(uid: "pongsakorn@gmail.com", providerID: "test"))
+                    ]
+                    
+                    expect(self.emailValidationOutput.events).to(equal([ .next(0, ""),
+                                                                         .next(230, "Not valid email format."),
+                                                                         .next(240, ""),
+                                                                         .next(260, "") ]))
+                    expect(self.passwordValidationOutput.events).to(equal([ .next(0, ""),
+                                                                            .next(230, "Password is too short"),
+                                                                            .next(250, ""),
+                                                                            .next(260, "") ]))
+                    expect(delegateTriggered.events).to(equal(delegateExpected))
+                    expect(self.isLoadingOutput.events).to(equal(loadingExpected))
+                    expect(self.useCase?.signInCalled).to(beTrue())
                 }
             }
-            
-            
-            context("can sign in") {
-                
-                context("with email and password") {
-                    it("by correct email and password") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
 
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let dto = SignInDto(email: "pongsakorn@gmail.com", password: "Welcome1")
-                            
-                            viewModel.useCase.signIn(dto: dto)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).to(beNil())
-                        expect(user).notTo(beNil())
-                    }
-                }
-            }
-            
-            context("can not sign in") {
-                context("with email and password") {
-                    it("by empty value") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let dto = SignInDto(email: "", password: "")
-                            
-                            viewModel.useCase.signIn(dto: dto)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(user).to(beNil())
-                    }
+            context("sign in with provider") {
+                it("press google sign") {
+                    // Given
+                    let googleSignInTrigger = self.scheduler.createHotObservable([
+                        .next(230, GoogleAuthProvider.credential(withIDToken: "", accessToken: "")),
+                    ])
                     
-                    it("by wrong password") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let dto = SignInDto(email: "pongsakorn.onsri@gmail.com", password: "123456789")
-                            
-                            viewModel.useCase.signIn(dto: dto)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(onError?.localizedDescription).to(match("The password is invalid or the user does not have a password."))
-                        expect(user).to(beNil())
-                    }
+                    // When
+                    googleSignInTrigger
+                        .subscribe(self.signInGoogleTrigger)
+                        .disposed(by: self.disposeBag)
                     
-                    it("by email does not registered") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let dto = SignInDto(email: "aaa.bbb@gmail.com", password: "aaaaaaaa")
-                            
-                            viewModel.useCase.signIn(dto: dto)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(onError?.localizedDescription).to(match("There is no user record corresponding to this identifier. The user may have been deleted."))
-                        expect(user).to(beNil())
-                    }
+                    self.scheduler.start()
                     
-                    it("by only short password") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let dto = SignInDto(email: "", password: "aaaa")
-                            
-                            viewModel.useCase.signIn(dto: dto)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(user).to(beNil())
-                    }
-                }
-                
-                context("with google provider") {
-                    it("by empty token") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let credential = GoogleAuthProvider.credential(withIDToken: "", accessToken: "")
-                            
-                            viewModel.useCase.signIn(with: credential)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
-                        expect(user).to(beNil())
-                    }
-                }
-                
-                context("with github provider") {
-                    it("by empty token") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let credential = GitHubAuthProvider.credential(withToken: "")
-                            viewModel.useCase.signIn(with: credential)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
-                        expect(user).to(beNil())
-                    }
-                }
-                
-                context("with facebook provider") {
-                    it("by empty token") {
-                        var onError: Error?
-                        var user: SocialLite.User?
-                        
-                        waitUntil(timeout: .seconds(10)) { (done) in
-                            let credential = FacebookAuthProvider.credential(withAccessToken: "")
-                            viewModel.useCase.signIn(with: credential)
-                                .subscribe(onNext: { value in
-                                    user = value
-                                    done()
-                                }, onError: { error in
-                                    onError = error
-                                    done()
-                                })
-                                .disposed(by: self.disposeBag)
-                        }
-                        
-                        expect(onError).notTo(beNil())
-                        expect(onError?.localizedDescription).to(match("An internal error has occurred, print and inspect the error details for more information."))
-                        expect(user).to(beNil())
-                    }
+                    // Then
+                    expect(self.useCase?.signInCredential).to(beTrue())
                 }
             }
         }

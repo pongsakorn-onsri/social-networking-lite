@@ -35,6 +35,8 @@
 		11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */; };
 		11A7A56C26215471003ECAF4 /* CreatePostUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A56B26215471003ECAF4 /* CreatePostUseCaseMock.swift */; };
 		11A7A577262154A0003ECAF4 /* CreatePostViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A576262154A0003ECAF4 /* CreatePostViewModelTests.swift */; };
+		11A7A57C26217D96003ECAF4 /* SignInUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A57B26217D96003ECAF4 /* SignInUseCaseMock.swift */; };
+		11A7A58126217DA2003ECAF4 /* SignUpUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A58026217DA2003ECAF4 /* SignUpUseCaseMock.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -155,6 +157,8 @@
 		11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingPost.swift; sourceTree = "<group>"; };
 		11A7A56B26215471003ECAF4 /* CreatePostUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostUseCaseMock.swift; sourceTree = "<group>"; };
 		11A7A576262154A0003ECAF4 /* CreatePostViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModelTests.swift; sourceTree = "<group>"; };
+		11A7A57B26217D96003ECAF4 /* SignInUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCaseMock.swift; sourceTree = "<group>"; };
+		11A7A58026217DA2003ECAF4 /* SignUpUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCaseMock.swift; sourceTree = "<group>"; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 		11A7A5692621542D003ECAF4 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				11A7A57B26217D96003ECAF4 /* SignInUseCaseMock.swift */,
 				11B53B532619AB650056B822 /* SignInViewModelTests.swift */,
 			);
 			path = SignIn;
@@ -531,6 +536,7 @@
 		11A7A56A26215432003ECAF4 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				11A7A58026217DA2003ECAF4 /* SignUpUseCaseMock.swift */,
 				11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */,
 			);
 			path = SignUp;
@@ -1241,6 +1247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11A7A57C26217D96003ECAF4 /* SignInUseCaseMock.swift in Sources */,
 				11A7A51E2621343C003ECAF4 /* SigningInTests.swift in Sources */,
 				11A7A530262146AE003ECAF4 /* GettingPostListTests.swift in Sources */,
 				11A7A577262154A0003ECAF4 /* CreatePostViewModelTests.swift in Sources */,
@@ -1257,6 +1264,7 @@
 				11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */,
 				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
 				11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */,
+				11A7A58126217DA2003ECAF4 /* SignUpUseCaseMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

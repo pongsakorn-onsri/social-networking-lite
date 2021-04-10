@@ -39,7 +39,6 @@ target 'SocialLite' do
     pod 'Quick'
     pod 'Nimble'
     pod 'RxTest'
-    pod 'RxBlocking'
   end
 
   target 'SocialLiteUITests' do

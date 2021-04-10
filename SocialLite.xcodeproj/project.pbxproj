@@ -22,6 +22,8 @@
 		11338B7126164F8B000D8823 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B7026164F8B000D8823 /* SignUp.storyboard */; };
 		11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7526164F93000D8823 /* SignUpViewController.swift */; };
 		11338B7B26164FA1000D8823 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B7A26164FA1000D8823 /* SignUpViewModel.swift */; };
+		11715ACC262191EF00633321 /* FeedUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11715ACB262191EF00633321 /* FeedUseCaseMock.swift */; };
+		11715AD1262191F900633321 /* FeedViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11715AD0262191F900633321 /* FeedViewModelTest.swift */; };
 		11A7A4EC262092C8003ECAF4 /* FeedUseCase+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */; };
 		11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A4F72620BB7F003ECAF4 /* UserTests.swift */; };
 		11A7A5072620BB8E003ECAF4 /* PostTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A5062620BB8E003ECAF4 /* PostTests.swift */; };
@@ -143,6 +145,8 @@
 		11338B7026164F8B000D8823 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		11338B7526164F93000D8823 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		11338B7A26164FA1000D8823 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		11715ACB262191EF00633321 /* FeedUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUseCaseMock.swift; sourceTree = "<group>"; };
+		11715AD0262191F900633321 /* FeedViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTest.swift; sourceTree = "<group>"; };
 		11A53E3E341AC894BF2736CC /* Pods_SocialLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A7A4EB262092C8003ECAF4 /* FeedUseCase+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUseCase+Injection.swift"; sourceTree = "<group>"; };
 		11A7A4F72620BB7F003ECAF4 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
@@ -511,6 +515,8 @@
 		11A7A56726215419003ECAF4 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				11715ACB262191EF00633321 /* FeedUseCaseMock.swift */,
+				11715AD0262191F900633321 /* FeedViewModelTest.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1256,6 +1262,7 @@
 				11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */,
 				11B53BA42619C2FC0056B822 /* AuthenGatewayMock.swift in Sources */,
 				11A7A5072620BB8E003ECAF4 /* PostTests.swift in Sources */,
+				11715ACC262191EF00633321 /* FeedUseCaseMock.swift in Sources */,
 				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
 				11A7A51626212E65003ECAF4 /* ThemeTests.swift in Sources */,
 				11A7A52B2621348E003ECAF4 /* SigningUpTests.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */,
 				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
 				11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */,
+				11715AD1262191F900633321 /* FeedViewModelTest.swift in Sources */,
 				11A7A58126217DA2003ECAF4 /* SignUpUseCaseMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

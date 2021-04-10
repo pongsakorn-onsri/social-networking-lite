@@ -73,3 +73,10 @@ class PostTests: QuickSpec {
     }
 
 }
+
+extension Post {
+    init(_ id: String) {
+        self.init(userId: "test", displayName: "test_user", content: "", timestamp: Date())
+        self.documentId = id
+    }
+}

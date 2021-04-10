@@ -57,6 +57,12 @@ extension Post: Equatable {
     }
 }
 
+extension Post: CustomStringConvertible {
+    public var description: String {
+        "id: \(documentId ?? "")"
+    }
+}
+
 extension Array where Element == Post {
     func withoutDuplicates() -> [Element] {
         reduce(into: [Element]()) { (result, element) in

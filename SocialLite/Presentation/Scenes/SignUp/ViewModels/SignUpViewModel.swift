@@ -76,7 +76,7 @@ extension SignUpViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         let confirmPasswordValidation = input.submitTrigger
-            .withLatestFrom(input.email)
+            .withLatestFrom(input.confirmPassword)
             .withLatestFrom(input.password) { ($0, $1) }
             .map {
                 useCase.validateConfirmPassword($0.0, $0.1)

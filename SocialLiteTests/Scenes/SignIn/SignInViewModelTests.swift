@@ -125,6 +125,8 @@ class SignInViewModelTests: QuickSpec {
                     expect(self.passwordValidationOutput.events).to(equal([ .next(0, ""),
                                                                             .next(230, "Please input your password.") ]))
                     expect(self.isLoadingOutput.events).to(equal(loadingExpected))
+                    expect(self.useCase?.validateEmailCalled).to(beTrue())
+                    expect(self.useCase?.validatePasswordCalled).to(beTrue())
                 }
                 
                 it("input email & password -> press sign in") {
@@ -183,6 +185,8 @@ class SignInViewModelTests: QuickSpec {
                     expect(delegateTriggered.events).to(equal(delegateExpected))
                     expect(self.isLoadingOutput.events).to(equal(loadingExpected))
                     expect(self.useCase?.signInCalled).to(beTrue())
+                    expect(self.useCase?.validateEmailCalled).to(beTrue())
+                    expect(self.useCase?.validatePasswordCalled).to(beTrue())
                 }
             }
 

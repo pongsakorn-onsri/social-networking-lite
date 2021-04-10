@@ -26,7 +26,9 @@ final class PostTableViewCell: UITableViewCell {
 extension PostTableViewCell {
     func configure(with viewModel: PostCellViewModel) {
         let post = viewModel.post
-        let dateFormatter = DateFormatter(withFormat: "MM-dd-yyyy HH:mm", locale: Locale.current.identifier)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        dateFormatter.locale = .current
         let dateString = dateFormatter.string(from: post.timestamp.dateValue())
         titleLabel.text = post.displayName
         timeLabel.text = dateString

@@ -10,7 +10,6 @@ import Quick
 import Nimble
 import RxSwift
 import RxTest
-import RxBlocking
 import XCoordinator
 import GoogleSignIn
 import FirebaseAuth

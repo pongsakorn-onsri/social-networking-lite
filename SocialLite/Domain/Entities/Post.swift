@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ObjectMapper
 import FirebaseFirestore
 
 public struct Post: Hashable {

@@ -995,12 +995,9 @@ PODS:
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
   - Nimble (9.0.0)
-  - ObjectMapper (4.2.0)
   - PromisesObjC (1.2.12)
   - Quick (3.1.2)
   - Resolver (1.4.1)
-  - RxBlocking (5.1.1):
-    - RxSwift (~> 5)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -1016,8 +1013,6 @@ PODS:
   - RxSwift (5.1.2)
   - RxTest (5.1.2):
     - RxSwift (~> 5)
-  - SwiftLint (0.43.0)
-  - Then (2.7.0)
   - ValidatedPropertyKit (0.0.4)
   - XCoordinator/Core (2.0.7)
   - XCoordinator/RxSwift (2.0.7):
@@ -1036,17 +1031,13 @@ DEPENDENCIES:
   - MGArchitecture (~> 2.0.1)
   - MGLoadMore (~> 3.0.2)
   - Nimble
-  - ObjectMapper
   - Quick
   - Resolver
-  - RxBlocking
   - RxCocoa (~> 5)
   - RxDataSources
   - RxGesture
   - RxSwift (~> 5)
   - RxTest
-  - SwiftLint
-  - Then (~> 2.7)
   - ValidatedPropertyKit
   - XCoordinator/RxSwift (~> 2.0.3)
 
@@ -1085,19 +1076,15 @@ SPEC REPOS:
     - MotionInterchange
     - nanopb
     - Nimble
-    - ObjectMapper
     - PromisesObjC
     - Quick
     - Resolver
-    - RxBlocking
     - RxCocoa
     - RxDataSources
     - RxGesture
     - RxRelay
     - RxSwift
     - RxTest
-    - SwiftLint
-    - Then
     - ValidatedPropertyKit
     - XCoordinator
 
@@ -1135,22 +1122,18 @@ SPEC CHECKSUMS:
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
   Resolver: c293d0177cbc69fcb700cfd49922ae2122c1829c
-  RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   RxTest: 274549b747dca56f47c52c8991ec5cf797ecfe40
-  SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
-  Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
   XCoordinator: 9ee654fedef1ffede33d5c11677708a555c00542
 
-PODFILE CHECKSUM: b4c9e06632da60069fbbcc40762d471097e173bd
+PODFILE CHECKSUM: 7f325f33dbe226ffae7d21c5d7edcd930a7de74c
 
 COCOAPODS: 1.10.1

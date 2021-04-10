@@ -19,12 +19,6 @@ target 'SocialLite' do
   pod 'Dto'
   pod 'Resolver'
   
-  # Linter
-  pod 'SwiftLint'
-  
-  # Parser
-  pod 'ObjectMapper'
-  
   # Base
   pod 'Firebase', :subspecs => ['Auth', 'RemoteConfig', "Firestore", 'Storage']
   pod 'XCoordinator/RxSwift', '~> 2.0.3'
@@ -32,7 +26,6 @@ target 'SocialLite' do
   pod 'RxCocoa', '~> 5'
   pod 'RxDataSources'
   pod 'RxGesture'
-  pod 'Then', '~> 2.7'
 
   target 'SocialLiteTests' do
     inherit! :search_paths

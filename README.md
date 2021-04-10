@@ -1,15 +1,17 @@
 # SocialLite
 ![Travis (.com)](https://img.shields.io/travis/com/pongsakorn-onsri/social-networking-lite)
 ![GitHub top language](https://img.shields.io/github/languages/top/pongsakorn-onsri/social-networking-lite)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pongsakorn-onsri_social-networking-lite&metric=coverage)](https://sonarcloud.io/dashboard?id=pongsakorn-onsri_social-networking-lite)
+![Sonar Coverage](https://img.shields.io/sonar/coverage/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Test Success Rate](https://img.shields.io/sonar/test_success_density/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
 ![GitHub](https://img.shields.io/github/license/pongsakorn-onsri/social-networking-lite)
 
 # Features
-* [ ] Signup, Sign in, Sign out with social provider.
-* [ ] Post view page.
-* [ ] Timeline view page.
-* [ ] Use Firebase service as a backend.
-* [ ] Unit testing cover all view models.
+* [x] Signup, Sign in, Sign out with social provider.
+* [x] Create post to timeline.
+* [x] Timeline view page.
+* [x] Use Firebase service as a backend.
+* [x] Unit testing cover all view models.
 
 
 ## App Architecture

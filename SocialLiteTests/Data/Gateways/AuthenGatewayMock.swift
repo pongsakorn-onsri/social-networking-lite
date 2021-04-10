@@ -10,7 +10,7 @@ import FirebaseAuth
 import RxSwift
 
 @testable import SocialLite
-class MockAuthen: NSObject, AuthenGatewayType {
+class AuthenGatewayMock: NSObject, AuthenGatewayType {
     
     typealias User = SocialLite.User
     var currentUser: User?

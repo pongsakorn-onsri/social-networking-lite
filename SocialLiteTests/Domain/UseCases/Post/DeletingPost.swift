@@ -1,5 +1,5 @@
 //
-//  SigningOutTests.swift
+//  DeletingPost.swift
 //  SocialLiteTests
 //
 //  Created by Pongsakorn Onsri on 10/4/2564 BE.
@@ -11,35 +11,36 @@ import RxSwift
 import RxTest
 
 @testable import SocialLite
-class SigningOutTests: QuickSpec, SigningOut {
-
-    var authenGateway: AuthenGatewayType {
-        authenMock
+class DeletingPostListTest: QuickSpec, DeletingPost {
+    var postGateway: PostGatewayType {
+        postGatewayMock
     }
     
-    private var authenMock: AuthenGatewayMock!
+    private var postGatewayMock: PostGatewayMock!
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     
     override func spec() {
-        describe("As a SigningOut") {
+        describe("As a DeletingPost") {
             beforeEach {
-                self.authenMock = AuthenGatewayMock()
+                self.postGatewayMock = PostGatewayMock()
                 self.disposeBag = DisposeBag()
                 self.scheduler = TestScheduler(initialClock: 0)
             }
             
-            it("can sign out") {
+            it("can remove post") {
                 // Given
-                let signoutObserver = self.scheduler.createObserver(Void.self)
+                let dto = DeletePostDto(id: "1234")
+                let deletePostObserver = self.scheduler.createObserver(Void.self)
                 
                 // When
-                self.signOut()
-                    .subscribe(signoutObserver)
+                self.removePost(dto)
+                    .subscribe(deletePostObserver)
                     .disposed(by: self.disposeBag)
                 
                 // Then
-                expect(self.authenMock.signOutCalled).to(beTrue())
+                
+                expect(self.postGatewayMock.removePostCalled).to(beTrue())
             }
         }
     }

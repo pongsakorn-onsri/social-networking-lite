@@ -15,8 +15,6 @@
 		11338B1426163FBD000D8823 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B1326163FBD000D8823 /* FeedViewController.swift */; };
 		11338B1926163FCF000D8823 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B1826163FCF000D8823 /* FeedViewModel.swift */; };
 		11338B2E2616401E000D8823 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11338B2D2616401E000D8823 /* Feed.storyboard */; };
-		11338B33261640FC000D8823 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B32261640FC000D8823 /* BaseViewController.swift */; };
-		11338B3826164103000D8823 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B3726164103000D8823 /* BaseViewModel.swift */; };
 		11338B47261641C4000D8823 /* BaseProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B46261641C4000D8823 /* BaseProtocols.swift */; };
 		11338B5B26164E59000D8823 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5A26164E59000D8823 /* SignInViewController.swift */; };
 		11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11338B5F26164E67000D8823 /* SignInViewModel.swift */; };
@@ -31,6 +29,10 @@
 		11A7A51E2621343C003ECAF4 /* SigningInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A51D2621343C003ECAF4 /* SigningInTests.swift */; };
 		11A7A52626213482003ECAF4 /* SigningOutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A52526213482003ECAF4 /* SigningOutTests.swift */; };
 		11A7A52B2621348E003ECAF4 /* SigningUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A52A2621348E003ECAF4 /* SigningUpTests.swift */; };
+		11A7A530262146AE003ECAF4 /* GettingPostListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A52F262146AE003ECAF4 /* GettingPostListTests.swift */; };
+		11A7A53526214723003ECAF4 /* PostGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A53426214723003ECAF4 /* PostGatewayMock.swift */; };
+		11A7A54626214E95003ECAF4 /* CreatingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A54526214E95003ECAF4 /* CreatingPost.swift */; };
+		11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */; };
 		11B53A0626174E0B0056B822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B53A0526174E0B0056B822 /* GoogleService-Info.plist */; };
 		11B53AC82617ECF60056B822 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53AC72617ECF60056B822 /* CreatePostViewController.swift */; };
 		11B53AD02617ED0D0056B822 /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */; };
@@ -61,7 +63,7 @@
 		11B53B26261814000056B822 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B25261814000056B822 /* UIColor+Extensions.swift */; };
 		11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B532619AB650056B822 /* SignInViewModelTests.swift */; };
 		11B53B5F2619AC990056B822 /* SocialLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */; };
-		11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53BA32619C2FC0056B822 /* MockAuthen.swift */; };
+		11B53BA42619C2FC0056B822 /* AuthenGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53BA32619C2FC0056B822 /* AuthenGatewayMock.swift */; };
 		11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */; };
 		11B53C37261B50FE0056B822 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C36261B50FE0056B822 /* User.swift */; };
 		11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B53C80261B5AA90056B822 /* TestSchedulerExtensions.swift */; };
@@ -130,8 +132,6 @@
 		11338B1326163FBD000D8823 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		11338B1826163FCF000D8823 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		11338B2D2616401E000D8823 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		11338B32261640FC000D8823 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		11338B3726164103000D8823 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		11338B46261641C4000D8823 /* BaseProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocols.swift; sourceTree = "<group>"; };
 		11338B5A26164E59000D8823 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		11338B5F26164E67000D8823 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +147,10 @@
 		11A7A51D2621343C003ECAF4 /* SigningInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningInTests.swift; sourceTree = "<group>"; };
 		11A7A52526213482003ECAF4 /* SigningOutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningOutTests.swift; sourceTree = "<group>"; };
 		11A7A52A2621348E003ECAF4 /* SigningUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningUpTests.swift; sourceTree = "<group>"; };
+		11A7A52F262146AE003ECAF4 /* GettingPostListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingPostListTests.swift; sourceTree = "<group>"; };
+		11A7A53426214723003ECAF4 /* PostGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostGatewayMock.swift; sourceTree = "<group>"; };
+		11A7A54526214E95003ECAF4 /* CreatingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingPost.swift; sourceTree = "<group>"; };
+		11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingPost.swift; sourceTree = "<group>"; };
 		11B53A0526174E0B0056B822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11B53AC72617ECF60056B822 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		11B53ACF2617ED0D0056B822 /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
@@ -180,7 +184,7 @@
 		11B53B3C2618E83C0056B822 /* SocialLite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SocialLite.entitlements; sourceTree = "<group>"; };
 		11B53B532619AB650056B822 /* SignInViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTests.swift; sourceTree = "<group>"; };
 		11B53B5E2619AC990056B822 /* SocialLiteUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLiteUITests.swift; sourceTree = "<group>"; };
-		11B53BA32619C2FC0056B822 /* MockAuthen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuthen.swift; sourceTree = "<group>"; };
+		11B53BA32619C2FC0056B822 /* AuthenGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenGatewayMock.swift; sourceTree = "<group>"; };
 		11B53C30261A03A10056B822 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		11B53C36261B50FE0056B822 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		11B53C80261B5AA90056B822 /* TestSchedulerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSchedulerExtensions.swift; sourceTree = "<group>"; };
@@ -345,8 +349,6 @@
 		11338B3C26164177000D8823 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
-				11338B32261640FC000D8823 /* BaseViewController.swift */,
-				11338B3726164103000D8823 /* BaseViewModel.swift */,
 				11338B46261641C4000D8823 /* BaseProtocols.swift */,
 			);
 			path = BaseClasses;
@@ -462,6 +464,9 @@
 		11A7A51B262133EC003ECAF4 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				11A7A52F262146AE003ECAF4 /* GettingPostListTests.swift */,
+				11A7A54526214E95003ECAF4 /* CreatingPost.swift */,
+				11A7A54A26214EB7003ECAF4 /* DeletingPost.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -474,6 +479,14 @@
 				11A7A52A2621348E003ECAF4 /* SigningUpTests.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		11A7A54F26215375003ECAF4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				11B53BA82619C2FF0056B822 /* Gateways */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		11B53AC32617ECB70056B822 /* CreatePost */ = {
@@ -581,12 +594,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		11B53BA82619C2FF0056B822 /* Mocks */ = {
+		11B53BA82619C2FF0056B822 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
-				11B53BA32619C2FC0056B822 /* MockAuthen.swift */,
+				11B53BA32619C2FC0056B822 /* AuthenGatewayMock.swift */,
+				11A7A53426214723003ECAF4 /* PostGatewayMock.swift */,
 			);
-			path = Mocks;
+			path = Gateways;
 			sourceTree = "<group>";
 		};
 		11B53C35261B50DB0056B822 /* Entities */ = {
@@ -784,7 +798,7 @@
 				11B53C7F261B5A9C0056B822 /* Extensions */,
 				11B53B522619AAF50056B822 /* ViewModels */,
 				9AB4C8042615E74D00CDCE38 /* Info.plist */,
-				11B53BA82619C2FF0056B822 /* Mocks */,
+				11A7A54F26215375003ECAF4 /* Data */,
 			);
 			path = SocialLiteTests;
 			sourceTree = "<group>";
@@ -1137,7 +1151,6 @@
 				11B53CF4261D41230056B822 /* UITableView+Rx.swift in Sources */,
 				11B53D5E261E06B80056B822 /* ObservableType+Extensions.swift in Sources */,
 				11B53D80261E9FC10056B822 /* AuthenGatewayType.swift in Sources */,
-				11338B3826164103000D8823 /* BaseViewModel.swift in Sources */,
 				11B53F1B26202D150056B822 /* SignUpUseCase+Injection.swift in Sources */,
 				11B53D63261E08320056B822 /* FeedNavigator.swift in Sources */,
 				11B53CE2261CA4800056B822 /* FeedUseCase.swift in Sources */,
@@ -1171,7 +1184,6 @@
 				11338B7626164F93000D8823 /* SignUpViewController.swift in Sources */,
 				11338B6026164E67000D8823 /* SignInViewModel.swift in Sources */,
 				11B53E65261F3B180056B822 /* Validation+String.swift in Sources */,
-				11338B33261640FC000D8823 /* BaseViewController.swift in Sources */,
 				11B53ADA2617FC150056B822 /* Theme.swift in Sources */,
 				11A7A4EC262092C8003ECAF4 /* FeedUseCase+Injection.swift in Sources */,
 				11338A9C261639CB000D8823 /* SceneDelegate.swift in Sources */,
@@ -1192,13 +1204,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				11A7A51E2621343C003ECAF4 /* SigningInTests.swift in Sources */,
+				11A7A530262146AE003ECAF4 /* GettingPostListTests.swift in Sources */,
+				11A7A53526214723003ECAF4 /* PostGatewayMock.swift in Sources */,
 				11A7A4F82620BB7F003ECAF4 /* UserTests.swift in Sources */,
-				11B53BA42619C2FC0056B822 /* MockAuthen.swift in Sources */,
+				11B53BA42619C2FC0056B822 /* AuthenGatewayMock.swift in Sources */,
 				11A7A5072620BB8E003ECAF4 /* PostTests.swift in Sources */,
 				11B53B542619AB650056B822 /* SignInViewModelTests.swift in Sources */,
 				11A7A51626212E65003ECAF4 /* ThemeTests.swift in Sources */,
 				11A7A52B2621348E003ECAF4 /* SigningUpTests.swift in Sources */,
 				11A7A52626213482003ECAF4 /* SigningOutTests.swift in Sources */,
+				11A7A54626214E95003ECAF4 /* CreatingPost.swift in Sources */,
+				11A7A54B26214EB7003ECAF4 /* DeletingPost.swift in Sources */,
 				11B53C31261A03A10056B822 /* SignUpViewModelTests.swift in Sources */,
 				11B53C81261B5AA90056B822 /* TestSchedulerExtensions.swift in Sources */,
 			);

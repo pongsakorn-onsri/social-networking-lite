@@ -19,14 +19,14 @@ class SigningUpTests: QuickSpec, SigningUp {
         authenMock
     }
     
-    private var authenMock: MockAuthen!
+    private var authenMock: AuthenGatewayMock!
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
 
     override func spec() {
         describe("As a SigningUp") {
             beforeEach {
-                self.authenMock = MockAuthen()
+                self.authenMock = AuthenGatewayMock()
                 self.disposeBag = DisposeBag()
                 self.scheduler = TestScheduler(initialClock: 0)
             }

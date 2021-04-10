@@ -21,7 +21,7 @@ class SigningInTests: QuickSpec, SigningIn {
         authenMock
     }
     
-    private var authenMock: MockAuthen!
+    private var authenMock: AuthenGatewayMock!
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     
@@ -29,7 +29,7 @@ class SigningInTests: QuickSpec, SigningIn {
         
         describe("As a SigningIn usecase") {
             beforeEach {
-                self.authenMock = MockAuthen()
+                self.authenMock = AuthenGatewayMock()
                 self.disposeBag = DisposeBag()
                 self.scheduler = TestScheduler(initialClock: 0)
             }

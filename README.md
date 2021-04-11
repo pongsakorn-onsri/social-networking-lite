@@ -1,8 +1,8 @@
 # SocialLite
 ![Travis (.com)](https://img.shields.io/travis/com/pongsakorn-onsri/social-networking-lite)
 ![GitHub top language](https://img.shields.io/github/languages/top/pongsakorn-onsri/social-networking-lite)
-![Sonar Coverage](https://img.shields.io/sonar/coverage/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
-![Sonar Test Success Rate](https://img.shields.io/sonar/test_success_density/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
+![Codacy coverage](https://img.shields.io/codacy/coverage/892922674f904202b655f029dadb33f1)
+![Codacy grade](https://img.shields.io/codacy/grade/892922674f904202b655f029dadb33f1)
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
 ![GitHub](https://img.shields.io/github/license/pongsakorn-onsri/social-networking-lite)
  
@@ -37,6 +37,12 @@
 ## How to test
 * Open `SocialLite.xcworkspace` in Xcode 12.0 or higher
 * `CMD+U` or Product -> Test
+
+## Reference Link
+* [Clean Architecture with RxSwift & MVVM](https://github.com/tuan188/MGCleanArchitecture)
+* [GitHub - sergdort/CleanArchitectureRxSwift: Example of Clean Architecture of iOS app using RxSwift](https://github.com/sergdort/CleanArchitectureRxSwift)
+* [ReactiveX/RxSwift: Reactive Programming in Swift](https://github.com/ReactiveX/RxSwift)
+* [Coordinator pattern](https://github.com/quickbirdstudios/XCoordinator)
 
 
 ## License(MIT)

@@ -11,16 +11,16 @@ branches:
 jobs:
   include:
     - stage: Install Dependencies
-        script: skip
-        cache: false
+      script: skip
+      cache: false
     - stage: Build
-        name: Unit Test
-        after_success:
-        # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-        - sonar-scanner -Dsonar.login=${sonar_login}
+      name: Unit Test
+      after_success:
+      # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+      - sonar-scanner -Dsonar.login=${sonar_login}
     - stage: Build
-        name: Push Cache
-        script: skip
+      name: Push Cache
+      script: skip
 addons:
   sonarcloud:
     organization: "sonarcloud"

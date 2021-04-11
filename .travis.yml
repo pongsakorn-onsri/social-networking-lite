@@ -10,16 +10,15 @@ branches:
   - develop
 jobs:
   include:
-    - stage: Install Dependencies
-      script: skip
-      cache: false
     - stage: Build
       name: Unit Test
       after_success:
       # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
       - sonar-scanner -Dsonar.login=${sonar_login}
+      cache: false
     - stage: Build
-      name: Push Cache
+      name: Push Pods Cache
+      before_install: skip
       script: skip
 addons:
   sonarcloud:
@@ -34,3 +33,4 @@ cache:
     # This contains the CFamily cache. According to https://docs.travis-ci.com/user/caching/#pull-request-builds-and-caches,
     # for a PR, it will use the cache of the target branch if the branch of the PR does not already have its cache.
     - $HOME/.cfamily
+    - $HOME/.cocoapods

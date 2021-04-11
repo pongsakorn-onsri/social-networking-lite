@@ -12,19 +12,16 @@ jobs:
   include:
     - stage: Build
       name: Unit Test
+      before_script:
+      - bash <(curl -Ls https://coverage.codacy.com/get.sh) download
       after_success:
-      # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-      - sonar-scanner -Dsonar.login=${sonar_login}
-      cache: false
+      - gem install slather
+      - slather
+      - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r output/cobertura.xml
     - stage: Build
       name: Push Pods Cache
       before_install: skip
       script: skip
-addons:
-  sonarcloud:
-    organization: "sonarcloud"
-    token:
-      secure: "a3VqIAEYmc7MK37D3LL93nEk7Dt/Og/bMHKc4eSHNlMzUv/4iJTHsWfcmzJ01Y6NJlT26kIcZN97O2frlmeWzWU9tsUT/HWK9DZl4XJgdnkabEPrMW/YcwiDevvRfsppZzUxPZXjeabtazmObOFrFkoMv7aVurmt+3ZEZ9v91njAS8LDqveWXg4wZehCSwqnArKN6qzpk8TmxVdMUqVnzISVKaovL3heXd5g2ZSXhkHTw8SxJiP5MHQUwnmVF2rJO+PZGS9QgrBw/MxI7Dbm2pwdBdqjNoCzyLCusve1djmYDib6DtlQ8kVx8GQZwS/aVpbYigvR9UXZtk9XrHx9I+MRRu9RNCkj+xczVFy1pWs2zNQ5S+0qcRDj9FGBC2fHVbWJjfTHkaxi63AHC0EiJA5aB/j4J9xtaJ5fCbCBupEXSh6JawhLHxj63THOqieWCjbcC4s0Dzsrpl+WPH7ior3RRVASk2oPBS5RtSwn3VgR+CifGrNUPGVoIZSVs35FsKyU/q2RFZlJw9HlAoUvM3beUHNQRB8Gekwt8P6q4dEypOlC8q0BkbSFbUX1BmLj2hTxId8ljZVDoV1busIFROxfG9LJfG6dVOPU1s6t6VjM0zQRkJkuj1Sw4/6TjxlAExAq9r+erFcniZYMD+R/XENN6K9ARGZyTzHOiJmhQbw="
 cache:
   timeout: 1000
   cocoapods: true

@@ -1,0 +1,8 @@
+coverage_service: cobertura_xml
+xcodeproj: SocialLite.xcodeproj
+workspace: SocialLite.xcworkspace
+scheme: SocialLite
+source_directory: SocialLite
+output_directory: output
+ignore:
+  - Pods/*

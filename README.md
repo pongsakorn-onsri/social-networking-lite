@@ -6,6 +6,10 @@
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/pongsakorn-onsri_social-networking-lite?server=https%3A%2F%2Fsonarcloud.io)
 ![GitHub](https://img.shields.io/github/license/pongsakorn-onsri/social-networking-lite)
 
+<img src="./Screenshot/TimelineScreen.png" width="250">
+<img src="./Screenshot/SignInScreen.png" width="250">
+<img src="./Screenshot/SignUpScreen.png" width="250">
+<img src="./Screenshot/CreatePostScreen.png" width="250">
 # Features
 * [x] Signup, Sign in, Sign out with social provider.
 * [x] Create post to timeline.

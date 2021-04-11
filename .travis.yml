@@ -13,7 +13,7 @@ addons:
 
 after_success:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
+  - sonar-scanner -Dsonar.login=${sonar_login}
 cache:
   directories:
     - $HOME/.sonar/cache
